@@ -45,3 +45,14 @@ Vite 設定使用 `base: './'`，build 後會輸出到 `docs/`，上傳到 GitHu
 ## 編碼
 
 所有原始碼以 UTF-8 without BOM 儲存。若在 Windows PowerShell 讀取中文檔，請使用 `-Encoding UTF8`。
+
+## 工業安全 × AI 影像判讀（48 題範例）
+
+- GitHub Pages：<https://niwi7yming4.github.io/Prob/safety-quiz/>
+- 可維護原始檔：`public/safety-quiz/index.html`
+- 靜態網站輸出：`docs/safety-quiz/index.html`
+- 48 個不同原始影像 ID，四種實驗條件各 12 題；每人每張原始影像只出現一次。
+- 流程：照片 → 初答 → 模擬 AI 建議 → 終答；第 24 題後休息，最後附 Jian 12 題信任量表。
+- 支援研究者題庫核對、作答結果 CSV／JSON 匯出、localStorage 暫存；不蒐集或上傳資料至伺服器。
+- 示範影像與 YOLO 類別來自 [Panly23 公開資料集](https://github.com/Panly23/Labeling-data-for-safety-helmets-and-work-uniforms)。原倉庫沒有明示獨立授權，正式施測或再散布前應先釐清影像權利並人工核對題目標準答案。
+- 這是研究操作原型，不是真正執行電腦視覺辨識的 AI 系統。
