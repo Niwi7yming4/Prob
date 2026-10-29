@@ -37,7 +37,7 @@ SOURCE_INFO={
   "name":"Roboflow Construction Site Safety (Kaggle mirror)",
   "url":"https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/28",
   "license":"CC BY 4.0 (per Roboflow project; confirm for each image)",
-  "classNames":{0:"Hardhat",1:"Mask",2:"NO-Hardhat",3:"NO-Mask",4:"NO-Safety Vest",5:"Person",6:"Safety Cone",7:"Safety Vest",8:"machinery",9:"vehicle"}
+  "classNames":{0:"Hardhat",1:"Mask",2:"NO-Hardhat",3:"NO-Mask",4:"NO-Safety Vest",5:"Person",6:"Safety Cone",7:"Safety Vest",8:"machinery",9:"vehicle",18:"Person + machinery (paired object labels)"}
  }
 }
 # Source, YOLO class index, quantity, question in plain Taiwanese Mandarin, min visible target box area.
@@ -49,7 +49,7 @@ CATEGORIES=[
  ("護目鏡","ultralytics",4,6,"畫面中是否可看到有人配戴護目鏡？",.006),
  ("工程車輛","roboflow",9,6,"畫面中是否可看到工程施工車輛？",.04),
 
- ("防護口罩","roboflow",1,4,"畫面中是否可看到有人佩戴防護口罩？",.012),
+ ("人機同場","roboflow",18,4,"畫面中是否同時有作業人員與大型施工機具？",.03),
  ("反光背心","roboflow",7,4,"畫面中是否可看到工地人員穿著反光安全背心？",.025),
  ("安全帽","roboflow",0,4,"畫面中是否可看到有人佩戴安全帽？",.016),
 ]
@@ -153,9 +153,10 @@ def assign_all_questions(items,rng):
    # Negative PPE questions use a clearly visible, positive annotation and
    # a precisely worded absence claim. This prevents unlabeled footwear or
    # non-workplace "no PPE" photos from being misused as ground truth.
-   inverted=(not present) and category in {"安全鞋","防護手套","護目鏡","防護口罩","反光背心","安全帽"}
+   inverted=(not present) and category in {"安全鞋","防護手套","護目鏡","人機同場","反光背心","安全帽"}
    def allowed(a):
     cs={x[0] for x in a["boxes"]}
+    if label==18 and (present or inverted):return 5 in cs and any(c==8 and w*h>=threshold for c,x,y,w,h in a["boxes"])
     if present or inverted:return any(c==label and w*h>=threshold for c,x,y,w,h in a["boxes"])
     if label in cs:return False
     if counterpart is not None:return counterpart in cs
@@ -199,7 +200,7 @@ def assign_all_questions(items,rng):
   "安全鞋":"畫面中是否完全看不到有人穿著防護靴或安全鞋？",
   "防護手套":"畫面中是否完全看不到防護手套？",
   "護目鏡":"畫面中是否完全沒有人配戴護目鏡？",
-  "防護口罩":"畫面中是否完全沒有人配戴防護口罩？",
+  "人機同場":"畫面中是否沒有同時出現人員與大型施工機具？",
   "反光背心":"畫面中是否完全沒有人穿著反光安全背心？",
   "安全帽":"畫面中是否完全沒有人佩戴安全帽？"
  }
@@ -256,7 +257,7 @@ def main():
     im=ImageOps.exif_transpose(src).convert("RGB")
     im.thumbnail((1200,900),Image.Resampling.LANCZOS)
     im.save(IMAGE_DIR/file,quality=88,optimize=True,subsampling=0)
-   # Negative-worded PPE questions use explicit presence, to avoid equating unannotated objects with absent objects.
+   # Negative-worded questions use confirmed object presence (or an explicit person+machinery pair).
    size=(IMAGE_DIR/file).stat().st_size
    if size<2500:raise ValueError("Image is unexpectedly tiny "+file)
    info=SOURCE_INFO[code]
@@ -264,7 +265,8 @@ def main():
     "id":"S"+f"{i+1:03d}","image":"./images/"+file,"prompt":prompt,"correct":"是" if present else "否",
     "category":category,"source":info["name"],"sourceURL":info["url"],"sourceLicense":info["license"],
     "sourceOriginal":item["original"],"sourceFile":item["file"],"sourceLabel":item["labels"],
-    "className":info["classNames"][label],"classId":label,"hasTargetAnnotation":present,
+    "className":info["classNames"][label],"classId":label,"hasTargetAnnotation":(any(c==label for c,x,y,w,h in item["boxes"]) if label!=18 else (5 in [b[0] for b in item["boxes"]] and 8 in [b[0] for b in item["boxes"]])),
+    "negativeWording":(not present and category in {"安全鞋","防護手套","護目鏡","人機同場","反光背心","安全帽"}),
     "imageBytes":size
    })
   unique=len(set((q["source"],q["sourceOriginal"]) for q in results))
