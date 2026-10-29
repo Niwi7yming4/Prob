@@ -109,9 +109,9 @@ def is_work_scene(a,source):
  name=a["file"].lower()
  classes={x[0] for x in a["boxes"]}
  if source=="roboflow":
-  if "/train/" in name or "autox" in name or "race" in name: return False
-  return bool(classes.intersection({0,5,6,7,8,9}))
- return 6 in classes and (0 in classes or 2 in classes)
+  if "/train/" in name or "autox" in name or "race" in name or "image36_" in name or "construction-9-_jpg" in name: return False
+  return bool(classes.intersection({0,6,7,8,9}))
+ return 6 in classes and 0 in classes and 2 in classes
 
 def choose(target,zitems,chosen,amount,threshold,rng,source):
  # Only consider photos with a concrete worksite/PPE context, not generic people photos.
@@ -150,9 +150,13 @@ def assign_all_questions(items,rng):
   good=[a for a in items[code] if is_work_scene(a,code)]
   for present in [True,False]:
    counterpart=missing.get(code,{}).get(label)
+   # Negative PPE questions use a clearly visible, positive annotation and
+   # a precisely worded absence claim. This prevents unlabeled footwear or
+   # non-workplace "no PPE" photos from being misused as ground truth.
+   inverted=(not present) and category in {"安全鞋","防護手套","護目鏡","防護口罩","反光背心","安全帽"}
    def allowed(a):
     cs={x[0] for x in a["boxes"]}
-    if present:return any(c==label and w*h>=threshold for c,x,y,w,h in a["boxes"])
+    if present or inverted:return any(c==label and w*h>=threshold for c,x,y,w,h in a["boxes"])
     if label in cs:return False
     if counterpart is not None:return counterpart in cs
     return True
@@ -191,9 +195,18 @@ def assign_all_questions(items,rng):
   if not insert(i,set()):
    gi,present=slots[i]
    raise RuntimeError("Distinct photo assignment impossible: "+str(CATEGORIES[gi][0])+" "+str(present))
+ negativePrompts={
+  "安全鞋":"畫面中是否完全看不到有人穿著防護靴或安全鞋？",
+  "防護手套":"畫面中是否完全看不到防護手套？",
+  "護目鏡":"畫面中是否完全沒有人配戴護目鏡？",
+  "防護口罩":"畫面中是否完全沒有人配戴防護口罩？",
+  "反光背心":"畫面中是否完全沒有人穿著反光安全背心？",
+  "安全帽":"畫面中是否完全沒有人佩戴安全帽？"
+ }
  groups=[[] for _ in CATEGORIES]
  for i,(gi,present) in enumerate(slots):
   category,code,label,qty,prompt,threshold=CATEGORIES[gi]
+  if not present and category in negativePrompts: prompt=negativePrompts[category]
   groups[gi].append((category,code,label,prompt,assigned[i],present))
  return groups
 
@@ -243,7 +256,7 @@ def main():
     im=ImageOps.exif_transpose(src).convert("RGB")
     im.thumbnail((1200,900),Image.Resampling.LANCZOS)
     im.save(IMAGE_DIR/file,quality=88,optimize=True,subsampling=0)
-   # Explicitly negative phrasing on an object-absent source image is not needed; same question, yes/no depends on label.
+   # Negative-worded PPE questions use explicit presence, to avoid equating unannotated objects with absent objects.
    size=(IMAGE_DIR/file).stat().st_size
    if size<2500:raise ValueError("Image is unexpectedly tiny "+file)
    info=SOURCE_INFO[code]
