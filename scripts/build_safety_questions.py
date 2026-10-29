@@ -141,6 +141,62 @@ def choose(target,zitems,chosen,amount,threshold,rng,source):
   out.append((picked,positive))
  return out
 
+def assign_all_questions(items,rng):
+ """Globally match scarce positive/explicit-negative labels to distinct source images."""
+ missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3}}
+ pools={}
+ slots=[]
+ for gi,(category,code,label,qty,prompt,threshold) in enumerate(CATEGORIES):
+  good=[a for a in items[code] if is_work_scene(a,code)]
+  for present in [True,False]:
+   counterpart=missing.get(code,{}).get(label)
+   def allowed(a):
+    cs={x[0] for x in a["boxes"]}
+    if present:return any(c==label and w*h>=threshold for c,x,y,w,h in a["boxes"])
+    if label in cs:return False
+    if counterpart is not None:return counterpart in cs
+    return True
+   pool=[a for a in good if allowed(a)]
+   # Only one photo per original source image, even if the export has augmented variants.
+   best={}
+   for a in pool:
+    key=a["original"]
+    area=max([w*h for c,x,y,w,h in a["boxes"] if c==label] or [0])
+    merit=area if present else len(a["boxes"])*.001
+    if key not in best or merit>best[key][0]:best[key]=(merit,a)
+   pool=[a for score,a in best.values()]
+   rng.shuffle(pool)
+   pool.sort(key=lambda a:max([w*h for c,x,y,w,h in a["boxes"] if c==label] or [0]) if present else len(a["boxes"])*.0008,reverse=True)
+   pools[gi,present]=pool
+   print("Candidate pool",code,category,"yes" if present else "no","unique",len(pool),flush=True)
+  for k in range(qty):slots.append((gi,k%2==0))
+ # Standard augmenting-path assignment: prioritize most constrained label classes.
+ choices={i:[(CATEGORIES[gi][1],a["original"],a) for a in pools[gi,present]]
+          for i,(gi,present) in enumerate(slots)}
+ owners={}
+ assigned={}
+ def insert(i,seen):
+  for source,original,a in choices[i]:
+   key=(source,original)
+   if key in seen:continue
+   seen.add(key)
+   prior=owners.get(key)
+   if prior is None or insert(prior,seen):
+    owners[key]=i
+    assigned[i]=a
+    return True
+  return False
+ order=sorted(range(len(slots)),key=lambda i:len(choices[i]))
+ for i in order:
+  if not insert(i,set()):
+   gi,present=slots[i]
+   raise RuntimeError("Distinct photo assignment impossible: "+str(CATEGORIES[gi][0])+" "+str(present))
+ groups=[[] for _ in CATEGORIES]
+ for i,(gi,present) in enumerate(slots):
+  category,code,label,qty,prompt,threshold=CATEGORIES[gi]
+  groups[gi].append((category,code,label,prompt,assigned[i],present))
+ return groups
+
 def main():
  OUT.mkdir(parents=True,exist_ok=True);IMAGE_DIR.mkdir(parents=True,exist_ok=True)
  rng=random.Random(20261029)
@@ -155,14 +211,7 @@ def main():
    z=zipfile.ZipFile(path)
    zips[code]=z
    items[code]=find_entries(z)
-  chosen=set()
-  groups=[]
-  for category,code,label,qty,prompt,threshold in CATEGORIES:
-   selections=choose(label,items[code],chosen,qty,threshold,rng,code)
-   group=[]
-   for source_item,present in selections:
-    group.append((category,code,label,prompt,source_item,present))
-   groups.append(group)
+  groups=assign_all_questions(items,rng)
   # Allocate 48 photos across 4 experimental cells with 6 YES and 6 NO per cell.
   # Four preview questions deliberately cover 4 separate topics, including machinery and cones.
   remaining=[record for group in groups for record in group]
