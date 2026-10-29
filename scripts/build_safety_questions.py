@@ -267,6 +267,9 @@ def main():
     "sourceOriginal":item["original"],"sourceFile":item["file"],"sourceLabel":item["labels"],
     "className":info["classNames"][label],"classId":label,"hasTargetAnnotation":(any(c==label for c,x,y,w,h in item["boxes"]) if label!=18 else (5 in [b[0] for b in item["boxes"]] and 8 in [b[0] for b in item["boxes"]])),
     "negativeWording":(not present and category in {"安全鞋","防護手套","護目鏡","人機同場","反光背心","安全帽"}),
+    "boxes":[{"label":info["classNames"].get(c,str(c)), "classId":c,
+              "x":round(x,5),"y":round(y,5),"w":round(w,5),"h":round(h,5)}
+             for c,x,y,w,h in sorted(item["boxes"],key=lambda b:b[3]*b[4],reverse=True)[:10]],
     "imageBytes":size
    })
   unique=len(set((q["source"],q["sourceOriginal"]) for q in results))
