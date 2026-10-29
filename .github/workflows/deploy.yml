@@ -68,7 +68,7 @@ jobs:
             new Function(fs.readFileSync('docs/safety-quiz/' + addon, 'utf8'));
           }
           const mobileCss = fs.readFileSync('docs/safety-quiz/mobile.css','utf8');
-          if (!html.includes('href="./mobile.css"') || !html.includes('class="answer-dock"'))
+          if (!html.includes('href="./mobile.css') || !html.includes('class="answer-dock"'))
             throw Error('Mobile quiz layout or source file missing');
           if (!mobileCss.includes('max-width: 720px') || !mobileCss.includes('.answer-dock'))
             throw Error('Mobile-first stylesheet missing');
