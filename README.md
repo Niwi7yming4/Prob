@@ -52,7 +52,7 @@ Vite 設定使用 `base: './'`，build 後會輸出到 `docs/`，上傳到 GitHu
 - 可維護原始檔：`public/safety-quiz/index.html`
 - 靜態網站輸出：`docs/safety-quiz/index.html`
 - 48 個不重複的原始影像，另有 2 張獨立教學照片。四種實驗條件各 12 題；其中 22 題考察兩類物件共同辨識。
-- 新流程：**額外 2 題教學不計分**。Demo 為 12 題 → Jian 12 題信任問卷 → 12 題 → 再填一次同量表 → 3 題介面評估；完整模式為 24 題 → 信任問卷 → 休息 → 24 題 → 信任問卷 → 介面評估。每題先獨立回答，再顯示模擬 AI 建議與真實資料庫標註框，最後決定答案。
+- 研究流程（依 DOCX）：**2 題教學（不計分）→ 24 題 → 組間休息 → 24 題 → 1 次 Jian 12 題信任量表 → 結果**。Demo 則是 **2 題教學 → 四種實驗條件各 1 題（共 4 題）→ 3 題問卷試填 → 結果**。Demo 問卷只示範操作，不當成完整信任量表。
 - 支援研究者題庫核對、作答結果 CSV／JSON 匯出、localStorage 暫存；不蒐集或上傳資料至伺服器。
 - 題庫為 48 張不同照片、9 種主題：防護手套 6、警示錐 6、施工機具 8、護目鏡 6、工程車輛 6、安全鞋 4、反光背心 4、安全帽 4、人員與機具同場 4。
 - 影像與物件標註來自 [Ultralytics Construction-PPE](https://docs.ultralytics.com/datasets/detect/construction-ppe/)（AGPL-3.0）和 [Roboflow Construction Site Safety](https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/28)（專案標示 CC BY 4.0），後者經 [Kaggle 公開鏡像](https://www.kaggle.com/datasets/snehilsanyal/construction-site-safety-image-dataset-roboflow)取得。逐題檔名、來源、類別、答案、文字正反向均見 `docs/safety-quiz/data.json`；來源清單見 `docs/safety-quiz/sources.csv`。
