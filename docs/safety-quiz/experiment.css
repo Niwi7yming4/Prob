@@ -1,0 +1,68 @@
+/* Research demonstration: high-salience AI advice, annotation overlays and two warm-up questions. */
+.ai-panel{
+ display:flex!important;align-items:center;justify-content:space-between;gap:15px;
+ padding:17px 19px!important;margin:0 0 16px!important;
+ border:3px solid #d16a26!important;border-radius:12px!important;
+ background:#fff0dc!important;box-shadow:0 5px 18px rgba(113,63,24,.14);
+ color:#3d281c;
+}
+.ai-panel .ai-panel-left{flex:1;min-width:0;}
+.ai-panel .eyebrow{font-size:16px!important;font-weight:900!important;letter-spacing:.02em;color:#713511!important}
+.ai-panel .eyebrow small{font-size:11px;font-weight:750;color:#7f5d45;border:1px solid #cea482;border-radius:4px;padding:1px 5px;margin-left:4px}
+.ai-panel .ai-summary{font-size:13px;color:#744323;margin-top:6px;line-height:1.5;max-width:25em}
+.ai-panel .suggest{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;font-size:43px!important;font-weight:950;color:#a94312!important;line-height:1.06}
+.ai-panel .suggest small{font-size:13px;font-weight:800;color:#75472c;margin-bottom:5px}
+.photo-frame .evidence-layer{position:absolute;z-index:1;pointer-events:none;box-sizing:border-box;overflow:visible}
+.evidence-layer[hidden]{display:none!important}
+.evidence-box{position:absolute;box-sizing:border-box;border:3px solid #ffae24;background:rgba(255,183,40,.035);box-shadow:0 0 0 1px rgba(21,35,52,.5),0 0 13px rgba(255,170,23,.35)}
+.evidence-box:nth-child(2){border-color:#59dbdd}
+.evidence-box:nth-child(3){border-color:#eab1f0}
+.evidence-label{position:absolute;left:-2px;top:-23px;background:#151e2b;color:white;padding:2px 6px;border-radius:3px;font-size:12px;font-weight:850;white-space:nowrap;max-width:120px;text-overflow:ellipsis;overflow:hidden}
+.evidence-box:nth-child(2) .evidence-label{background:#12676e}
+.practice-wrap{max-width:970px;margin:0 auto;padding-bottom:36px}
+.practice-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 14px;font-weight:900;color:#315679;font-size:14px}
+.practice-step{background:#eaf1f7;padding:5px 9px;border-radius:7px}
+.practice-question{font-size:clamp(23px,2.9vw,32px);line-height:1.45;margin:0 0 13px}
+.practice-photo{height:min(52vh,520px);min-height:240px;position:relative;background:#e8edf2;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:10px;margin-bottom:13px}
+.practice-photo>img{width:100%;height:100%;object-fit:contain}
+.practice-photo .evidence-layer{position:absolute;pointer-events:none;z-index:2}
+.practice-ai{border:3px solid #d16a26;background:#fff0dc;padding:13px 17px;margin:0 0 15px;border-radius:11px;color:#4f2d18}
+.practice-ai-title{font-size:15px;font-weight:900}
+.practice-ai-title small{font-size:11px;color:#765039;border:1px solid #cbaa86;padding:1px 5px;border-radius:4px}
+.practice-ai-answer{font-size:21px;font-weight:800}
+.practice-ai-answer strong{font-size:39px;color:#ab460e;margin-left:5px;line-height:1.1}
+.practice-ai p{font-size:13px;margin:2px 0 0;color:#704627}
+.practice-options{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.practice-options button{min-height:65px;background:white;border:2px solid #bfcddb;border-radius:10px;font-size:24px;font-weight:900;color:#163a5e}
+.practice-options button.selected{border-color:#1760af;background:#e8f3ff;box-shadow:inset 0 0 0 1px #1760af}
+.practice-foot{display:flex;justify-content:flex-end;margin:13px 0 0}
+.practice-foot .btn{min-width:180px}
+.practice-explain{padding:15px;border-left:4px solid #26745f;background:#edf7f2;border-radius:8px}
+.practice-explain strong{font-size:18px}.practice-explain p{font-size:14px;margin:5px 0 0}
+.practice-caption{font-size:12px;color:#66798a;margin:12px 0 0}
+.practice-loading{max-width:570px;margin:70px auto;padding:30px}
+@media(max-width:720px){
+ body[data-screen="tutorial"] .head-actions{display:none}
+ body[data-screen="tutorial"] .flow-guide{display:none}
+ body[data-screen="tutorial"] main.shell{padding:10px 13px 32px}
+ .practice-heading{margin:3px 0 10px;font-size:12px}
+ .practice-step{font-size:12px}
+ .practice-question{font-size:clamp(21px,5.6vw,25px);margin-bottom:11px;line-height:1.35}
+ .practice-photo{min-height:235px;height:clamp(240px,43dvh,420px);border-radius:0;margin:0 -13px 12px}
+ .practice-ai{padding:11px 13px;margin:0 0 9px}
+ .practice-ai-title{font-size:14px}
+ .practice-ai-answer{font-size:18px}
+ .practice-ai-answer strong{font-size:32px}
+ .practice-ai p{font-size:12px}
+ .practice-options{gap:8px}
+ .practice-options button{min-height:58px}
+ .practice-foot .btn{width:100%;min-height:53px}
+ .practice-caption{font-size:11px}
+ .ai-panel{padding:11px 13px!important;margin:0 0 10px!important;min-height:85px;border-width:3px!important;border-radius:9px!important}
+ .ai-panel .eyebrow{font-size:15px!important}
+ .ai-panel .ai-summary{font-size:12px;margin-top:6px;max-width:22em}
+ .ai-panel .suggest{font-size:36px!important;min-width:57px}
+ .ai-panel .suggest small{font-size:12px}
+ .evidence-box{border-width:2.5px}
+ .evidence-label{top:-20px;font-size:11px;padding:2px 4px}
+}
