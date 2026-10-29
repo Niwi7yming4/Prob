@@ -1,4 +1,4 @@
-name: Deploy Vite site to Pages
+name: Build study site and sync GitHub Pages files
 
 on:
   push:
@@ -7,11 +7,9 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: build-study-site
   cancel-in-progress: false
 
 jobs:
@@ -69,7 +67,12 @@ jobs:
           for (const addon of ['flow-addon.js','data-addon.js']) {
             new Function(fs.readFileSync('docs/safety-quiz/' + addon, 'utf8'));
           }
-          console.log('PASS: 48 unique images, 9 categories, balanced answers, protocol scripts');
+          const mobileCss = fs.readFileSync('docs/safety-quiz/mobile.css','utf8');
+          if (!html.includes('href="./mobile.css"') || !html.includes('class="answer-dock"'))
+            throw Error('Mobile quiz layout or source file missing');
+          if (!mobileCss.includes('max-width: 720px') || !mobileCss.includes('.answer-dock'))
+            throw Error('Mobile-first stylesheet missing');
+          console.log('PASS: 48 source images, nine topics, balanced questions and dedicated mobile UI');
           NODE
 
       - name: Save source-backed quiz images and manifest to GitHub
@@ -84,18 +87,3 @@ jobs:
             echo "Question bank and images are already synchronized"
           fi
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
