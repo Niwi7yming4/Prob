@@ -11,7 +11,7 @@ a{color:var(--blue);text-underline-offset:3px}
 .skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:white;padding:8px;z-index:100}
 .site-head{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
 .head-inner{max-width:1360px;margin:auto;padding:13px clamp(16px,3vw,42px);display:flex;gap:18px;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:800;color:var(--navy);text-decoration:none}.mark{display:block;width:23px;height:23px;border-left:8px solid var(--blue);border-top:7px solid var(--orange);border-bottom:7px solid var(--blue)}
+.brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:800;color:var(--navy);text-decoration:none}
 .head-actions{display:flex;gap:8px;align-items:center;font-size:14px}.head-actions a{white-space:nowrap}
 .shell{max-width:1360px;margin:auto;padding:clamp(18px,2.5vw,36px) clamp(16px,3vw,42px) 68px}
 .kicker{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
@@ -51,14 +51,106 @@ h1,h2,h3,p{margin-top:0}h1{font-size:clamp(30px,3.3vw,49px);letter-spacing:-.035
 .review-header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:0 0 18px}.review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.review-card{overflow:hidden}.review-card img{width:100%;height:195px;object-fit:contain;background:#e9edf1}.review-content{padding:15px}.review-content strong{display:block;font-size:18px;margin:5px 0}.review-content p{font-size:14px;margin:4px 0 9px}.review-content a{font-size:13px;overflow-wrap:anywhere}.review-footer{display:flex;gap:8px;justify-content:center;margin:26px 0}
 .footer-note{font-size:13px;color:var(--muted);line-height:1.8;max-width:1100px;margin:38px auto 0;border-top:1px solid var(--line);padding-top:16px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:980px){.workspace{grid-template-columns:1fr}.photo-card{position:static}.photo-frame{height:min(48vh,480px)}.review-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){body{font-size:16px}.head-inner{padding:11px 15px}.brand{font-size:16px}.head-actions{font-size:12px}.shell{padding:17px 13px 50px}.intro-grid{grid-template-columns:1fr}.intro-grid .card{padding:20px}.steps{grid-template-columns:repeat(2,1fr)}.step{min-height:123px}.photo-card{padding:10px}.photo-frame{height:min(43vh,350px);min-height:220px}.question-card{padding:18px}.answer{min-height:75px}.quiz-head{align-items:start}.quiz-head h1{font-size:23px}.review-grid{grid-template-columns:1fr}.summ-grid{grid-template-columns:repeat(2,1fr)}.scale{gap:4px}.scale-choice{min-height:48px}.question-title{font-size:24px}}
+/* Mobile-first improvements. CSS order allows question > photo > answers on compact screens. */
+.head-count{background:#ecf3fa;color:var(--navy);border-radius:99px;padding:5px 11px;font-weight:800;white-space:nowrap}
+.zoom-photo{position:absolute;bottom:11px;right:11px;z-index:2;min-height:42px;padding:7px 14px;background:#fff;color:var(--navy);border:1px solid #cbd6e1;border-radius:9px;font-size:14px;font-weight:800;box-shadow:0 3px 10px #15293e27}
+.zoom-photo:focus-visible{outline:3px solid #91b7e3}
+.image-dialog{border:0;border-radius:13px;padding:14px;background:#fff;color:var(--ink);width:min(95vw,1100px);max-width:none;max-height:95dvh;overflow:auto;box-shadow:0 30px 100px #0e2b4399}
+.image-dialog::backdrop{background:#0f233de8}
+.image-dialog .dialog-top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:10px;font-size:15px}
+.image-dialog .dialog-top button{min-height:44px;min-width:75px;background:var(--navy);border:0;border-radius:8px;color:white;font-weight:800}
+.image-dialog img{display:block;max-width:100%;width:auto;max-height:calc(94dvh - 100px);height:auto;object-fit:contain;margin:auto;touch-action:pinch-zoom}
+@media(max-width:980px){.workspace{grid-template-columns:1fr}.photo-card{position:static}.photo-frame{height:min(52vh,520px)}.review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){
+:root{--radius:11px}
+body{font-size:16px;line-height:1.58}
+.site-head{position:sticky;top:0}
+.head-inner{padding:10px 15px;min-height:54px;gap:10px}
+.brand{font-size:16px;line-height:1.3;white-space:nowrap;font-weight:850}
+.head-actions{font-size:12px;gap:7px}
+.head-actions>span:first-child{display:none}
+.head-count{padding:4px 9px}
+.shell{padding:15px 13px max(48px,env(safe-area-inset-bottom))}
+.hero{margin:10px auto}
+.hero-head{padding-left:15px;margin:14px 0 23px;border-left-width:4px}
+.hero-head h1{font-size:clamp(29px,7vw,38px);margin:8px 0 14px}
+.hero-head p{font-size:16px}
+.intro-grid{grid-template-columns:1fr;gap:12px}
+.intro-grid .card{padding:20px}
+.intro-grid .card h2{font-size:22px}
+.steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.step{min-height:113px;padding:12px 10px}
+.step b{font-size:17px}
+.step p{font-size:13px}
+.metrics{gap:9px}
+.metric{padding:12px}
+.metric b{font-size:23px}
+.button-row{gap:9px}
+.button-row .btn{width:100%}
+.btn{min-height:52px;padding:12px 16px}
+.quiz-head{align-items:center;gap:8px;margin-bottom:10px}
+.quiz-head h1{font-size:23px;margin:3px 0 0;line-height:1.25}
+.quiz-head .kicker{font-size:10px;letter-spacing:.06em}
+.stage-badges{justify-content:flex-end;gap:5px;max-width:55%}
+.pill{font-size:11px;padding:5px 8px;line-height:1.2;white-space:nowrap}
+.progress-bg{height:6px;margin:0 0 14px}
+body[data-screen="quiz"] .workspace{display:flex;flex-direction:column;gap:0;padding-bottom:94px;align-items:stretch}
+body[data-screen="quiz"] .question-card{display:contents}
+body[data-screen="quiz"] .question-card>.stage-label{order:1;padding:3px 5px 0;font-size:12px;margin:0 0 5px}
+body[data-screen="quiz"] .question-card>.question-title{order:2;font-size:clamp(22px,5.9vw,28px);line-height:1.46;padding:0 4px;margin:0 0 13px;letter-spacing:-.025em}
+body[data-screen="quiz"] .photo-card{order:3;border-radius:10px;padding:8px;margin-bottom:12px;position:static}
+body[data-screen="quiz"] .photo-top{font-size:12px;padding:0 4px 7px}
+body[data-screen="quiz"] .photo-top span{font-size:11px}
+body[data-screen="quiz"] .photo-frame{height:clamp(220px,39dvh,440px);min-height:220px}
+body[data-screen="quiz"] .photo-caption{font-size:11px;line-height:1.5;padding:8px 3px 2px}
+body[data-screen="quiz"] .question-card>.note{order:4;padding:0 4px;margin:2px 0 10px;font-size:14px}
+body[data-screen="quiz"] .question-card>.hint{order:5;margin:0 0 9px;font-size:14px}
+body[data-screen="quiz"] .question-card>.ai-panel{order:6;margin:0 0 12px;padding:16px 17px}
+body[data-screen="quiz"] .question-card>.ai-panel .suggest{font-size:25px}
+body[data-screen="quiz"] .question-card>.answer-group{order:7;margin:7px 0 12px;gap:10px}
+body[data-screen="quiz"] .question-card>.answer-group .answer{min-height:78px;border-radius:10px;font-size:23px;touch-action:manipulation}
+body[data-screen="quiz"] .question-card>#commit{order:8;position:fixed;z-index:15;bottom:calc(10px + env(safe-area-inset-bottom));left:13px;width:calc(100% - 26px)!important;min-height:56px;margin:0;box-shadow:0 6px 24px #142c4f42}
+body[data-screen="quiz"] .question-card>.question-foot{order:9;margin:0 0 12px;padding:13px 4px 0;font-size:12px}
+.pause-card{padding:25px 20px;margin:18px auto}
+.pause-card h1{font-size:29px}
+.survey-wrap{margin:10px auto}
+.survey-wrap>.card{padding:16px}
+.survey-wrap h1,.summary h1{font-size:28px}
+.survey-item{padding:17px 0}
+.survey-item h3{font-size:17px;line-height:1.5}
+.scale{gap:5px}
+.scale-choice{min-height:49px;min-width:0;padding:0;font-size:16px}
+.summary>.card{padding:18px}
+.summ-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.summ-grid>div{padding:12px}
+.summ-grid strong{font-size:26px}
+.review-grid{grid-template-columns:1fr;gap:13px}
+.review-card img{height:225px}
+.review-header h1{font-size:26px}
+.footer-note{font-size:12px}
+body[data-screen="quiz"] .footer-note{display:none}
+}
+@media(max-width:370px){
+.brand{font-size:14px}.head-count{font-size:11px}
+body[data-screen="quiz"] .photo-frame{height:clamp(205px,36dvh,310px)}
+body[data-screen="quiz"] .question-card>.question-title{font-size:21px}
+.quiz-head h1{font-size:21px}
+.stage-badges{max-width:62%}
+.scale{gap:3px}
+.scale-choice{min-height:45px;font-size:14px}
+}
+@media(max-width:740px) and (orientation:landscape){
+body[data-screen="quiz"] .photo-frame{height:clamp(180px,53dvh,320px)}
+body[data-screen="quiz"] .workspace{padding-bottom:85px}
+}
+
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style></head>
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
 <header class="site-head"><div class="head-inner">
-<a class="brand" href="../"><span class="mark" aria-hidden="true"></span><span>機統複習 <span style="color:#9eacba;margin:0 5px">/</span> 工業安全影像判讀</span></a>
-<div class="head-actions"><a href="../">返回複習首頁</a><span style="color:#b5c0cb">｜</span><span>研究介面範例 · 48 題</span></div>
+<div class="brand">工業安全影像判讀</div>
+<div class="head-actions"><span>研究介面範例</span><span class="head-count">48 題</span></div>
 </div></header>
 <main id="main" class="shell" aria-live="polite"></main>
 <script>
@@ -91,7 +183,7 @@ const ORDER=Array.from({length:12},(_,r)=>Array.from({length:4},(_,slot)=>({imag
 function cur(){const r=ORDER[state.position];return {...BASE[r.imageIndex],condition:r.condition,number:state.position+1,color:r.condition<2?"彩色":"灰階",aiCorrect:r.condition%2===0};}
 function record(){return state.records[state.position]||{};}
 function txtStatus(){return '<div class="kicker">研究示範 / INDUSTRIAL SAFETY</div>';}
-function render(){if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="done")done();else if(state.screen==="review")review();}
+function render(){document.body.dataset.screen=state.screen;if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="done")done();else if(state.screen==="review")review();}
 function intro(){
 main.innerHTML='<section class="hero">'+txtStatus()+'<div class="hero-head"><h1>工業安全 × AI<br>輔助影像判讀</h1><p style="font-size:22px;font-weight:800;color:var(--orange)">當 AI 提出建議時，你會改變判斷嗎？</p><p>觀看真實工地影像，先自行回答「是／否」，再讀取 AI 建議並確認最終答案。這是 48 題的可操作研究介面範例。</p></div>'+
 '<div class="intro-grid"><article class="card"><div class="kicker">作答方法</div><h2 style="margin:7px 0 17px">每題四個步驟</h2><div class="steps"><div class="step"><small>01</small><b>觀看照片</b><p>讀清楚題目</p></div><div class="step"><small>02</small><b>第一次回答</b><p>獨立判斷是／否</p></div><div class="step ai"><small>03</small><b>閱讀 AI 建議</b><p>建議可能正確或錯誤</p></div><div class="step"><small>04</small><b>最後確認</b><p>保持或改變答案</p></div></div><p class="note">題目共兩組，每組 24 題；組間可休息。全部完成後填寫 12 題 AI 信任量表。</p></article>'+
@@ -108,7 +200,7 @@ selected=null;questionStart=Date.now();
 const suggestion=q.aiCorrect?q.correct:(q.correct==="是"?"否":"是");
 main.innerHTML='<div class="quiz-head"><div><div class="kicker">48 題影像判讀 / 第 '+(q.number<=24?"一":"二")+'組</div><h1>第 '+String(q.number).padStart(2,"0")+' 題 <span style="color:var(--muted);font-size:.6em;font-weight:500">/ 48</span></h1></div><div class="stage-badges"><span class="pill">'+q.color+'影像</span><span class="pill dark">'+(first?"階段 1｜獨立作答":"階段 2｜最後確認")+'</span></div></div>'+
 '<div class="progress-bg" role="progressbar" aria-valuenow="'+(q.number-1)+'" aria-valuemin="0" aria-valuemax="48" aria-label="完成題數"><div class="progress-fill" style="width:'+((q.number-1)/48*100)+'%"></div></div>'+
-'<div class="workspace"><section class="card photo-card"><div class="photo-top"><strong>觀察影像</strong><span>來源：Panly23 · '+esc(q.id)+'</span></div><div id="photoframe" class="photo-frame '+(q.color==="灰階"?"mono":"")+'"><img id="photo" class="loading" alt="工地安全影像 '+esc(q.id)+'" src="'+RAW+encodeURIComponent(q.image)+'"><div id="photoError" class="img-fail" hidden><strong>照片暫時無法載入</strong><span>請確認網路連線，再重新載入本題照片。</span><button class="btn secondary" id="retry">重新載入圖片</button></div></div><div class="photo-caption"><span>保留原圖比例；灰階題僅改變色彩呈現。</span><span><a href="'+SOURCE+'/blob/main/dataset/train/images/'+encodeURIComponent(q.image)+'" target="_blank" rel="noopener noreferrer">查看原始檔案</a></span></div></section>'+
+'<div class="workspace"><section class="card photo-card"><div class="photo-top"><strong>觀察影像</strong><span>來源：Panly23 · '+esc(q.id)+'</span></div><div id="photoframe" class="photo-frame '+(q.color==="灰階"?"mono":"")+'"><img id="photo" class="loading" alt="工地安全影像 '+esc(q.id)+'" src="'+RAW+encodeURIComponent(q.image)+'"><button class="zoom-photo" type="button" id="zoomPhoto" aria-label="放大查看照片">放大照片</button><dialog id="imageDialog" class="image-dialog" aria-label="放大查看原始照片"><div class="dialog-top"><strong>照片 '+esc(q.id)+'</strong><button type="button" id="closeZoom">關閉 ×</button></div><img id="zoomImage" alt="放大的工地安全影像 '+esc(q.id)+'"></dialog><div id="photoError" class="img-fail" hidden><strong>照片暫時無法載入</strong><span>請確認網路連線，再重新載入本題照片。</span><button class="btn secondary" id="retry">重新載入圖片</button></div></div><div class="photo-caption"><span>保留原圖比例；灰階題僅改變色彩呈現。</span><span><a href="'+SOURCE+'/blob/main/dataset/train/images/'+encodeURIComponent(q.image)+'" target="_blank" rel="noopener noreferrer">查看原始檔案</a></span></div></section>'+
 '<section class="card question-card"><div class="stage-label">'+(first?"步驟 02 / 獨立判斷":"步驟 03–04 / 閱讀建議後再次回答")+'</div><h2 class="question-title">'+esc(q.wording)+'</h2>'+
 (first?'<p class="note">請只依照照片自行判斷；提交後才會出現 AI 建議。</p>':'<div class="hint">你第一次的答案：<strong>'+esc(r.initial)+'</strong>。可以維持原判斷，或選擇修改。</div><div class="ai-panel"><div class="eyebrow">AI 辨識建議 · 模擬輸出</div><div class="suggest">建議回答「'+suggestion+'」</div><p>這是模擬的輔助建議，請仍依照你對圖片的觀察決定最後答案。</p></div>')+
 '<div class="answer-group" role="group" aria-label="選擇答案"><button class="answer" data-answer="是">是 <small>符合題目敘述</small></button><button class="answer" data-answer="否">否 <small>不符合題目敘述</small></button></div><button id="commit" class="btn primary" style="width:100%" disabled>'+(first?"提交第一次回答":"確認最後答案，前往下一題")+'</button><div class="question-foot"><span>題目 '+q.number+'／48</span><span>每個階段各記錄一次作答時間</span></div></section></div>';
@@ -116,6 +208,9 @@ const img=document.querySelector("#photo"),err=document.querySelector("#photoErr
 function imgSuccess(){imageReady=true;err.hidden=true;img.classList.remove("loading");}
 function imgFail(){imageReady=false;err.hidden=false;img.classList.add("loading");document.querySelector("#commit").disabled=true;}
 img.onload=imgSuccess;img.onerror=imgFail;if(img.complete){if(img.naturalWidth)imgSuccess();else imgFail();}
+document.querySelector("#zoomPhoto").onclick=()=>{const dlg=document.querySelector("#imageDialog"),large=document.querySelector("#zoomImage");large.src=img.src;large.style.filter=q.color==="灰階"?"grayscale(1)":"none";dlg.showModal();};
+document.querySelector("#closeZoom").onclick=()=>document.querySelector("#imageDialog").close();
+document.querySelector("#imageDialog").onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close();};
 document.querySelector("#retry").onclick=()=>{err.hidden=true;img.src=RAW+encodeURIComponent(q.image)+(img.src.includes("?")?"&":"?")+"reload="+Date.now();};
 document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{selected=b.dataset.answer;document.querySelectorAll(".answer").forEach(x=>x.classList.toggle("selected",x===b));document.querySelector("#commit").disabled=!imageReady;});
 document.querySelector("#commit").onclick=()=>{if(!selected||!imageReady)return;const elapsed=Date.now()-questionStart;if(first){state.records[state.position]={imageId:q.id,imageFile:q.image,source:q.source,originalImageId:q.sourceOriginal,question:q.wording,category:q.category,color:q.color,aiCondition:q.aiCorrect?"correct":"incorrect",conditionId:q.condition+1,standardAnswer:q.correct,aiAdvice:suggestion,initial:selected,initialMs:elapsed,final:null,finalMs:null};state.phase="second";save();quiz();}else{const out=state.records[state.position];out.final=selected;out.finalMs=elapsed;out.initialCorrect=out.initial===q.correct;out.finalCorrect=out.final===q.correct;out.changed=out.initial!==out.final;state.position++;state.phase="first";state.screen=state.position===24?"pause":state.position===48?"survey":"quiz";save();render();}};
