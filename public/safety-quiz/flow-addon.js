@@ -57,7 +57,7 @@ done=function(){
  const wrongAdvice=state.records.filter(r=>r.aiCondition==='incorrect'),correctAdvice=state.records.filter(r=>r.aiCondition==='correct');
  const influenced=wrongAdvice.filter(r=>r.initialCorrect&&r.changed&&!r.finalCorrect).length;
  const caution=wrongAdvice.filter(r=>r.initialCorrect).length;
- const misses=state.records.filter(r=>r.standardAnswer==='是'&&r.final==='否').length;
+ const misses=state.records.filter(r=>r.hasTargetAnnotation&&((r.negativeWording&&r.final==='是')||(!r.negativeWording&&r.final==='否'))).length;
  const insight=[
   {title:'初答和終答比較',body:x.end>x.init?'閱讀 AI 建議後，終答正確題數比初答多 '+(x.end-x.init)+' 題。':x.end<x.init?'閱讀 AI 建議後，終答正確題數比初答少 '+(x.init-x.end)+' 題。':'閱讀 AI 建議前後，總正確題數相同；仍可能發生改對與改錯互相抵銷。'},
   {title:'錯誤 AI 建議的影響',body:caution?'在 '+caution+' 題「初答正確、但 AI 建議錯誤」的題目中，有 '+influenced+' 題被改成錯誤答案。':'沒有出現可計算的「初答正確且 AI 建議錯誤」題目，因此此指標無法判讀。'},
@@ -68,7 +68,7 @@ done=function(){
  '<p>已依序完成：影像初答 → AI 建議後終答 → Jian 12 題量表 → 3 題結束體驗評估。以下為<strong>此瀏覽器單次作答</strong>的示範結果，並非研究結論。</p>'+
  '<article class="card"><h2>影像判讀摘要</h2><div class="summ-grid"><div><strong>'+x.init+'/'+n+'</strong><span>初答正確</span></div><div><strong>'+x.end+'/'+n+'</strong><span>終答正確</span></div><div><strong>'+x.changed+'</strong><span>答案改變</span></div><div><strong>'+x.bad+'/'+x.eligible+'</strong><span>因錯誤 AI 建議而改錯</span></div></div>'+
  '<div class="score-trend">'+rows.map((r,i)=>'<div class="score-row '+(i===1?'final':'')+'"><div><span>'+r[0]+'正確率</span><b>'+Math.round(r[1]/n*100)+'%</b></div><div class="score-track"><div class="score-fill" style="width:'+(r[1]/n*100)+'%"></div></div></div>').join('')+'</div>'+
- '<h2>信任量表與小評估</h2><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>Jian 信任量表平均（前 5 題反向計分）</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>3 題介面可用性回饋平均</span></div><div><strong>'+misses+'</strong><span>實際有標註目標卻判斷無（依目前題目答案）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
+ '<h2>信任量表與小評估</h2><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>Jian 信任量表平均（前 5 題反向計分）</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>3 題介面可用性回饋平均</span></div><div><strong>'+misses+'</strong><span>有標註目標卻判斷為無（已考慮否定問句）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
  '<h2>這次 Demo 的觀察</h2><div class="insight-list">'+insight.map(v=>'<div class="insight"><strong>'+v.title+'</strong>'+v.body+'</div>').join('')+'</div>'+
  '<div class="rule"><strong>解讀限制：</strong>題目標準答案仍依資料集標註推定，尚待人工核對；AI 建議是預設條件而非模型輸出。4 題 Demo 樣本極少，不足以推論 AI 可信度或使用者行為差異。</div>'+
  '<div class="button-row"><button class="btn primary" id="csv">下載影像題 CSV</button><button class="btn secondary" id="json">下載完整 JSON（含兩種問卷）</button><button class="btn secondary" id="review">查看題庫照片來源</button></div></article>'+
