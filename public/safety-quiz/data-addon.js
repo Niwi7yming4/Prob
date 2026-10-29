@@ -35,7 +35,7 @@
      window.__safetyBankReady=true;
      banner('ok','48 題與 2 題教學已載入');
      gate(true);
-     if(state.screen==='intro'||state.screen==='review')render();
+     if(['intro','review','tutorial','quiz'].includes(state.screen))render();
    })
    .catch(err=>{
      window.__safetyBankReady=false;
