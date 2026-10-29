@@ -33,6 +33,17 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Cache public dataset archives
+        uses: actions/cache@v4
+        with:
+          path: .cache/safety
+          key: public-safety-data-ultra-v1-roboflow-v28
+
+      - name: Prepare multi-topic image questions
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 scripts/build_safety_questions.py
+
       - name: Validate 48-question safety quiz
         run: |
           node <<'NODE'
@@ -47,7 +58,18 @@ jobs:
           for (const item of data) {
             if (!/^.+\.jpg$/i.test(item.image) || !/^[0123]+$/.test(item.codes)) throw Error('Invalid source data');
           }
-          console.log('PASS: 48 unique images and valid inline JavaScript');
+          const source = JSON.parse(fs.readFileSync('docs/safety-quiz/data.json', 'utf8'));
+          if(source.length !== 48 || new Set(source.map(x => x.category)).size !== 9) throw Error('Expected 48 diverse questions across 9 topics');
+          if(new Set(source.map(x => x.source + ':' + x.sourceOriginal)).size !== 48) throw Error('Repeated source photos');
+          const yes = source.filter(x => x.correct === '是').length;
+          if(yes !== 24) throw Error('Yes/no distribution is not balanced');
+          for (const x of source) {
+            if (!fs.existsSync('docs/safety-quiz/' + x.image.replace('./', ''))) throw Error('Missing image ' + x.image);
+          }
+          for (const addon of ['flow-addon.js','data-addon.js']) {
+            new Function(fs.readFileSync('docs/safety-quiz/' + addon, 'utf8'));
+          }
+          console.log('PASS: 48 unique images, 9 categories, balanced answers, protocol scripts');
           NODE
 
       - name: Upload artifact
