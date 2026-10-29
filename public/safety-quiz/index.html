@@ -423,5 +423,5 @@ document.querySelector("#leaveDiscard").onclick=()=>{
 };
 document.querySelector("#leaveDialog").onclick=e=>{if(e.target===e.currentTarget)closeExitDialog();};
 const footer=document.createElement("footer");footer.className="footer-note shell";footer.innerHTML='<strong>資料來源：</strong> <a href="https://docs.ultralytics.com/datasets/detect/construction-ppe/" target="_blank" rel="noopener noreferrer">Ultralytics Construction-PPE</a>（AGPL-3.0）與 <a href="https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/28" target="_blank" rel="noopener noreferrer">Roboflow Construction Site Safety</a>（標示 CC BY 4.0；原始影像授權仍須逐檔核實）。研究流程為課程原型；作答資料僅儲存在本機瀏覽器，不會自動上傳。';document.body.append(footer);
-if(new URLSearchParams(location.search).has("review")){state.screen="review";}render();
+if(new URLSearchParams(location.search).has("review")){state.screen="review";}if(state.screen!=="tutorial")render();
 </script><script src="./visual-tutorial.js"></script><script src="./flow-addon.js"></script><script src="./data-addon.js"></script></body></html>
