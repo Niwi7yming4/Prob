@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -71,6 +71,18 @@ jobs:
           }
           console.log('PASS: 48 unique images, 9 categories, balanced answers, protocol scripts');
           NODE
+
+      - name: Save source-backed quiz images and manifest to GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/safety-quiz
+          if ! git diff --cached --quiet; then
+            git commit -m "Update 48 diverse industrial safety images and study flow"
+            git push origin HEAD:main
+          else
+            echo "Question bank and images are already synchronized"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
