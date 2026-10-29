@@ -1,0 +1,133 @@
+[
+  {
+    "id": "T01",
+    "image": "./images/tutorial-01.jpg",
+    "prompt": "示範 1：畫面中是否同時出現安全帽與防護手套？",
+    "correct": "是",
+    "aiAdvice": "是",
+    "explanation": "同時辨認安全帽與手套；AI 這次建議正確。",
+    "source": "Ultralytics Construction-PPE",
+    "sourceOriginal": "image271",
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.55952,
+        "y": 0.50541,
+        "w": 0.73355,
+        "h": 0.88506
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.4857,
+        "y": 0.38409,
+        "w": 0.51109,
+        "h": 0.35869
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.73966,
+        "y": 0.78966,
+        "w": 0.29523,
+        "h": 0.1857
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.53173,
+        "y": 0.84522,
+        "w": 0.24761,
+        "h": 0.18887
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.40951,
+        "y": 0.1222,
+        "w": 0.32064,
+        "h": 0.11428
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.39442,
+        "y": 0.62696,
+        "w": 0.18253,
+        "h": 0.16508
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.43411,
+        "y": 0.14523,
+        "w": 0.29366,
+        "h": 0.07141
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.74919,
+        "y": 0.50791,
+        "w": 0.15556,
+        "h": 0.12698
+      }
+    ],
+    "targetIds": [
+      0,
+      1,
+      6
+    ],
+    "mode": "unscored"
+  },
+  {
+    "id": "T02",
+    "image": "./images/tutorial-02.jpg",
+    "prompt": "示範 2：畫面中是否同時出現施工機具和作業人員？",
+    "correct": "是",
+    "aiAdvice": "否",
+    "explanation": "可看到人員與機具；AI 這次建議錯誤，應自行核對。",
+    "source": "Roboflow Construction Site Safety (Kaggle mirror)",
+    "sourceOriginal": "construction-3-_mp4-219",
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.47031,
+        "y": 0.44219,
+        "w": 0.86797,
+        "h": 0.7875
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.75625,
+        "y": 0.46406,
+        "w": 0.33984,
+        "h": 0.38906
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.45469,
+        "y": 0.33203,
+        "w": 0.04766,
+        "h": 0.10781
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.43672,
+        "y": 0.31406,
+        "w": 0.01328,
+        "h": 0.04844
+      }
+    ],
+    "targetIds": [
+      5,
+      8
+    ],
+    "mode": "unscored"
+  }
+]
