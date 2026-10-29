@@ -5,78 +5,45 @@ const UX_ITEMS=[
  "從影像判讀、信任量表到結束頁，整體流程是否容易完成？"
 ];
 
-/* A short walkthrough: three representative items, NOT a full Jian score. */
+/* DOCX protocol: one questionnaire after both image blocks. Demo gets a
+   3-item form preview; it is not interpreted as a full Jian scale score. */
 const DEMO_TRUST_INDICES=[2,5,9];
-function demoSurvey(){
- const block=state.surveyRounds.length+1;
- const indices=DEMO_TRUST_INDICES;
- const filled=indices.filter((_,i)=>Number(state.survey[i])>=1&&Number(state.survey[i])<=7).length;
- main.innerHTML='<section class="survey-wrap"><div class="kicker">第 '+block+' 組 / 問卷示範</div><h1>AI 信任問卷</h1>'+
- '<p>試填 3 題，體驗完整問卷的操作；不計為正式量表成績。</p>'+
- '<article class="card" style="padding:clamp(16px,3vw,26px)"><p class="note">1＝完全不符合　4＝普通　7＝非常符合</p>'+
- indices.map((j,i)=>'<div class="survey-item"><h3>'+String(i+1).padStart(2,"0")+'. '+esc(TRUST[j])+'</h3><div class="scale" role="group" data-demo-index="'+i+'" aria-label="示範問卷第 '+(i+1)+' 題">'+
- Array.from({length:7},(_,k)=>'<button type="button" class="scale-choice '+(state.survey[i]===k+1?'selected':'')+'" aria-pressed="'+(state.survey[i]===k+1)+'" data-value="'+(k+1)+'">'+(k+1)+'</button>').join('')+
- '</div><div class="scale-guide"><span>完全不符合</span><span>非常符合</span></div></div>').join('')+
- '<button type="button" class="btn primary" id="demoSurveyNext" style="width:100%;margin-top:16px" '+(filled===3?'':'disabled')+'>'+(block===1?'繼續後 2 題':'完成問卷')+'</button></article></section>';
- document.querySelectorAll('[data-demo-index] button').forEach(b=>b.onclick=()=>{
-  const i=Number(b.parentElement.dataset.demoIndex);
-  state.survey[i]=Number(b.dataset.value);save();
-  b.parentElement.querySelectorAll('button').forEach(x=>{
-    x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b));
-  });
-  document.querySelector('#demoSurveyNext').disabled=!indices.every((_,i)=>Number(state.survey[i])>=1);
- });
- document.querySelector('#demoSurveyNext').onclick=()=>{
-  if(!indices.every((_,i)=>Number(state.survey[i])>=1))return;
-  const entry={block,questionEnd:state.position,indices:[...indices],answers:{...state.survey},at:new Date().toISOString()};
-  if(state.reviewCompletedSurvey)state.surveyRounds[state.surveyRounds.length-1]=entry;
-  else state.surveyRounds.push(entry);
-  state.reviewCompletedSurvey=false;
-  if(state.surveyRounds.length===1){
-    state.midSurveyDone=true;state.survey={};state.screen='quiz';
-  }else state.screen='feedback';
-  save();render();
- };
-}
-
 survey=function(){
-  if(isDemo())return demoSurvey();
-  const page=state.surveyPage||0,start=page*4,items=TRUST.slice(start,start+4);
-  const answered=Object.keys(state.survey).length;
-  const completed=items.every((_,i)=>Number(state.survey[start+i])>=1);
-  main.innerHTML='<section class="survey-wrap"><div class="kicker">'+(isDemo()?"中途問卷":"結束問卷")+' · '+(page+1)+'/3 頁</div><h1>AI 信任量表</h1>'+
-    '<p>第 '+(state.surveyRounds.length+1)+' 組結束，請評估本組的 AI 建議。</p>'+
-    '<p class="progress-title">已回答 '+answered+' / 12 題</p><div class="progress-bg"><div class="progress-fill" style="width:'+(answered/12*100)+'%"></div></div>'+
-    '<article class="card" style="padding:clamp(18px,3vw,30px)"><p class="note">1＝完全不符合　　4＝普通　　7＝非常符合</p>'+
-    items.map((q,i)=>{const idx=start+i;return '<div class="survey-item"><h3>'+String(idx+1).padStart(2,"0")+'. '+esc(q)+'</h3><div class="scale" data-idx="'+idx+'" role="group" aria-label="第 '+(idx+1)+' 題">'+
-      Array.from({length:7},(_,k)=>'<button type="button" class="scale-choice '+(state.survey[idx]===k+1?'selected':'')+'" data-value="'+(k+1)+'" aria-pressed="'+(state.survey[idx]===k+1)+'">'+(k+1)+'</button>').join('')+
+  const demo=isDemo(),indices=demo?DEMO_TRUST_INDICES:Array.from({length:12},(_,i)=>i);
+  const page=demo?0:(state.surveyPage||0),start=page*4;
+  const items=demo?indices:indices.slice(start,start+4);
+  const filled=indices.filter((_,i)=>Number(state.survey[i])>=1&&Number(state.survey[i])<=7).length;
+  const pageReady=items.every((_,j)=>Number(state.survey[start+j])>=1&&Number(state.survey[start+j])<=7);
+  main.innerHTML='<section class="survey-wrap"><div class="kicker">'+(demo?'Demo · 問卷試填':'完整模式 · 問卷 '+(page+1)+'/3')+'</div>'+
+    '<h1>AI 信任問卷</h1><p>'+(demo?'試填 3 題。正式施測使用完整 12 題。':'已完成 48 題，請依本次 AI 建議的使用經驗評分。')+'</p>'+
+    '<p class="progress-title">已填 '+filled+' / '+indices.length+' 題</p>'+
+    '<div class="progress-bg"><div class="progress-fill" style="width:'+(filled/indices.length*100)+'%"></div></div>'+
+    '<article class="card" style="padding:clamp(16px,3vw,28px)"><p class="note">1＝完全不符合　4＝普通　7＝非常符合</p>'+
+    items.map((idx,j)=>{const slot=start+j;return '<div class="survey-item"><h3>'+String(slot+1).padStart(2,'0')+'. '+esc(TRUST[idx])+'</h3>'+
+      '<div class="scale" data-trust-index="'+slot+'" role="group" aria-label="問卷第 '+(slot+1)+' 題">'+
+      Array.from({length:7},(_,k)=>'<button type="button" class="scale-choice '+(Number(state.survey[slot])===k+1?'selected':'')+
+       '" data-value="'+(k+1)+'" aria-pressed="'+(Number(state.survey[slot])===k+1)+'">'+(k+1)+'</button>').join('')+
       '</div><div class="scale-guide"><span>完全不符合</span><span>非常符合</span></div></div>';}).join('')+
-    '<div class="button-row" style="justify-content:space-between"><button class="btn secondary" id="surveyPrev" '+(page===0?'disabled':'')+'>上一頁</button>'+
-    '<button class="btn primary" id="surveyNext" '+(completed?'':'disabled')+'>'+(page===2?(state.surveyRounds.length===0?'完成問卷，進入第 2 組':'完成問卷，進入結束評估'):'下一頁')+'</button></div></article></section>';
-  document.querySelectorAll('.scale-choice').forEach(b=>b.onclick=()=>{
-    const idx=+b.parentElement.dataset.idx;state.survey[idx]=+b.dataset.value;save();
+    '<div class="button-row" style="justify-content:space-between">'+(demo?'':'<button class="btn secondary" type="button" id="trustPrev" '+(page===0?'disabled':'')+'>上一頁</button>')+
+    '<button class="btn primary" type="button" id="trustNext" '+(pageReady?'':'disabled')+'>'+(demo||page===2?'完成問卷，查看結果':'下一頁')+'</button></div></article></section>';
+  document.querySelectorAll('[data-trust-index] button').forEach(b=>b.onclick=()=>{
+    const slot=Number(b.parentElement.dataset.trustIndex);state.survey[slot]=Number(b.dataset.value);save();
     b.parentElement.querySelectorAll('button').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b));});
-    document.querySelector('#surveyNext').disabled=!items.every((_,i)=>Number(state.survey[start+i])>=1);
-    const n=Object.keys(state.survey).length;
-    document.querySelector('.progress-title').textContent='已回答 '+n+' / 12 題';
-    document.querySelector('.progress-fill').style.width=n/12*100+'%';
+    document.querySelector('#trustNext').disabled=!items.every((_,j)=>Number(state.survey[start+j])>=1);
+    const n=indices.filter((_,i)=>Number(state.survey[i])>=1).length;
+    document.querySelector('.progress-title').textContent='已填 '+n+' / '+indices.length+' 題';
+    document.querySelector('.progress-fill').style.width=(n/indices.length*100)+'%';
   });
-  document.querySelector('#surveyPrev').onclick=()=>{if(page>0){state.surveyPage=page-1;save();render();}};
-  document.querySelector('#surveyNext').onclick=()=>{
-    if(!items.every((_,i)=>Number(state.survey[start+i])>=1))return;
-    if(page===2){
-      const entry={block:state.surveyRounds.length+1,questionEnd:state.position,indices:Array.from({length:12},(_,i)=>i),answers:{...state.survey},at:new Date().toISOString()};
-      if(state.reviewCompletedSurvey)state.surveyRounds[state.surveyRounds.length-1]=entry;
-      else state.surveyRounds.push(entry);
-      state.reviewCompletedSurvey=false;
-      state.surveyPage=0;
-      const afterFirst=state.surveyRounds.length===1;
-      if(afterFirst){state.midSurveyDone=true;state.survey={};state.screen='pause';}
-      else state.screen='feedback';
-    }else state.surveyPage=page+1;
-    save();render();
+  if(!demo)document.querySelector('#trustPrev').onclick=()=>{if(page>0){state.surveyPage=page-1;save();render();}};
+  document.querySelector('#trustNext').onclick=()=>{
+    if(!items.every((_,j)=>Number(state.survey[start+j])>=1))return;
+    if(!demo&&page<2){state.surveyPage=page+1;save();render();return;}
+    if(indices.some((_,i)=>!(Number(state.survey[i])>=1&&Number(state.survey[i])<=7)))return;
+    state.surveyRounds=[{block:1,questionEnd:state.position,indices:[...indices],answers:{...state.survey},at:new Date().toISOString()}];
+    state.screen='done';state.completedAt=new Date().toISOString();save();render();
   };
 };
+
 function feedback(){
   const n=Object.keys(state.feedback).filter(k=>state.feedback[k]>=1).length;
   main.innerHTML='<section class="survey-wrap"><div class="kicker">第 4 階段｜介面評估</div><h1>使用體驗</h1>'+
@@ -97,38 +64,38 @@ function feedback(){
   document.querySelector('#endProtocol').onclick=()=>{if(Object.keys(state.feedback).filter(k=>state.feedback[k]>=1).length!==3)return;state.completedAt=new Date().toISOString();setScreen('done');};
 }
 done=function(){
- const x=stats(),n=state.records.length,trust=(isDemo()?DEMO_TRUST_INDICES:Array.from({length:12},(_,i)=>i)).map((idx,i)=>idx<5?8-Number(state.survey[i]):Number(state.survey[i]));
- const mean=trust.reduce((a,b)=>a+b,0)/trust.length,uxMean=Object.values(state.feedback).reduce((a,b)=>a+Number(b),0)/3;
- const trustRounds=(state.surveyRounds||[]).map(r=>{
-   const indices=r.indices||Array.from({length:12},(_,i)=>i);
-   const scores=indices.map((idx,i)=>idx<5?8-Number(r.answers[i]):Number(r.answers[i]));
-   return {block:r.block,questionEnd:r.questionEnd,average:scores.reduce((a,b)=>a+b,0)/scores.length,items:scores.length};
- });
- const wrongAdvice=state.records.filter(r=>r.aiCondition==='incorrect'),correctAdvice=state.records.filter(r=>r.aiCondition==='correct');
- const influenced=wrongAdvice.filter(r=>r.initialCorrect&&r.changed&&!r.finalCorrect).length;
- const caution=wrongAdvice.filter(r=>r.initialCorrect).length;
- const misses=state.records.filter(r=>r.hasTargetAnnotation&&((r.negativeWording&&r.final==='是')||(!r.negativeWording&&r.final==='否'))).length;
- const insight=[
-  {title:'初答和終答比較',body:x.end>x.init?'終答多 '+(x.end-x.init)+' 題。':x.end<x.init?'終答少 '+(x.init-x.end)+' 題。':'初答與終答正確數相同。'},
-  {title:'錯誤 AI 建議的影響',body:caution?'原本答對的 '+caution+' 題中，有 '+influenced+' 題改錯。':'沒有可計算題目。'},
-  {title:'信任與操作體驗',body:'信任 '+mean.toFixed(2)+'/7；介面 '+uxMean.toFixed(2)+'/5。分開計分。'}
- ];
- const rows=[['初次作答',x.init],['最終作答',x.end]];
- main.innerHTML='<section class="summary"><div class="kicker">第 5 階段｜流程結束</div><h1>'+(isDemo()?'4 題 Demo 已完成':'48 題完整流程已完成')+'</h1>'+
- '<p>'+(isDemo()?'2 題後試填一次，4 題後再試填一次。':'每 24 題後完成 12 題信任量表，再進行介面評估。')+'</p>'+
- '<article class="card"><h2>影像判讀摘要</h2><div class="summ-grid"><div><strong>'+x.init+'/'+n+'</strong><span>初答正確</span></div><div><strong>'+x.end+'/'+n+'</strong><span>終答正確</span></div><div><strong>'+x.changed+'</strong><span>答案改變</span></div><div><strong>'+x.bad+'/'+x.eligible+'</strong><span>因錯誤 AI 建議而改錯</span></div></div>'+
- '<div class="score-trend">'+rows.map((r,i)=>'<div class="score-row '+(i===1?'final':'')+'"><div><span>'+r[0]+'正確率</span><b>'+Math.round(r[1]/n*100)+'%</b></div><div class="score-track"><div class="score-fill" style="width:'+(r[1]/n*100)+'%"></div></div></div>').join('')+'</div>'+
- '<h2>問卷結果</h2><div class="insight-list">'+trustRounds.map(r=>'<div class="insight"><strong>第 '+r.block+' 組信任平均</strong>'+r.average.toFixed(2)+' / 7（'+r.items+' 題；完成 '+r.questionEnd+' 張照片）</div>').join('')+'</div><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>'+(isDemo()?'3 題試填平均（非正式信任分數）':'12 題信任量表平均')+'</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>介面評估平均</span></div><div><strong>'+misses+'</strong><span>漏判目標（依標註）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
- '<h2>作答觀察</h2><div class="insight-list">'+insight.map(v=>'<div class="insight"><strong>'+v.title+'</strong>'+v.body+'</div>').join('')+'</div>'+
- '<details class="rule"><summary><strong>解讀限制</strong></summary><p>答案依標註推定，仍須人工核對。AI 建議為模擬；4 題 Demo 不能推論研究效果。</p></details>'+
- '<div class="button-row"><button class="btn primary" id="csv">下載影像題 CSV</button><button class="btn secondary" id="json">下載完整 JSON</button><button class="btn secondary" id="review">查看圖片來源</button></div></article>'+
- '<div class="button-row"><button class="btn secondary" id="home">回到模式選擇</button><button class="btn warn" id="reset">重做本模式</button></div></section>';
- document.querySelector('#csv').onclick=downloadCSV;
- document.querySelector('#json').onclick=()=>download('industrial-safety-'+n+'-protocol.json',JSON.stringify({...state,summary:x,trustReverseScored:trust,trustAverage:mean,trustRounds,uxAverage:uxMean},null,2),'application/json;charset=utf-8');
- document.querySelector('#review').onclick=()=>{state.screen='review';previewPage=0;render();};
- document.querySelector('#home').onclick=()=>{state.screen='intro';save();render();};
- document.querySelector('#reset').onclick=reset;
+  const x=stats(),n=state.records.length,demo=isDemo();
+  const indices=demo?DEMO_TRUST_INDICES:Array.from({length:12},(_,i)=>i);
+  const scores=indices.map((idx,i)=>idx<5?8-Number(state.survey[i]):Number(state.survey[i]));
+  const average=scores.reduce((a,b)=>a+b,0)/scores.length;
+  const pct=value=>n?Math.round(value/n*100):0;
+  main.innerHTML='<section class="summary"><div class="kicker">已完成</div>'+
+    '<h1>'+(demo?'4 題 Demo 結束':'48 題測驗結束')+'</h1>'+
+    '<p>'+(demo?'四種條件各一題，已完成問卷試填。':'已完成兩組判讀與一次 Jian 12 題問卷。')+'</p>'+
+    '<article class="card"><h2>作答摘要</h2>'+
+    '<div class="summ-grid"><div><strong>'+x.init+'/'+n+'</strong><span>初答正確</span></div>'+
+    '<div><strong>'+x.end+'/'+n+'</strong><span>最後正確</span></div>'+
+    '<div><strong>'+x.changed+'</strong><span>改答次數</span></div>'+
+    '<div><strong>'+x.bad+'/'+x.eligible+'</strong><span>錯誤 AI 建議後改錯</span></div></div>'+
+    '<div class="score-trend">'+[['初答正確率',x.init],['終答正確率',x.end]].map((v,i)=>
+      '<div class="score-row '+(i?'final':'')+'"><div><span>'+v[0]+'</span><b>'+pct(v[1])+'%</b></div>'+
+      '<div class="score-track"><div class="score-fill" style="width:'+pct(v[1])+'%"></div></div></div>').join('')+'</div>'+
+    '<h2>問卷結果</h2><div class="summ-grid"><div><strong>'+average.toFixed(2)+' / 7</strong>'+
+    '<span>'+(demo?'3 題試填平均（不是正式量表分數）':'Jian 信任量表平均（前五題反向計分）')+'</span></div>'+
+    '<div><strong>'+scores.length+' 題</strong><span>已填問卷</span></div></div>'+
+    '<details class="rule"><summary><strong>結果使用限制</strong></summary><p>AI 建議是模擬輸出，標準答案依資料集標註推定，正式施測前須人工確認。Demo 不作正式統計推論。</p></details>'+
+    '<div class="button-row"><button class="btn primary" id="csv">下載作答 CSV</button>'+
+    '<button class="btn secondary" id="json">下載完整 JSON</button></div></article>'+
+    '<div class="button-row"><button class="btn secondary" id="home">返回模式選擇</button>'+
+    '<button class="btn warn" id="reset">重做本模式</button></div></section>';
+  document.querySelector('#csv').onclick=downloadCSV;
+  document.querySelector('#json').onclick=()=>download('industrial-safety-'+n+'-protocol.json',
+    JSON.stringify({...state,summary:x,trustAverage:average,trustScores:scores,trustIsPreview:demo},null,2),
+    'application/json;charset=utf-8');
+  document.querySelector('#home').onclick=()=>{state.screen='intro';save();render();};
+  document.querySelector('#reset').onclick=reset;
 };
+
 reset=function(){
  if(!confirm('確定清除目前這個模式的所有紀錄？另一個模式的紀錄不會受影響。'))return;
  localStorage.removeItem(isDemo()?DEMO_STORE:STORE);state=fresh(state.mode);render();
