@@ -2,7 +2,7 @@
   {
     "id": "S001",
     "image": "./images/q01.jpg",
-    "prompt": "畫面中是否可看到有人戴著防護手套？",
+    "prompt": "畫面中是否同時能看到防護手套與工作背心？",
     "correct": "是",
     "category": "防護手套",
     "source": "Ultralytics Construction-PPE",
@@ -49,12 +49,17 @@
         "h": 0.25088
       }
     ],
-    "imageBytes": 70804
+    "imageBytes": 70804,
+    "queryClassIds": [
+      1,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S002",
     "image": "./images/q02.jpg",
-    "prompt": "畫面中是否可看到用於提醒通行者的安全警示錐？",
+    "prompt": "畫面中是否同時能看到警示錐與安全帽？",
     "correct": "否",
     "category": "警示錐",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -149,7 +154,12 @@
         "h": 0.18828
       }
     ],
-    "imageBytes": 93009
+    "imageBytes": 93009,
+    "queryClassIds": [
+      6,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S003",
@@ -306,7 +316,7 @@
   {
     "id": "S005",
     "image": "./images/q05.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與反光背心？",
     "correct": "是",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -369,7 +379,12 @@
         "h": 0.0625
       }
     ],
-    "imageBytes": 68578
+    "imageBytes": 68578,
+    "queryClassIds": [
+      9,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S006",
@@ -474,7 +489,7 @@
   {
     "id": "S007",
     "image": "./images/q07.jpg",
-    "prompt": "畫面中是否可看到有人佩戴安全帽？",
+    "prompt": "畫面中是否同時能看到安全帽與反光背心？",
     "correct": "是",
     "category": "安全帽",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -521,7 +536,12 @@
         "h": 0.17656
       }
     ],
-    "imageBytes": 77199
+    "imageBytes": 77199,
+    "queryClassIds": [
+      0,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S008",
@@ -626,7 +646,7 @@
   {
     "id": "S009",
     "image": "./images/q09.jpg",
-    "prompt": "畫面中是否可看到有人配戴護目鏡？",
+    "prompt": "畫面中是否同時能看到護目鏡與安全帽？",
     "correct": "是",
     "category": "護目鏡",
     "source": "Ultralytics Construction-PPE",
@@ -681,12 +701,17 @@
         "h": 0.13969
       }
     ],
-    "imageBytes": 46727
+    "imageBytes": 46727,
+    "queryClassIds": [
+      4,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S010",
     "image": "./images/q10.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與反光背心？",
     "correct": "否",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -781,12 +806,17 @@
         "h": 0.21641
       }
     ],
-    "imageBytes": 107251
+    "imageBytes": 107251,
+    "queryClassIds": [
+      9,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S011",
     "image": "./images/q11.jpg",
-    "prompt": "畫面中是否可看到工地人員穿著反光安全背心？",
+    "prompt": "畫面中是否同時能看到反光背心與安全帽？",
     "correct": "是",
     "category": "反光背心",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -825,7 +855,12 @@
         "h": 0.06406
       }
     ],
-    "imageBytes": 50420
+    "imageBytes": 50420,
+    "queryClassIds": [
+      7,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S012",
@@ -1058,7 +1093,7 @@
   {
     "id": "S015",
     "image": "./images/q15.jpg",
-    "prompt": "畫面中是否可看到作業人員穿著防護靴／安全鞋？",
+    "prompt": "畫面中是否同時能看到安全鞋與工作背心？",
     "correct": "是",
     "category": "安全鞋",
     "source": "Ultralytics Construction-PPE",
@@ -1137,7 +1172,12 @@
         "h": 0.14441
       }
     ],
-    "imageBytes": 128442
+    "imageBytes": 128442,
+    "queryClassIds": [
+      3,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S016",
@@ -1378,7 +1418,7 @@
   {
     "id": "S019",
     "image": "./images/q19.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與反光背心？",
     "correct": "是",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -1433,7 +1473,12 @@
         "h": 0.18203
       }
     ],
-    "imageBytes": 87456
+    "imageBytes": 87456,
+    "queryClassIds": [
+      9,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S020",
@@ -1842,7 +1887,7 @@
   {
     "id": "S025",
     "image": "./images/q25.jpg",
-    "prompt": "畫面中是否可看到有人佩戴安全帽？",
+    "prompt": "畫面中是否同時能看到安全帽與反光背心？",
     "correct": "是",
     "category": "安全帽",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -1889,7 +1934,12 @@
         "h": 0.27891
       }
     ],
-    "imageBytes": 73005
+    "imageBytes": 73005,
+    "queryClassIds": [
+      0,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S026",
@@ -2346,7 +2396,7 @@
   {
     "id": "S031",
     "image": "./images/q31.jpg",
-    "prompt": "畫面中是否可看到工地人員穿著反光安全背心？",
+    "prompt": "畫面中是否同時能看到反光背心與安全帽？",
     "correct": "是",
     "category": "反光背心",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -2393,7 +2443,12 @@
         "h": 0.05703
       }
     ],
-    "imageBytes": 70503
+    "imageBytes": 70503,
+    "queryClassIds": [
+      7,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S032",
@@ -2498,7 +2553,7 @@
   {
     "id": "S033",
     "image": "./images/q33.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與反光背心？",
     "correct": "是",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -2561,7 +2616,12 @@
         "h": 0.06641
       }
     ],
-    "imageBytes": 69673
+    "imageBytes": 69673,
+    "queryClassIds": [
+      9,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S034",
@@ -2666,7 +2726,7 @@
   {
     "id": "S035",
     "image": "./images/q35.jpg",
-    "prompt": "畫面中是否可看到有人戴著防護手套？",
+    "prompt": "畫面中是否同時能看到防護手套與工作背心？",
     "correct": "是",
     "category": "防護手套",
     "source": "Ultralytics Construction-PPE",
@@ -2761,12 +2821,17 @@
         "h": 0.10389
       }
     ],
-    "imageBytes": 79186
+    "imageBytes": 79186,
+    "queryClassIds": [
+      1,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S036",
     "image": "./images/q36.jpg",
-    "prompt": "畫面中是否可辨認大型施工機具？",
+    "prompt": "畫面中是否同時能看到施工機具與安全帽？",
     "correct": "否",
     "category": "施工機具",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -2861,7 +2926,12 @@
         "h": 0.13516
       }
     ],
-    "imageBytes": 64216
+    "imageBytes": 64216,
+    "queryClassIds": [
+      8,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S037",
@@ -2942,7 +3012,7 @@
   {
     "id": "S038",
     "image": "./images/q38.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與反光背心？",
     "correct": "否",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -3037,12 +3107,17 @@
         "h": 0.26406
       }
     ],
-    "imageBytes": 102171
+    "imageBytes": 102171,
+    "queryClassIds": [
+      9,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S039",
     "image": "./images/q39.jpg",
-    "prompt": "畫面中是否可看到作業人員穿著防護靴／安全鞋？",
+    "prompt": "畫面中是否同時能看到安全鞋與工作背心？",
     "correct": "是",
     "category": "安全鞋",
     "source": "Ultralytics Construction-PPE",
@@ -3121,7 +3196,12 @@
         "h": 0.03656
       }
     ],
-    "imageBytes": 92460
+    "imageBytes": 92460,
+    "queryClassIds": [
+      3,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S040",
@@ -3226,7 +3306,7 @@
   {
     "id": "S041",
     "image": "./images/q41.jpg",
-    "prompt": "畫面中是否可看到有人配戴護目鏡？",
+    "prompt": "畫面中是否同時能看到護目鏡與工作背心？",
     "correct": "是",
     "category": "護目鏡",
     "source": "Ultralytics Construction-PPE",
@@ -3273,12 +3353,17 @@
         "h": 0.18255
       }
     ],
-    "imageBytes": 97733
+    "imageBytes": 97733,
+    "queryClassIds": [
+      4,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S042",
     "image": "./images/q42.jpg",
-    "prompt": "畫面中是否可看到工程施工車輛？",
+    "prompt": "畫面中是否同時能看到工程車輛與安全帽？",
     "correct": "否",
     "category": "工程車輛",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -3373,7 +3458,12 @@
         "h": 0.08672
       }
     ],
-    "imageBytes": 79596
+    "imageBytes": 79596,
+    "queryClassIds": [
+      9,
+      0
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S043",
@@ -3546,7 +3636,7 @@
   {
     "id": "S045",
     "image": "./images/q45.jpg",
-    "prompt": "畫面中是否可看到有人戴著防護手套？",
+    "prompt": "畫面中是否同時能看到防護手套與工作背心？",
     "correct": "是",
     "category": "防護手套",
     "source": "Ultralytics Construction-PPE",
@@ -3609,12 +3699,17 @@
         "h": 0.13581
       }
     ],
-    "imageBytes": 78450
+    "imageBytes": 78450,
+    "queryClassIds": [
+      1,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S046",
     "image": "./images/q46.jpg",
-    "prompt": "畫面中是否可辨認大型施工機具？",
+    "prompt": "畫面中是否同時能看到施工機具與工程車輛？",
     "correct": "否",
     "category": "施工機具",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -3709,12 +3804,17 @@
         "h": 0.01641
       }
     ],
-    "imageBytes": 56171
+    "imageBytes": 56171,
+    "queryClassIds": [
+      8,
+      9
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S047",
     "image": "./images/q47.jpg",
-    "prompt": "畫面中是否可看到有人配戴護目鏡？",
+    "prompt": "畫面中是否同時能看到護目鏡與工作背心？",
     "correct": "是",
     "category": "護目鏡",
     "source": "Ultralytics Construction-PPE",
@@ -3761,12 +3861,17 @@
         "h": 0.14481
       }
     ],
-    "imageBytes": 82038
+    "imageBytes": 82038,
+    "queryClassIds": [
+      4,
+      2
+    ],
+    "questionType": "兩類物件共同辨識"
   },
   {
     "id": "S048",
     "image": "./images/q48.jpg",
-    "prompt": "畫面中是否可辨認大型施工機具？",
+    "prompt": "畫面中是否同時能看到施工機具與反光背心？",
     "correct": "否",
     "category": "施工機具",
     "source": "Roboflow Construction Site Safety (Kaggle mirror)",
@@ -3861,6 +3966,11 @@
         "h": 0.31953
       }
     ],
-    "imageBytes": 80442
+    "imageBytes": 80442,
+    "queryClassIds": [
+      8,
+      7
+    ],
+    "questionType": "兩類物件共同辨識"
   }
 ]
