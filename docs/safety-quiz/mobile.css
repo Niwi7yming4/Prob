@@ -1,3 +1,4 @@
+.answer-dock .dock-top{display:none}
 /* 2026-10-29: Dedicated touch layout, not a scaled desktop card.  */
 @media screen and (max-width: 720px) {
   :root { color-scheme: light; }
