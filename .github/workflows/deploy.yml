@@ -33,6 +33,23 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Validate 48-question safety quiz
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const html = fs.readFileSync('docs/safety-quiz/index.html', 'utf8');
+          const script = html.match(/<script>([\\s\\S]*?)<\\/script>/)?.[1];
+          if (!script) throw Error('Quiz script missing');
+          new Function(script);
+          const data = JSON.parse(script.match(/const DATA=(\\[[^\\n]+\\]);/)?.[1] || 'null');
+          if (!Array.isArray(data) || data.length !== 48) throw Error('Expected 48 questions');
+          if (new Set(data.map(x => x.sourceOriginal)).size !== 48) throw Error('Duplicate original images');
+          for (const item of data) {
+            if (!/^.+\\.jpg$/i.test(item.image) || !/^[0123]+$/.test(item.codes)) throw Error('Invalid source data');
+          }
+          console.log('PASS: 48 unique images and valid inline JavaScript');
+          NODE
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
