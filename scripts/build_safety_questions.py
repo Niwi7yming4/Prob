@@ -51,7 +51,7 @@ CATEGORIES=[
 
  ("防護口罩","roboflow",1,4,"畫面中是否可看到有人佩戴防護口罩？",.012),
  ("反光背心","roboflow",7,4,"畫面中是否可看到工地人員穿著反光安全背心？",.025),
- ("安全帽","ultralytics",0,4,"畫面中是否可看到有人佩戴安全帽？",.016),
+ ("安全帽","roboflow",0,4,"畫面中是否可看到有人佩戴安全帽？",.016),
 ]
 assert sum(c[3] for c in CATEGORIES)==48
 
@@ -119,7 +119,7 @@ def choose(target,zitems,chosen,amount,threshold,rng,source):
  yes=[a for a in zitems if any(c==target and w*h>=threshold for c,x,y,w,h in a["boxes"])]
  # For PPE, negative answers require an EXPLICIT missing-PPE annotation.
  # Merely lacking a positive bounding box is not proof of a safety violation.
- missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3}}
+ missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3,0:2}}
  counterpart=missing.get(source,{}).get(target)
  if counterpart is None:
   no=[a for a in zitems if not any(c==target for c,x,y,w,h in a["boxes"]) and len(a["boxes"])>=1]
@@ -143,7 +143,7 @@ def choose(target,zitems,chosen,amount,threshold,rng,source):
 
 def assign_all_questions(items,rng):
  """Globally match scarce positive/explicit-negative labels to distinct source images."""
- missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3}}
+ missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3,0:2}}
  pools={}
  slots=[]
  for gi,(category,code,label,qty,prompt,threshold) in enumerate(CATEGORIES):
