@@ -281,7 +281,7 @@ main.innerHTML='<section class="hero">'+txtStatus()+
 '<article class="card"><div class="kicker">48 題完整模式</div><h2 style="margin:7px 0 12px">四種條件各 12 題</h2><div class="metrics"><div class="metric"><b>12 題</b><span>彩色 × 正確 AI</span></div><div class="metric"><b>12 題</b><span>彩色 × 錯誤 AI</span></div><div class="metric"><b>12 題</b><span>灰階 × 正確 AI</span></div><div class="metric"><b>12 題</b><span>灰階 × 錯誤 AI</span></div></div><p class="note">分兩組各 24 題，中間設有休息頁。AI 為預設的模擬建議，不是即時模型推論。</p></article></div>'+
 '<section class="demo-cta"><div class="demo-label">快速測試 · 完整流程預覽</div><h2>先試 4 題流程 Demo</h2><p>4 張不同照片各對應一種實驗條件。之後接續完整的 Jian 12 題量表、3 題介面體驗評估與結果摘要。Demo 與 48 題紀錄分開保存。</p><div class="button-row"><button class="btn warn" id="startDemo">'+(demo.position>0&&demo.screen!=="done"?"繼續 4 題 Demo":"開始 4 題 Demo")+'</button><button class="btn primary" id="startFull">'+(full.position>0&&full.screen!=="done"?"繼續 48 題流程":"開始完整 48 題")+'</button></div></section>'+
 '<div class="button-row"><button class="btn secondary" id="viewBank">研究者：查看 48 張來源照片</button></div>'+
-'<div class="rule"><strong>研究原型說明：</strong>圖片出自 Panly23 公開影像與 YOLO 標註。標準答案暫由標註推定，正式施測前需人工核圖及確認圖片授權。小評估為網頁體驗回饋，不屬於 Jian 信任量表。</div></section>';
+'<div class="rule"><strong>研究原型說明：</strong>目前題庫使用 Ultralytics Construction-PPE 及 Roboflow Construction Site Safety 的來源照片與標註。48 題涵蓋防護裝備、警示錐、施工機具、車輛和人機同場；仍須人工核圖並確認逐檔影像授權。負向問句與正向問句已在題目資料中記錄，正式研究需再檢查文字難度是否造成額外影響。結束小評估不屬於 Jian 信任量表。</div></section>';
 document.querySelector("#startDemo").onclick=()=>startMode("demo");
 document.querySelector("#startFull").onclick=()=>startMode("full");
 document.querySelector("#viewBank").onclick=()=>{state.screen="review";previewPage=0;render();};
