@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="工業安全 AI 輔助影像判讀：48 題研究介面與流程範例">
 <title>工業安全影像判讀｜48 題研究介面範例</title>
 <style>
@@ -183,7 +183,7 @@ const ORDER=Array.from({length:12},(_,r)=>Array.from({length:4},(_,slot)=>({imag
 function cur(){const r=ORDER[state.position];return {...BASE[r.imageIndex],condition:r.condition,number:state.position+1,color:r.condition<2?"彩色":"灰階",aiCorrect:r.condition%2===0};}
 function record(){return state.records[state.position]||{};}
 function txtStatus(){return '<div class="kicker">研究示範 / INDUSTRIAL SAFETY</div>';}
-function render(){document.body.dataset.screen=state.screen;if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="done")done();else if(state.screen==="review")review();}
+function render(){window.scrollTo(0,0);document.body.dataset.screen=state.screen;if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="done")done();else if(state.screen==="review")review();}
 function intro(){
 main.innerHTML='<section class="hero">'+txtStatus()+'<div class="hero-head"><h1>工業安全 × AI<br>輔助影像判讀</h1><p style="font-size:22px;font-weight:800;color:var(--orange)">當 AI 提出建議時，你會改變判斷嗎？</p><p>觀看真實工地影像，先自行回答「是／否」，再讀取 AI 建議並確認最終答案。這是 48 題的可操作研究介面範例。</p></div>'+
 '<div class="intro-grid"><article class="card"><div class="kicker">作答方法</div><h2 style="margin:7px 0 17px">每題四個步驟</h2><div class="steps"><div class="step"><small>01</small><b>觀看照片</b><p>讀清楚題目</p></div><div class="step"><small>02</small><b>第一次回答</b><p>獨立判斷是／否</p></div><div class="step ai"><small>03</small><b>閱讀 AI 建議</b><p>建議可能正確或錯誤</p></div><div class="step"><small>04</small><b>最後確認</b><p>保持或改變答案</p></div></div><p class="note">題目共兩組，每組 24 題；組間可休息。全部完成後填寫 12 題 AI 信任量表。</p></article>'+
@@ -194,6 +194,7 @@ document.querySelector("#begin").onclick=()=>{if(state.position===24&&state.phas
 document.querySelector("#viewBank").onclick=()=>{state.screen="review";previewPage=0;render();};
 }
 function quiz(){
+window.scrollTo(0,0);
 if(state.position>=48){state.screen="survey";save();render();return;}
 const q=cur(),r=record(),first=state.phase==="first";
 selected=null;questionStart=Date.now();
@@ -205,8 +206,8 @@ main.innerHTML='<div class="quiz-head"><div><div class="kicker">48 題影像判�
 (first?'<p class="note">請只依照照片自行判斷；提交後才會出現 AI 建議。</p>':'<div class="hint">你第一次的答案：<strong>'+esc(r.initial)+'</strong>。可以維持原判斷，或選擇修改。</div><div class="ai-panel"><div class="eyebrow">AI 辨識建議 · 模擬輸出</div><div class="suggest">建議回答「'+suggestion+'」</div><p>這是模擬的輔助建議，請仍依照你對圖片的觀察決定最後答案。</p></div>')+
 '<div class="answer-group" role="group" aria-label="選擇答案"><button class="answer" data-answer="是">是 <small>符合題目敘述</small></button><button class="answer" data-answer="否">否 <small>不符合題目敘述</small></button></div><button id="commit" class="btn primary" style="width:100%" disabled>'+(first?"提交第一次回答":"確認最後答案，前往下一題")+'</button><div class="question-foot"><span>題目 '+q.number+'／48</span><span>每個階段各記錄一次作答時間</span></div></section></div>';
 const img=document.querySelector("#photo"),err=document.querySelector("#photoError");let imageReady=false;
-function imgSuccess(){imageReady=true;err.hidden=true;img.classList.remove("loading");}
-function imgFail(){imageReady=false;err.hidden=false;img.classList.add("loading");document.querySelector("#commit").disabled=true;}
+function imgSuccess(){imageReady=true;err.hidden=true;img.classList.remove("loading");document.querySelector("#zoomPhoto").hidden=false;}
+function imgFail(){imageReady=false;err.hidden=false;img.classList.add("loading");document.querySelector("#zoomPhoto").hidden=true;document.querySelector("#commit").disabled=true;}
 img.onload=imgSuccess;img.onerror=imgFail;if(img.complete){if(img.naturalWidth)imgSuccess();else imgFail();}
 document.querySelector("#zoomPhoto").onclick=()=>{const dlg=document.querySelector("#imageDialog"),large=document.querySelector("#zoomImage");large.src=img.src;large.style.filter=q.color==="灰階"?"grayscale(1)":"none";dlg.showModal();};
 document.querySelector("#closeZoom").onclick=()=>document.querySelector("#imageDialog").close();
