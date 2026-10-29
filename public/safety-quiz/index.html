@@ -266,12 +266,16 @@ function record(){return state.records[state.position]||{};}
 function txtStatus(){return '<div class="kicker">研究示範 / INDUSTRIAL SAFETY</div>';}
 function render(){window.scrollTo(0,0);document.body.dataset.screen=state.screen;if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="feedback")feedback();else if(state.screen==="done")done();else if(state.screen==="review")review();main.insertAdjacentHTML("afterbegin",flowBar());}
 function intro(){
-main.innerHTML='<section class="hero">'+txtStatus()+'<div class="hero-head"><h1>工業安全 × AI<br>輔助影像判讀</h1><p style="font-size:22px;font-weight:800;color:var(--orange)">當 AI 提出建議時，你會改變判斷嗎？</p><p>觀看真實工地影像，先自行回答「是／否」，再讀取 AI 建議並確認最終答案。這是 48 題的可操作研究介面範例。</p></div>'+
-'<div class="intro-grid"><article class="card"><div class="kicker">作答方法</div><h2 style="margin:7px 0 17px">每題四個步驟</h2><div class="steps"><div class="step"><small>01</small><b>觀看照片</b><p>讀清楚題目</p></div><div class="step"><small>02</small><b>第一次回答</b><p>獨立判斷是／否</p></div><div class="step ai"><small>03</small><b>閱讀 AI 建議</b><p>建議可能正確或錯誤</p></div><div class="step"><small>04</small><b>最後確認</b><p>保持或改變答案</p></div></div><p class="note">題目共兩組，每組 24 題；組間可休息。全部完成後填寫 12 題 AI 信任量表。</p></article>'+
-'<article class="card"><div class="kicker">實驗條件</div><h2 style="margin:7px 0 12px">48 題 · 四種條件</h2><div class="metrics"><div class="metric"><b>12 題</b><span>彩色影像 × 正確建議</span></div><div class="metric"><b>12 題</b><span>彩色影像 × 錯誤建議</span></div><div class="metric"><b>12 題</b><span>灰階影像 × 正確建議</span></div><div class="metric"><b>12 題</b><span>灰階影像 × 錯誤建議</span></div></div><p class="note">同一張原始照片在本次作答中只會出現一次。AI 建議為預先安排的模擬結果，不是即時模型推論。</p></article></div>'+
-'<div class="button-row"><button class="btn primary" id="begin">'+(state.records.length||state.position>0?"繼續作答":"開始 48 題範例")+'</button><button class="btn secondary" id="viewBank">檢視 48 張題庫照片（研究者）</button></div>'+
-'<div class="rule"><strong>資料與研究提醒：</strong>目前題目使用 Panly23 公開倉庫中的影像和 YOLO 標註製作範例。題目答案仍須人工核圖，圖片使用權尚需另行確認；不應將此示範直接視為已核定的正式實驗或已驗證的 AI 判斷。</div></section>';
-document.querySelector("#begin").onclick=()=>{if(state.position===24&&state.phase==="first"){state.screen="pause";}else if(state.position>=48){state.screen="survey";}else {state.screen="quiz";}save();render();};
+const full=restore("full"),demo=restore("demo");
+main.innerHTML='<section class="hero">'+txtStatus()+
+'<div class="hero-head"><h1>工業安全與 AI<br>輔助辨識研究</h1><p style="font-size:21px;font-weight:800;color:var(--orange)">先自行判讀，再看 AI 建議。最後填量表，查看評估。</p><p>流程包含影像判斷、AI 建議、12 題信任量表，以及 3 題結束體驗評估。上方可展開完整流程。</p></div>'+
+'<div class="intro-grid"><article class="card"><div class="kicker">單題怎麼做</div><h2 style="margin:7px 0 17px">每張照片兩次判斷</h2><div class="steps"><div class="step"><small>01</small><b>看照片</b><p>閱讀問題、觀察對象</p></div><div class="step"><small>02</small><b>初次回答</b><p>不看 AI，選是／否</p></div><div class="step ai"><small>03</small><b>查看 AI</b><p>建議可能正確或錯誤</p></div><div class="step"><small>04</small><b>再次回答</b><p>可維持或修改答案</p></div></div><p class="note">影像題完成後才會進入信任量表。量表與結束小評估分開，不混合計分。</p></article>'+
+'<article class="card"><div class="kicker">48 題完整模式</div><h2 style="margin:7px 0 12px">四種條件各 12 題</h2><div class="metrics"><div class="metric"><b>12 題</b><span>彩色 × 正確 AI</span></div><div class="metric"><b>12 題</b><span>彩色 × 錯誤 AI</span></div><div class="metric"><b>12 題</b><span>灰階 × 正確 AI</span></div><div class="metric"><b>12 題</b><span>灰階 × 錯誤 AI</span></div></div><p class="note">分兩組各 24 題，中間設有休息頁。AI 為預設的模擬建議，不是即時模型推論。</p></article></div>'+
+'<section class="demo-cta"><div class="demo-label">快速測試 · 完整流程預覽</div><h2>先試 4 題流程 Demo</h2><p>4 張不同照片各對應一種實驗條件。之後接續完整的 Jian 12 題量表、3 題介面體驗評估與結果摘要。Demo 與 48 題紀錄分開保存。</p><div class="button-row"><button class="btn warn" id="startDemo">'+(demo.position>0&&demo.screen!=="done"?"繼續 4 題 Demo":"開始 4 題 Demo")+'</button><button class="btn primary" id="startFull">'+(full.position>0&&full.screen!=="done"?"繼續 48 題流程":"開始完整 48 題")+'</button></div></section>'+
+'<div class="button-row"><button class="btn secondary" id="viewBank">研究者：查看 48 張來源照片</button></div>'+
+'<div class="rule"><strong>研究原型說明：</strong>圖片出自 Panly23 公開影像與 YOLO 標註。標準答案暫由標註推定，正式施測前需人工核圖及確認圖片授權。小評估為網頁體驗回饋，不屬於 Jian 信任量表。</div></section>';
+document.querySelector("#startDemo").onclick=()=>startMode("demo");
+document.querySelector("#startFull").onclick=()=>startMode("full");
 document.querySelector("#viewBank").onclick=()=>{state.screen="review";previewPage=0;render();};
 }
 function quiz(){
