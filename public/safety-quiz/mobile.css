@@ -199,7 +199,19 @@
 }
 /* Phone landscape: preserve reading area by using a horizontal answer strip. */
 @media screen and (max-width: 920px) and (orientation: landscape) and (max-height: 540px) {
-  body[data-screen="quiz"] main.shell { padding-bottom: calc(106px + env(safe-area-inset-bottom)); }
+  body[data-screen="quiz"] main.shell { padding-bottom: calc(115px + env(safe-area-inset-bottom)); }
+  body[data-screen="quiz"] .workspace { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; }
+  body[data-screen="quiz"] .question-card { display: contents; }
+  body[data-screen="quiz"] .question-card>.stage-label { order: 1; padding: 0 4px; font-size: 11px; margin-bottom: 2px; }
+  body[data-screen="quiz"] .question-card>.question-title { order: 2; padding: 0 4px; font-size: 20px; line-height: 1.3; margin-bottom: 7px; }
+  body[data-screen="quiz"] .question-card>.note,
+  body[data-screen="quiz"] .question-card>.hint,
+  body[data-screen="quiz"] .question-card>.ai-panel { order: 3; margin: 0 0 8px; }
+  body[data-screen="quiz"] .photo-card { order: 4; position: static; padding: 0; margin: 0; border: 0; box-shadow: none; }
+  body[data-screen="quiz"] .photo-top { padding: 0 4px 5px; }
+  body[data-screen="quiz"] .photo-caption { padding: 5px 4px; font-size: 11px; }
+  body[data-screen="quiz"] .question-card>.question-foot { display: none; }
+  body[data-screen="quiz"] .question-card>.answer-dock { order: 7; position: fixed; }
   body[data-screen="quiz"] .question-card>.answer-dock {
     display: grid; grid-template-columns: minmax(0,1fr) minmax(170px,.6fr);
     align-items: end; gap: 10px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
