@@ -35,7 +35,7 @@ h1,h2,h3,p{margin-top:0}h1{font-size:clamp(30px,3.3vw,49px);letter-spacing:-.035
 .photo-frame{background:#e8edf1;border-radius:8px;min-height:340px;height:min(63vh,640px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .photo-frame img{width:100%;height:100%;object-fit:contain;display:block}
 .photo-frame.mono img{filter:grayscale(1)}.photo-frame img.loading{opacity:0}
-.img-fail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:26px;text-align:center;background:#e8edf1}
+.img-fail[hidden]{display:none!important}.img-fail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:26px;text-align:center;background:#e8edf1}
 .photo-caption{font-size:13px;color:var(--muted);padding:10px 4px 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 .question-card{padding:clamp(22px,2.7vw,34px)}.stage-label{font-size:13px;font-weight:900;color:var(--blue);margin-bottom:10px}.question-title{font-weight:850;font-size:clamp(24px,2.5vw,33px);line-height:1.5;letter-spacing:-.02em;margin-bottom:20px}.question-title em{font-style:normal;color:var(--navy);text-decoration:underline;text-decoration-color:#ffad9e;text-underline-offset:5px}
 .note{font-size:15px;color:var(--muted)}.answer-group{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:21px 0 16px}
@@ -83,7 +83,7 @@ function fresh(){return {screen:"intro",position:0,phase:"first",records:[],surv
 function restore(){try{const s=JSON.parse(localStorage.getItem(STORE));if(s&&Number.isInteger(s.position)&&Array.isArray(s.records)&&["intro","quiz","pause","survey","done"].includes(s.screen))return s;}catch(e){}return fresh();}
 function save(){localStorage.setItem(STORE,JSON.stringify(state));}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-function baseId(file){return file.split("_jpg.rf.")[0].replace(/_JPG$/i,"");}
+function baseId(file){return file.replace(/_jpg\\.rf\\..*$/i,"");}
 function choice(i){const codes=DATA[i].codes.split("").map(Number);if(codes.includes(1)&&i%5===0)return 1;if(codes.includes(3)&&i%3!==0)return 3;if(codes.includes(2)&&i%3!==0)return 2;return 0;}
 function question(i){const cl=choice(i),yes=i%2===0;return {...DATA[i],cl,yes,correct:yes?"是":"否",wording:TEMPLATES[cl][yes?0:1],category:LABELS[cl]};}
 const BASE=DATA.map((_,i)=>question(i));
