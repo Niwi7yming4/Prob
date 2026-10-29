@@ -45,13 +45,15 @@
   .hero-head p { font-size: 15px !important; line-height: 1.58; }
   .hero>.demo-cta { order: 2; margin: 0 0 16px; padding: 19px 17px; border-radius: 12px; }
   .demo-cta h2 { font-size: 22px; line-height: 1.35; }
-  .demo-cta p { font-size: 14px; line-height: 1.55; }
+  .demo-cta p { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
   .demo-cta .button-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
   .demo-cta .btn { width: 100%; min-height: 55px; }
-  .hero>.intro-grid { order: 3; display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
-  .intro-grid .card { padding: 18px; }
+  .hero>.intro-grid { order: 3; display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 12px; }
+  .intro-grid .card { padding: 16px; }
+  .intro-grid h2 { font-size: 20px; margin: 0 0 12px !important; }
   .steps { gap: 8px; }
-  .step { min-height: 112px; }
+  .step { min-height: 76px; padding: 10px 12px; }
+  .step b { font-size: 16px; margin: 3px 0 0; }
   .hero>.button-row { order: 4; margin: 0 0 15px; }
   .hero>.button-row .btn { width: 100%; }
   .hero>.rule { order: 5; margin-top: 5px; }
