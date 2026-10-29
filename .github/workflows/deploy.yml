@@ -64,9 +64,14 @@ jobs:
           for (const x of source) {
             if (!fs.existsSync('docs/safety-quiz/' + x.image.replace('./', ''))) throw Error('Missing image ' + x.image);
           }
-          for (const addon of ['flow-addon.js','data-addon.js']) {
+          for (const addon of ['flow-addon.js','data-addon.js','visual-tutorial.js']) {
             new Function(fs.readFileSync('docs/safety-quiz/' + addon, 'utf8'));
           }
+          const tutorial=JSON.parse(fs.readFileSync('docs/safety-quiz/tutorial.json','utf8'));
+          if(tutorial.length !== 2) throw Error('Two separate practice images are required');
+          if(tutorial.some(q=>!fs.existsSync('docs/safety-quiz/'+q.image.replace('./','')))) throw Error('Missing practice image');
+          if(!html.includes('visual-tutorial.js') || !html.includes('experiment.css')) throw Error('Tutorial/AI styling not linked');
+          if(!html.includes('evidenceLayer') || !html.includes('surveyRounds')) throw Error('AI overlay or two surveys missing');
           const mobileCss = fs.readFileSync('docs/safety-quiz/mobile.css','utf8');
           if (!html.includes('href="./mobile.css') || !html.includes('class="answer-dock"'))
             throw Error('Mobile quiz layout or source file missing');
