@@ -116,8 +116,15 @@ def choose(target,zitems,chosen,amount,threshold,rng,source):
  # Only consider photos with a concrete worksite/PPE context, not generic people photos.
  zitems=[a for a in zitems if is_work_scene(a,source)]
  yes=[a for a in zitems if any(c==target and w*h>=threshold for c,x,y,w,h in a["boxes"])]
- no=[a for a in zitems if not any(c==target for c,x,y,w,h in a["boxes"]) and len(a["boxes"])>=1]
- print("Candidate pool",source,target,"yes",len(yes),"no",len(no),flush=True)
+ # For PPE, negative answers require an EXPLICIT missing-PPE annotation.
+ # Merely lacking a positive bounding box is not proof of a safety violation.
+ missing={"ultralytics":{1:9,4:8,3:10,0:7},"roboflow":{7:4,1:3}}
+ counterpart=missing.get(source,{}).get(target)
+ if counterpart is None:
+  no=[a for a in zitems if not any(c==target for c,x,y,w,h in a["boxes"]) and len(a["boxes"])>=1]
+ else:
+  no=[a for a in zitems if not any(c==target for c,x,y,w,h in a["boxes"]) and any(c==counterpart for c,x,y,w,h in a["boxes"])]
+ print("Candidate pool",source,target,"yes",len(yes),"no",len(no),"explicit",counterpart,flush=True)
  def rank(a,positive):
   target_areas=[w*h for c,x,y,w,h in a["boxes"] if c==target]
   return (max(target_areas,default=0) if positive else .03)+rng.random()*.04
