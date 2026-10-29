@@ -42,12 +42,13 @@ SOURCE_INFO={
 }
 # Source, YOLO class index, quantity, question in plain Taiwanese Mandarin, min visible target box area.
 CATEGORIES=[
+ ("安全鞋","ultralytics",3,6,"畫面中是否可看到作業人員穿著防護靴／安全鞋？",.009),
  ("防護手套","ultralytics",1,6,"畫面中是否可看到有人戴著防護手套？",.009),
  ("警示錐","roboflow",6,6,"畫面中是否可看到用於提醒通行者的安全警示錐？",.015),
  ("施工機具","roboflow",8,6,"畫面中是否可辨認大型施工機具？",.04),
  ("護目鏡","ultralytics",4,6,"畫面中是否可看到有人配戴護目鏡？",.006),
  ("工程車輛","roboflow",9,6,"畫面中是否可看到工程施工車輛？",.04),
- ("安全鞋","ultralytics",3,6,"畫面中是否可看到作業人員穿著防護靴／安全鞋？",.009),
+
  ("防護口罩","roboflow",1,4,"畫面中是否可看到有人佩戴防護口罩？",.012),
  ("反光背心","roboflow",7,4,"畫面中是否可看到工地人員穿著反光安全背心？",.025),
  ("安全帽","ultralytics",0,4,"畫面中是否可看到有人佩戴安全帽？",.016),
