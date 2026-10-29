@@ -278,12 +278,12 @@ const main=document.querySelector("#main");
 let state=restore();
 let questionStart=Date.now();
 let selected=null,previewPage=0;
-function fresh(mode="full"){return {mode,screen:"intro",position:0,phase:"first",tutorialIndex:0,records:[],survey:{},feedback:{},feedbackNote:"",createdAt:new Date().toISOString()};}
+function fresh(mode="full"){return {mode,screen:"intro",position:0,phase:"first",tutorialIndex:0,midSurveyDone:false,records:[],survey:{},feedback:{},feedbackNote:"",createdAt:new Date().toISOString()};}
 function restore(mode="full"){
 try{
  const s=JSON.parse(localStorage.getItem(mode==="demo"?DEMO_STORE:STORE));
  if(s&&Number.isInteger(s.position)&&Array.isArray(s.records)&&["intro","tutorial","quiz","pause","survey","feedback","done"].includes(s.screen)){
-   s.mode=mode;s.feedback=s.feedback||{};s.feedbackNote=s.feedbackNote||"";s.position=Math.min(s.position,mode==="demo"?24:48);
+   s.mode=mode;s.feedback=s.feedback||{};s.feedbackNote=s.feedbackNote||"";s.tutorialIndex=Number.isInteger(s.tutorialIndex)?s.tutorialIndex:0;s.midSurveyDone=!!s.midSurveyDone;s.position=Math.min(s.position,mode==="demo"?24:48);
    return s;
  }
 }catch(e){}
@@ -297,21 +297,15 @@ state=restore(mode);
 if(state.screen==="done"||(state.screen==="intro"&&state.position===0&&state.phase==="first"&&state.records.length===0&&!state.returnScreen)){state=fresh(mode);state.screen="tutorial";}
 else if(state.screen==="intro"||state.screen==="review"){
  const target=state.returnScreen;
- state.screen=["tutorial","quiz","pause","survey","feedback","done"].includes(target)?target:(state.position>=total()?"survey":state.position===24&&mode==="full"?"pause":"quiz");
+ state.screen=["tutorial","quiz","pause","survey","feedback","done"].includes(target)?target:(mode==="demo"&&state.position>=24?"feedback":mode==="demo"&&state.position>=12&&!state.midSurveyDone?"survey":state.position>=total()?"survey":state.position===24&&mode==="full"?"pause":"quiz");
  delete state.returnScreen;
 }
 save();render();
 }
-function stageIndex(){return ({intro:0,tutorial:0,quiz:1,pause:1,survey:2,feedback:3,done:4})[state.screen]??0;}
+function stageIndex(){if(isDemo())return ({intro:0,tutorial:1,quiz:state.position<12?2:4,pause:4,survey:3,feedback:5,done:6})[state.screen]??0;return ({intro:0,tutorial:0,quiz:1,pause:1,survey:2,feedback:3,done:4})[state.screen]??0;}
 function flowBar(){
 if(state.screen!=="intro")return "";
-const steps=[
-["01","說明","開始"],
-["02","影像判讀",isDemo()?"24 題":"48 題"],
-["03","信任量表","12 題"],
-["04","介面評估","3 題"],
-["05","結果","摘要"]
-],current=stageIndex();
+const steps=isDemo()?[["01","開始",""],["02","教學","2 題"],["03","判讀","1–12 題"],["04","信任問卷","12 題"],["05","判讀","13–24 題"],["06","結束評估","3 題"],["07","結果","摘要"]]:[["01","教學","2 題"],["02","判讀","48 題"],["03","信任問卷","12 題"],["04","結束評估","3 題"],["05","結果","摘要"]],current=stageIndex();
 return '<details class="flow-guide"><summary><span><b>作答流程</b> <span class="flow-current">'+(current+1)+'/5 · '+steps[current][1]+'</span></span><span class="flow-more">展開</span></summary><ol class="flow-steps">'+steps.map((v,i)=>'<li class="'+(i===current?"current":i<current?"finished":"upcoming")+'"><span class="flow-num">'+(i<current?"✓":v[0])+'</span><div><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div></li>').join("")+'</ol></details>';
 }
 function setScreen(screen){state.screen=screen;save();render();}
@@ -331,9 +325,9 @@ function intro(){
 const full=restore("full"),demo=restore("demo");
 main.innerHTML='<section class="hero">'+
 '<div class="hero-head"><div class="kicker">研究流程 DEMO</div><h1>工業安全影像判讀</h1><p>看照片先作答，再參考 AI 建議確認答案。</p></div>'+
-'<section class="demo-cta"><div class="demo-label">選擇模式</div><h2>開始作答</h2><p>Demo 24 題、完整模式 48 題；開始前有 2 題教學。</p><div class="mode-actions"><button class="btn warn" id="startDemo">'+(hasProgress("demo")&&demo.screen!=="done"?"繼續 Demo":"24 題 Demo")+'</button>'+(hasProgress("demo")?'<button class="mode-restart" type="button" id="restartDemo" aria-label="重做 24 題 Demo">重做</button>':'')+'</div><div class="mode-actions"><button class="btn primary" id="startFull">'+(hasProgress("full")&&full.screen!=="done"?"繼續完整模式":"48 題完整模式")+'</button>'+(hasProgress("full")?'<button class="mode-restart" type="button" id="restartFull" aria-label="重做 48 題">重做</button>':'')+'</div></section>'+
+'<section class="demo-cta"><div class="demo-label">選擇模式</div><h2>開始作答</h2><p>Demo：教學 2 題 → 判讀 12 題 → 信任問卷 → 判讀 12 題 → 結束評估。</p><div class="mode-actions"><button class="btn warn" id="startDemo">'+(hasProgress("demo")&&demo.screen!=="done"?"繼續 Demo":"24 題 Demo")+'</button>'+(hasProgress("demo")?'<button class="mode-restart" type="button" id="restartDemo" aria-label="重做 24 題 Demo">重做</button>':'')+'</div><div class="mode-actions"><button class="btn primary" id="startFull">'+(hasProgress("full")&&full.screen!=="done"?"繼續完整模式":"48 題完整模式")+'</button>'+(hasProgress("full")?'<button class="mode-restart" type="button" id="restartFull" aria-label="重做 48 題">重做</button>':'')+'</div></section>'+
 '<div class="intro-grid"><article class="card"><h2>作答方式</h2><div class="steps"><div class="step"><small>01</small><b>看照片</b></div><div class="step"><small>02</small><b>初次作答</b></div><div class="step ai"><small>03</small><b>看 AI 建議</b></div><div class="step"><small>04</small><b>確認答案</b></div></div></article>'+
-'<article class="card"><h2>完整模式</h2><p>彩色／灰階 × AI 正確／錯誤，各 12 題。每 24 題可休息。</p><p class="note">AI 建議為模擬結果，非即時辨識。</p></article></div>'+
+'<article class="card"><h2>完整模式</h2><p>48 題後填信任量表；第 24 題可休息。四種條件各 12 題。</p><p class="note">AI 建議為模擬結果，非即時辨識。</p></article></div>'+
 '<div class="button-row"><button class="btn secondary" id="viewBank">查看 48 張題庫照片</button></div>'+
 '<details class="rule"><summary><strong>資料來源與研究限制</strong></summary><p>照片來自 Ultralytics Construction-PPE、Roboflow Construction Site Safety。答案依標註推定，施測前須人工核對與確認授權；正反問句仍須檢查理解難度。</p></details></section>';
 document.querySelector("#startDemo").onclick=()=>startMode("demo");
@@ -344,7 +338,7 @@ document.querySelector("#viewBank").onclick=()=>{state.screen="review";previewPa
 }
 function quiz(){
 window.scrollTo(0,0);
-if(state.position>=total()){state.screen="survey";save();render();return;}
+if(state.position>=total()){state.screen=isDemo()?"feedback":"survey";save();render();return;}
 const q=cur(),r=record(),first=state.phase==="first",limit=total();
 selected=null;questionStart=Date.now();
 const suggestion=q.aiCorrect?q.correct:(q.correct==="是"?"否":"是");
@@ -363,7 +357,7 @@ document.querySelector("#closeZoom").onclick=()=>document.querySelector("#imageD
 document.querySelector("#imageDialog").onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close();};
 document.querySelector("#retry").onclick=()=>{err.hidden=true;img.src=imgUrl(q.image)+(img.src.includes("?")?"&":"?")+"reload="+Date.now();};
 document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{selected=b.dataset.answer;document.querySelectorAll(".answer").forEach(x=>{const active=x===b;x.classList.toggle("selected",active);x.setAttribute("aria-pressed",String(active));});document.querySelector("#dockContext").textContent=(first?"初答":"終答")+" · 已選 "+selected;document.querySelector("#commit").disabled=!imageReady;});
-document.querySelector("#commit").onclick=()=>{if(!selected||!imageReady)return;const elapsed=Date.now()-questionStart;if(first){state.records[state.position]={imageId:q.id,imageFile:q.image,source:q.source,originalImageId:q.sourceOriginal,question:q.wording,category:q.category,color:q.color,aiCondition:q.aiCorrect?"correct":"incorrect",conditionId:q.condition+1,standardAnswer:q.correct,aiAdvice:suggestion,negativeWording:!!q.negativeWording,hasTargetAnnotation:!!q.hasTargetAnnotation,initial:selected,initialMs:elapsed,final:null,finalMs:null};state.phase="second";save();render();}else{const out=state.records[state.position];out.final=selected;out.finalMs=elapsed;out.initialCorrect=out.initial===q.correct;out.finalCorrect=out.final===q.correct;out.changed=out.initial!==out.final;state.position++;state.phase="first";state.screen=!isDemo()&&state.position===24?"pause":state.position===total()?"survey":"quiz";save();render();}};
+document.querySelector("#commit").onclick=()=>{if(!selected||!imageReady)return;const elapsed=Date.now()-questionStart;if(first){state.records[state.position]={imageId:q.id,imageFile:q.image,source:q.source,originalImageId:q.sourceOriginal,question:q.wording,category:q.category,color:q.color,aiCondition:q.aiCorrect?"correct":"incorrect",conditionId:q.condition+1,standardAnswer:q.correct,aiAdvice:suggestion,negativeWording:!!q.negativeWording,hasTargetAnnotation:!!q.hasTargetAnnotation,initial:selected,initialMs:elapsed,final:null,finalMs:null};state.phase="second";save();render();}else{const out=state.records[state.position];out.final=selected;out.finalMs=elapsed;out.initialCorrect=out.initial===q.correct;out.finalCorrect=out.final===q.correct;out.changed=out.initial!==out.final;state.position++;state.phase="first";state.screen=isDemo()&&state.position===12&&!state.midSurveyDone?"survey":!isDemo()&&state.position===24?"pause":state.position===total()?(isDemo()?"feedback":"survey"):"quiz";save();render();}};
 }
 function pause(){main.innerHTML='<section class="card pause-card"><div class="kicker">組間休息</div><h1>已完成 24 題</h1><p>可休息，再繼續下一組。</p><div class="progress-bg"><div class="progress-fill" style="width:50%"></div></div><button class="btn primary" id="resume">繼續作答</button></section>';document.querySelector("#resume").onclick=()=>{state.screen="quiz";save();render();};}
 function survey(){
@@ -387,7 +381,7 @@ document.querySelector("#prev").onclick=()=>{previewPage--;review();scrollTo(0,0
 }
 function hasProgress(mode){
  const st=restore(mode);
- return st.position>0||st.phase==="second"||st.records.length>0||Object.keys(st.survey||{}).length>0||Object.keys(st.feedback||{}).length>0||st.screen==="done";
+ return st.screen==="tutorial"||st.tutorialIndex>0||st.position>0||st.phase==="second"||st.records.length>0||Object.keys(st.survey||{}).length>0||Object.keys(st.feedback||{}).length>0||st.screen==="done";
 }
 function resetMode(mode){
  localStorage.removeItem(mode==="demo"?DEMO_STORE:STORE);
