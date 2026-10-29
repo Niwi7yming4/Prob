@@ -9,14 +9,14 @@ survey=function(){
   const answered=Object.keys(state.survey).length;
   const completed=items.every((_,i)=>Number(state.survey[start+i])>=1);
   main.innerHTML='<section class="survey-wrap"><div class="kicker">'+(isDemo()?"中途問卷":"結束問卷")+' · '+(page+1)+'/3 頁</div><h1>AI 信任量表</h1>'+
-    '<p>'+(isDemo()?"前 12 題完成，請評估剛才的 AI 建議。":"請評估剛才的 AI 建議。")+'</p>'+
+    '<p>第 '+(state.surveyRounds.length+1)+' 組結束，請評估本組的 AI 建議。</p>'+
     '<p class="progress-title">已回答 '+answered+' / 12 題</p><div class="progress-bg"><div class="progress-fill" style="width:'+(answered/12*100)+'%"></div></div>'+
     '<article class="card" style="padding:clamp(18px,3vw,30px)"><p class="note">1＝完全不符合　　4＝普通　　7＝非常符合</p>'+
     items.map((q,i)=>{const idx=start+i;return '<div class="survey-item"><h3>'+String(idx+1).padStart(2,"0")+'. '+esc(q)+'</h3><div class="scale" data-idx="'+idx+'" role="group" aria-label="第 '+(idx+1)+' 題">'+
       Array.from({length:7},(_,k)=>'<button type="button" class="scale-choice '+(state.survey[idx]===k+1?'selected':'')+'" data-value="'+(k+1)+'" aria-pressed="'+(state.survey[idx]===k+1)+'">'+(k+1)+'</button>').join('')+
       '</div><div class="scale-guide"><span>完全不符合</span><span>非常符合</span></div></div>';}).join('')+
     '<div class="button-row" style="justify-content:space-between"><button class="btn secondary" id="surveyPrev" '+(page===0?'disabled':'')+'>上一頁</button>'+
-    '<button class="btn primary" id="surveyNext" '+(completed?'':'disabled')+'>'+(page===2?(isDemo()?'完成問卷，繼續第 13 題':'完成問卷，進入小評估'):'下一頁')+'</button></div></article></section>';
+    '<button class="btn primary" id="surveyNext" '+(completed?'':'disabled')+'>'+(page===2?(state.surveyRounds.length===0?'完成問卷，進入第 2 組':'完成問卷，進入結束評估'):'下一頁')+'</button></div></article></section>';
   document.querySelectorAll('.scale-choice').forEach(b=>b.onclick=()=>{
     const idx=+b.parentElement.dataset.idx;state.survey[idx]=+b.dataset.value;save();
     b.parentElement.querySelectorAll('button').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b));});
@@ -28,7 +28,13 @@ survey=function(){
   document.querySelector('#surveyPrev').onclick=()=>{if(page>0){state.surveyPage=page-1;save();render();}};
   document.querySelector('#surveyNext').onclick=()=>{
     if(!items.every((_,i)=>Number(state.survey[start+i])>=1))return;
-    if(page===2){state.surveyCompletedAt=new Date().toISOString();if(isDemo()){state.midSurveyDone=true;state.screen='quiz';}else state.screen='feedback';}else state.surveyPage=page+1;
+    if(page===2){
+      state.surveyRounds.push({block:state.surveyRounds.length+1,questionEnd:state.position,answers:{...state.survey},at:new Date().toISOString()});
+      state.surveyPage=0;
+      const afterFirst=state.surveyRounds.length===1;
+      if(afterFirst){state.midSurveyDone=true;state.survey={};state.screen=isDemo()?'quiz':'pause';}
+      else {state.screen='feedback';}
+    }else state.surveyPage=page+1;
     save();render();
   };
 };
@@ -54,6 +60,10 @@ function feedback(){
 done=function(){
  const x=stats(),n=state.records.length,trust=TRUST.map((_,i)=>i<5?8-state.survey[i]:state.survey[i]);
  const mean=trust.reduce((a,b)=>a+b,0)/12,uxMean=Object.values(state.feedback).reduce((a,b)=>a+Number(b),0)/3;
+ const trustRounds=(state.surveyRounds||[]).map(r=>{
+   const scores=TRUST.map((_,i)=>i<5?8-Number(r.answers[i]):Number(r.answers[i]));
+   return {block:r.block,questionEnd:r.questionEnd,average:scores.reduce((a,b)=>a+b,0)/12};
+ });
  const wrongAdvice=state.records.filter(r=>r.aiCondition==='incorrect'),correctAdvice=state.records.filter(r=>r.aiCondition==='correct');
  const influenced=wrongAdvice.filter(r=>r.initialCorrect&&r.changed&&!r.finalCorrect).length;
  const caution=wrongAdvice.filter(r=>r.initialCorrect).length;
@@ -68,13 +78,13 @@ done=function(){
  '<p>'+(isDemo()?'第 12 題完成中途問卷；第 24 題後完成介面評估。':'48 題後填寫信任問卷與介面評估。')+'</p>'+
  '<article class="card"><h2>影像判讀摘要</h2><div class="summ-grid"><div><strong>'+x.init+'/'+n+'</strong><span>初答正確</span></div><div><strong>'+x.end+'/'+n+'</strong><span>終答正確</span></div><div><strong>'+x.changed+'</strong><span>答案改變</span></div><div><strong>'+x.bad+'/'+x.eligible+'</strong><span>因錯誤 AI 建議而改錯</span></div></div>'+
  '<div class="score-trend">'+rows.map((r,i)=>'<div class="score-row '+(i===1?'final':'')+'"><div><span>'+r[0]+'正確率</span><b>'+Math.round(r[1]/n*100)+'%</b></div><div class="score-track"><div class="score-fill" style="width:'+(r[1]/n*100)+'%"></div></div></div>').join('')+'</div>'+
- '<h2>問卷結果</h2><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>信任量表平均（反向題已計分）</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>介面評估平均</span></div><div><strong>'+misses+'</strong><span>漏判目標（依標註）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
+ '<h2>問卷結果</h2><div class="insight-list">'+trustRounds.map(r=>'<div class="insight"><strong>第 '+r.block+' 組信任平均</strong>'+r.average.toFixed(2)+' / 7（完成 '+r.questionEnd+' 題）</div>').join('')+'</div><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>信任量表平均（反向題已計分）</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>介面評估平均</span></div><div><strong>'+misses+'</strong><span>漏判目標（依標註）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
  '<h2>作答觀察</h2><div class="insight-list">'+insight.map(v=>'<div class="insight"><strong>'+v.title+'</strong>'+v.body+'</div>').join('')+'</div>'+
  '<details class="rule"><summary><strong>解讀限制</strong></summary><p>答案依標註推定，仍須人工核對。AI 建議為模擬；4 題 Demo 不能推論研究效果。</p></details>'+
  '<div class="button-row"><button class="btn primary" id="csv">下載影像題 CSV</button><button class="btn secondary" id="json">下載完整 JSON</button><button class="btn secondary" id="review">查看圖片來源</button></div></article>'+
  '<div class="button-row"><button class="btn secondary" id="home">回到模式選擇</button><button class="btn warn" id="reset">重做本模式</button></div></section>';
  document.querySelector('#csv').onclick=downloadCSV;
- document.querySelector('#json').onclick=()=>download('industrial-safety-'+n+'-protocol.json',JSON.stringify({...state,summary:x,trustReverseScored:trust,trustAverage:mean,uxAverage:uxMean},null,2),'application/json;charset=utf-8');
+ document.querySelector('#json').onclick=()=>download('industrial-safety-'+n+'-protocol.json',JSON.stringify({...state,summary:x,trustReverseScored:trust,trustAverage:mean,trustRounds,uxAverage:uxMean},null,2),'application/json;charset=utf-8');
  document.querySelector('#review').onclick=()=>{state.screen='review';previewPage=0;render();};
  document.querySelector('#home').onclick=()=>{state.screen='intro';save();render();};
  document.querySelector('#reset').onclick=reset;

@@ -19,14 +19,21 @@
   gate(false);
   fetch('./data.json',{cache:'no-store'})
    .then(async res=>{if(!res.ok)throw Error('題庫清單未部署（HTTP '+res.status+'）');return res.json();})
-   .then(items=>{
+   .then(async items=>{
+     const response=await fetch('./tutorial.json',{cache:'no-store'});
+     if(!response.ok)throw Error('2 題教學照片尚未部署');
+     const practice=await response.json();
+     if(!Array.isArray(practice)||practice.length!==2||practice.some(q=>!q.image||!Array.isArray(q.boxes)||!q.boxes.length))
+       throw Error('教學題資料無效');
+     if(new Set(practice.map(q=>q.source+'|'+q.sourceOriginal)).size!==2)throw Error('教學題重複');
+     PRACTICE.splice(0,PRACTICE.length,...practice);
      if(items.length!==48||new Set(items.map(q=>q.source+'|'+q.sourceOriginal)).size!==48)throw Error('題數或原始圖像去重失敗');
      if(new Set(items.map(q=>q.category)).size<8)throw Error('題材種類不足');
      if(items.some(q=>!q.image||!q.source||!q.prompt||!['是','否'].includes(q.correct)))throw Error('題目資料不完整');
      DATA.splice(0,DATA.length,...items);
      BASE.splice(0,BASE.length,...DATA.map((_,i)=>question(i)));
      window.__safetyBankReady=true;
-     banner('ok','題庫已載入：48 張不同照片、9 種工業安全主題；每題保留來源與標註。');
+     banner('ok','48 題與 2 題教學已載入');
      gate(true);
      if(state.screen==='intro'||state.screen==='review')render();
    })
