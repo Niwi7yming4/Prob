@@ -15,6 +15,7 @@
   .head-count { border-radius: 100px; padding: 4px 10px; background: #eaf1f8; font-weight: 800; }
   .head-actions>span:first-child { display: none; }
   #bank-status { padding: 8px 16px; font-size: 12px; }
+  #bank-status[data-kind="ok"] { display: none; }
   body[data-screen="quiz"] #bank-status,
   body[data-screen="survey"] #bank-status,
   body[data-screen="feedback"] #bank-status { display: none; }
@@ -194,8 +195,8 @@
   body[data-screen="quiz"] .answer-dock .answer small { font-size: 11px; }
   body[data-screen="quiz"] .answer-dock .answer { font-size: 21px; }
   body[data-screen="quiz"] .answer-dock { padding-inline: 10px; }
-  .scale { gap: 2px; }
-  .scale-choice { min-height: 52px; font-size: 15px; }
+  .scale { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; }
+  .scale-choice { min-height: 48px; font-size: 16px; }
 }
 /* Phone landscape: preserve reading area by using a horizontal answer strip. */
 @media screen and (max-width: 920px) and (orientation: landscape) and (max-height: 540px) {
