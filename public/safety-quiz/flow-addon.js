@@ -8,15 +8,15 @@ survey=function(){
   const page=state.surveyPage||0,start=page*4,items=TRUST.slice(start,start+4);
   const answered=Object.keys(state.survey).length;
   const completed=items.every((_,i)=>Number(state.survey[start+i])>=1);
-  main.innerHTML='<section class="survey-wrap"><div class="kicker">第 3 階段｜AI 信任量表 · '+(page+1)+'/3 頁</div><h1>AI 信任量表</h1>'+
-    '<p>依剛才使用 AI 的感受，選擇 1～7 分。</p>'+
+  main.innerHTML='<section class="survey-wrap"><div class="kicker">'+(isDemo()?"中途問卷":"結束問卷")+' · '+(page+1)+'/3 頁</div><h1>AI 信任量表</h1>'+
+    '<p>'+(isDemo()?"前 12 題完成，請評估剛才的 AI 建議。":"請評估剛才的 AI 建議。")+'</p>'+
     '<p class="progress-title">已回答 '+answered+' / 12 題</p><div class="progress-bg"><div class="progress-fill" style="width:'+(answered/12*100)+'%"></div></div>'+
     '<article class="card" style="padding:clamp(18px,3vw,30px)"><p class="note">1＝完全不符合　　4＝普通　　7＝非常符合</p>'+
     items.map((q,i)=>{const idx=start+i;return '<div class="survey-item"><h3>'+String(idx+1).padStart(2,"0")+'. '+esc(q)+'</h3><div class="scale" data-idx="'+idx+'" role="group" aria-label="第 '+(idx+1)+' 題">'+
       Array.from({length:7},(_,k)=>'<button type="button" class="scale-choice '+(state.survey[idx]===k+1?'selected':'')+'" data-value="'+(k+1)+'" aria-pressed="'+(state.survey[idx]===k+1)+'">'+(k+1)+'</button>').join('')+
       '</div><div class="scale-guide"><span>完全不符合</span><span>非常符合</span></div></div>';}).join('')+
     '<div class="button-row" style="justify-content:space-between"><button class="btn secondary" id="surveyPrev" '+(page===0?'disabled':'')+'>上一頁</button>'+
-    '<button class="btn primary" id="surveyNext" '+(completed?'':'disabled')+'>'+(page===2?'完成量表，進入小評估':'下一頁')+'</button></div></article></section>';
+    '<button class="btn primary" id="surveyNext" '+(completed?'':'disabled')+'>'+(page===2?(isDemo()?'完成問卷，繼續第 13 題':'完成問卷，進入小評估'):'下一頁')+'</button></div></article></section>';
   document.querySelectorAll('.scale-choice').forEach(b=>b.onclick=()=>{
     const idx=+b.parentElement.dataset.idx;state.survey[idx]=+b.dataset.value;save();
     b.parentElement.querySelectorAll('button').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b));});
@@ -28,7 +28,7 @@ survey=function(){
   document.querySelector('#surveyPrev').onclick=()=>{if(page>0){state.surveyPage=page-1;save();render();}};
   document.querySelector('#surveyNext').onclick=()=>{
     if(!items.every((_,i)=>Number(state.survey[start+i])>=1))return;
-    if(page===2)state.screen='feedback';else state.surveyPage=page+1;
+    if(page===2){state.surveyCompletedAt=new Date().toISOString();if(isDemo()){state.midSurveyDone=true;state.screen='quiz';}else state.screen='feedback';}else state.surveyPage=page+1;
     save();render();
   };
 };
@@ -65,7 +65,7 @@ done=function(){
  ];
  const rows=[['初次作答',x.init],['最終作答',x.end]];
  main.innerHTML='<section class="summary"><div class="kicker">第 5 階段｜流程結束</div><h1>'+(isDemo()?'4 題流程 Demo 已完成':'48 題完整流程已完成')+'</h1>'+
- '<p>本次作答摘要（非正式研究結論）。</p>'+
+ '<p>'+(isDemo()?'第 12 題完成中途問卷；第 24 題後完成介面評估。':'48 題後填寫信任問卷與介面評估。')+'</p>'+
  '<article class="card"><h2>影像判讀摘要</h2><div class="summ-grid"><div><strong>'+x.init+'/'+n+'</strong><span>初答正確</span></div><div><strong>'+x.end+'/'+n+'</strong><span>終答正確</span></div><div><strong>'+x.changed+'</strong><span>答案改變</span></div><div><strong>'+x.bad+'/'+x.eligible+'</strong><span>因錯誤 AI 建議而改錯</span></div></div>'+
  '<div class="score-trend">'+rows.map((r,i)=>'<div class="score-row '+(i===1?'final':'')+'"><div><span>'+r[0]+'正確率</span><b>'+Math.round(r[1]/n*100)+'%</b></div><div class="score-track"><div class="score-fill" style="width:'+(r[1]/n*100)+'%"></div></div></div>').join('')+'</div>'+
  '<h2>問卷結果</h2><div class="summ-grid"><div><strong>'+mean.toFixed(2)+' / 7</strong><span>信任量表平均（反向題已計分）</span></div><div><strong>'+uxMean.toFixed(2)+' / 5</strong><span>介面評估平均</span></div><div><strong>'+misses+'</strong><span>漏判目標（依標註）</span></div><div><strong>'+correctAdvice.length+' / '+wrongAdvice.length+'</strong><span>正確／錯誤 AI 建議題數</span></div></div>'+
