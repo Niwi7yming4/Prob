@@ -222,7 +222,7 @@ body[data-screen="quiz"] .workspace{padding-bottom:85px}
 .leave-dialog-actions .leave-discard{color:#a43b30;border-color:#edc5c0;background:#fff8f7}
 .leave-dialog-actions button:focus-visible,.session-back:focus-visible{outline:3px solid #91b7e3;outline-offset:2px}
 @media(max-width:720px){.leave-dialog{width:min(390px,calc(100vw - 30px))}.leave-dialog-inner{padding:22px}.leave-dialog h2{font-size:22px}}
-</style><link rel="stylesheet" href="./mobile.css"></head>
+</style><link rel="stylesheet" href="./mobile.css?v=20261029-compact2"></head>
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
 <header class="site-head"><div class="head-inner">
@@ -309,7 +309,7 @@ function record(){return state.records[state.position]||{};}
 function imgUrl(file){return file.startsWith("./")?file:RAW+encodeURIComponent(file);}
 function sourceLink(q){return q.sourceURL||SOURCE+"/blob/main/dataset/train/images/"+encodeURIComponent(q.image);}
 function txtStatus(){return '<div class="kicker">研究示範 / INDUSTRIAL SAFETY</div>';}
-function render(){window.scrollTo(0,0);document.body.dataset.screen=state.screen;document.querySelector("#sessionBack").hidden=["intro","review"].includes(state.screen);if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="feedback")feedback();else if(state.screen==="done")done();else if(state.screen==="review")review();main.insertAdjacentHTML("afterbegin",flowBar());}
+function render(){window.scrollTo(0,0);document.body.dataset.screen=state.screen;document.querySelector("#sessionBack").hidden=["intro","review"].includes(state.screen);document.querySelector(".head-count").textContent=(state.mode==="demo"?"4 題":"48 題");if(state.screen==="intro")intro();else if(state.screen==="quiz")quiz();else if(state.screen==="pause")pause();else if(state.screen==="survey")survey();else if(state.screen==="feedback")feedback();else if(state.screen==="done")done();else if(state.screen==="review")review();main.insertAdjacentHTML("afterbegin",flowBar());}
 function intro(){
 const full=restore("full"),demo=restore("demo");
 main.innerHTML='<section class="hero">'+
