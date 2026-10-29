@@ -228,3 +228,63 @@
 @media (prefers-reduced-motion: reduce) {
   .answer-dock,.answer-dock button { transition: none !important; }
 }
+
+/* Compact mobile question viewport: header -> question -> image -> answer dock. */
+@media screen and (max-width: 720px) {
+  body[data-screen="quiz"] .head-inner,
+  body[data-screen="pause"] .head-inner,
+  body[data-screen="survey"] .head-inner,
+  body[data-screen="feedback"] .head-inner,
+  body[data-screen="done"] .head-inner {
+    justify-content:flex-start; gap:8px; min-height:46px; padding:4px 12px;
+  }
+  body:not([data-screen="intro"]) .head-inner .brand { font-size:15px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  body[data-screen="quiz"] .head-actions {display:none;}
+  body[data-screen="quiz"] .flow-guide { display:none; }
+  body[data-screen="quiz"] main.shell { padding:9px 14px calc(150px + env(safe-area-inset-bottom)); }
+  body[data-screen="quiz"] .quiz-head { min-height:27px; margin:0 0 7px; gap:8px; }
+  body[data-screen="quiz"] .quiz-head h1 { font-size:19px; margin:0; letter-spacing:0; font-weight:850; line-height:1.25; }
+  body[data-screen="quiz"] .quiz-head .quiz-total {font-size:15px; letter-spacing:0;}
+  body[data-screen="quiz"] .stage-badges {max-width:none; gap:5px;}
+  body[data-screen="quiz"] .stage-badges .pill { padding:4px 9px; font-size:12px; }
+  body[data-screen="quiz"] .progress-bg {height:4px; margin:0 0 13px; border-radius:100px;}
+  body[data-screen="quiz"] .question-card>.question-title {
+    order:1; font-size:clamp(20px,5.2vw,23px); line-height:1.36;
+    font-weight:850; margin:0 0 12px; padding:0 1px; letter-spacing:-.025em;
+  }
+  body[data-screen="quiz"] .question-card>.ai-panel {
+    order:2; margin:0 0 10px; padding:9px 12px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:#e9f3fc; border-left:3px solid var(--blue);
+  }
+  body[data-screen="quiz"] .question-card>.ai-panel .eyebrow {font-size:12px; margin:0; color:#265578;}
+  body[data-screen="quiz"] .question-card>.ai-panel .suggest {font-size:21px; flex-shrink:0;}
+  body[data-screen="quiz"] .question-card>.ai-panel .initial-answer{font-size:11px; color:#61758a; font-weight:500;}
+  body[data-screen="quiz"] .photo-card {order:3; margin:0 -14px; padding:0; border:0; border-radius:0; box-shadow:none;}
+  body[data-screen="quiz"] .photo-top { display:none; }
+  body[data-screen="quiz"] .photo-frame {height:clamp(300px,56dvh,620px); min-height:260px;}
+  body[data-screen="quiz"] .photo-caption { padding:5px 14px; font-size:11px; justify-content:flex-end; }
+  body[data-screen="quiz"] .zoom-photo {bottom:10px; right:11px;}
+  body[data-screen="quiz"] .question-card>.answer-dock {
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom)); border-radius:13px 13px 0 0;
+  }
+  body[data-screen="quiz"] .answer-dock .dock-top { display:none; }
+  body[data-screen="quiz"] .answer-dock .answer-group { gap:9px; margin:0 0 7px; }
+  body[data-screen="quiz"] .answer-dock .answer {min-height:52px; font-size:24px; padding:4px;}
+  body[data-screen="quiz"] .answer-dock #commit {min-height:46px; font-size:16px; padding:9px;}
+  .session-back {font-size:14px; padding:4px 8px; margin-left:-6px; min-width:59px; min-height:42px; justify-content:flex-start;}
+  .leave-dialog-actions button {min-height:52px;}
+  .demo-cta .mode-actions {display:flex; flex-direction:row; margin-top:8px;}
+  .demo-cta .mode-actions>.btn{width:auto; flex:1;}
+  .demo-cta .mode-restart{width:auto; min-width:67px;}
+}
+/* Landscape compact screen still places the image before the dock. */
+@media screen and (max-width:920px) and (orientation:landscape) and (max-height:540px) {
+  body[data-screen="quiz"] .flow-guide {display:none;}
+  body[data-screen="quiz"] .photo-top{display:none;}
+  body[data-screen="quiz"] .question-card>.question-title {order:1; margin-bottom:7px; font-size:19px;}
+  body[data-screen="quiz"] .question-card>.ai-panel {order:2; margin:0 0 7px; padding:5px 10px;}
+  body[data-screen="quiz"] .photo-card {order:3;}
+  body[data-screen="quiz"] .answer-dock .dock-top {display:none;}
+  body[data-screen="quiz"] .answer-dock .answer-group {margin:0;}
+}
