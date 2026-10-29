@@ -222,6 +222,23 @@ body[data-screen="quiz"] .workspace{padding-bottom:85px}
 .leave-dialog-actions .leave-discard{color:#a43b30;border-color:#edc5c0;background:#fff8f7}
 .leave-dialog-actions button:focus-visible,.session-back:focus-visible{outline:3px solid #91b7e3;outline-offset:2px}
 @media(max-width:720px){.leave-dialog{width:min(390px,calc(100vw - 30px))}.leave-dialog-inner{padding:22px}.leave-dialog h2{font-size:22px}}
+
+.tutorial-screen{max-width:760px;margin:0 auto;padding:5px 0 45px}
+.tutorial-screen h1{font-size:clamp(22px,4vw,31px);line-height:1.45;margin:10px 0 17px}
+.tutorial-picture{position:relative;background:#e8edf2;display:grid;place-items:center;border-radius:12px;overflow:hidden;min-height:270px;height:min(56vh,500px)}
+.tutorial-picture img{display:block;width:100%;height:100%;object-fit:contain}
+.tutorial-picture span{position:absolute;bottom:10px;left:10px;background:#fff;padding:3px 9px;border-radius:6px;font-size:12px}
+.tutorial-answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}
+.tutorial-answers button{min-height:65px;border:2px solid #c5d3e2;background:#fff;border-radius:10px;font-weight:900;font-size:23px;color:var(--navy)}
+.tutorial-answers button:active{background:#e2eefc}
+.tutorial-result{background:#e8f2fb;border-left:5px solid var(--blue);padding:16px;border-radius:8px;margin:14px 0}
+.tutorial-result strong{display:block;font-size:18px;margin-bottom:7px}
+.tutorial-result p{font-size:14px;margin-bottom:0}
+.tutorial-next{width:100%;margin-top:10px}
+.tutorial-foot{font-size:12px;color:var(--muted);margin-top:16px}
+@media(max-width:720px){body[data-screen="tutorial"] .flow-guide{display:none}.tutorial-screen h1{font-size:22px;margin:5px 0 10px}.tutorial-picture{height:clamp(260px,51dvh,480px)}.tutorial-answers button{min-height:58px}}
+.ai-panel .suggest{font-size:32px}
+@media(max-width:720px){body[data-screen="quiz"] .question-card>.ai-panel{background:#fff1dc;border:2px solid #e9a33c;border-left:7px solid #d58713;border-radius:12px;display:block;padding:16px 17px;margin:0 0 12px;box-shadow:0 5px 16px #a36f2425}body[data-screen="quiz"] .question-card>.ai-panel .eyebrow{font-size:15px;color:#6f4608;font-weight:900;margin:0 0 4px}body[data-screen="quiz"] .question-card>.ai-panel .suggest{font-size:34px;color:#543305}}
 </style><link rel="stylesheet" href="./mobile.css?v=20261029-compact2"></head>
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
@@ -412,4 +429,4 @@ document.querySelector("#leaveDiscard").onclick=()=>{
 document.querySelector("#leaveDialog").onclick=e=>{if(e.target===e.currentTarget)closeExitDialog();};
 const footer=document.createElement("footer");footer.className="footer-note shell";footer.innerHTML='<strong>資料來源：</strong> <a href="https://docs.ultralytics.com/datasets/detect/construction-ppe/" target="_blank" rel="noopener noreferrer">Ultralytics Construction-PPE</a>（AGPL-3.0）與 <a href="https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/28" target="_blank" rel="noopener noreferrer">Roboflow Construction Site Safety</a>（標示 CC BY 4.0；原始影像授權仍須逐檔核實）。研究流程為課程原型；作答資料僅儲存在本機瀏覽器，不會自動上傳。';document.body.append(footer);
 if(new URLSearchParams(location.search).has("review")){state.screen="review";}render();
-</script><script src="./flow-addon.js"></script><script src="./data-addon.js"></script></body></html>
+</script><script src="./tutorial.js"></script><script src="./flow-addon.js"></script><script src="./data-addon.js"></script></body></html>
