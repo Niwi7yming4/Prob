@@ -211,6 +211,31 @@ def assign_all_questions(items,rng):
   groups[gi].append((category,code,label,prompt,assigned[i],present))
  return groups
 
+def make_compound_questions(results):
+ """Turn visibly labeled pairs into harder co-occurrence judgments.
+ No spatial distance, collision or unsafe behavior is inferred from a static 2D box.
+ """
+ aliases={
+  "helmet":"安全帽","Hardhat":"安全帽","gloves":"防護手套",
+  "boots":"安全鞋","goggles":"護目鏡","vest":"工作背心",
+  "Safety Vest":"反光背心","Safety Cone":"警示錐",
+  "machinery":"施工機具","vehicle":"工程車輛"
+ }
+ changed=0
+ for q in results:
+  if q["category"]=="人機同場" or q["negativeWording"]:continue
+  candidates=[b for b in q["boxes"] if b["classId"]!=q["classId"]
+              and b["label"] in aliases and b["w"]*b["h"]>=.006]
+  if not candidates:continue
+  # Keep sufficiently large visible objects; do not invent proximity or danger.
+  other=max(candidates,key=lambda b:b["w"]*b["h"])
+  original=q["category"]
+  q["prompt"]=f"畫面中是否同時能看到{original}與{aliases[other['label']]}？"
+  q["queryClassIds"]=[q["classId"],other["classId"]]
+  q["questionType"]="兩類物件共同辨識"
+  changed+=1
+ print("COMPOUND QUESTIONS:",changed,"of",len(results),flush=True)
+
 def build_tutorials(items,used,zips):
  """Two extra annotated teaching images, excluded from the 48 scored questions."""
  specs=[
@@ -312,6 +337,7 @@ def main():
              for c,x,y,w,h in sorted(item["boxes"],key=lambda b:b[3]*b[4],reverse=True)[:10]],
     "imageBytes":size
    })
+  make_compound_questions(results)
   unique=len(set((q["source"],q["sourceOriginal"]) for q in results))
   if unique!=48:raise RuntimeError(f"Duplicate original images: {unique}")
   if Counter(x["correct"] for x in results)!={"是":24,"否":24}:raise RuntimeError("Answer imbalance")
