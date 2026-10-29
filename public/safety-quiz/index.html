@@ -241,7 +241,12 @@ return fresh(mode);
 function save(){localStorage.setItem(state.mode==="demo"?DEMO_STORE:STORE,JSON.stringify(state));}
 function total(){return state.mode==="demo"?4:48;}
 function isDemo(){return state.mode==="demo";}
-function startMode(mode){state=restore(mode);if(state.screen==="done"||state.screen==="intro"){state=fresh(mode);state.screen="quiz";}else if(state.screen==="review"){state.screen="intro";}save();render();}
+function startMode(mode){
+state=restore(mode);
+if(state.screen==="done"||(state.screen==="intro"&&state.position===0)){state=fresh(mode);state.screen="quiz";}
+else if(state.screen==="intro"||state.screen==="review"){state.screen=state.position>=total()?"survey":state.position===24&&mode==="full"?"pause":"quiz";}
+save();render();
+}
 function stageIndex(){return ({intro:0,quiz:1,pause:1,survey:2,feedback:3,done:4})[state.screen]??0;}
 function flowBar(){
 if(state.screen==="review")return "";
@@ -280,16 +285,16 @@ document.querySelector("#viewBank").onclick=()=>{state.screen="review";previewPa
 }
 function quiz(){
 window.scrollTo(0,0);
-if(state.position>=48){state.screen="survey";save();render();return;}
-const q=cur(),r=record(),first=state.phase==="first";
+if(state.position>=total()){state.screen="survey";save();render();return;}
+const q=cur(),r=record(),first=state.phase==="first",limit=total();
 selected=null;questionStart=Date.now();
 const suggestion=q.aiCorrect?q.correct:(q.correct==="是"?"否":"是");
-main.innerHTML='<div class="quiz-head"><div><div class="kicker">48 題影像判讀 / 第 '+(q.number<=24?"一":"二")+'組</div><h1>第 '+String(q.number).padStart(2,"0")+' 題 <span style="color:var(--muted);font-size:.6em;font-weight:500">/ 48</span></h1></div><div class="stage-badges"><span class="pill">'+q.color+'影像</span><span class="pill dark">'+(first?"階段 1｜獨立作答":"階段 2｜最後確認")+'</span></div></div>'+
-'<div class="progress-bg" role="progressbar" aria-valuenow="'+(q.number-1)+'" aria-valuemin="0" aria-valuemax="48" aria-label="完成題數"><div class="progress-fill" style="width:'+((q.number-1)/48*100)+'%"></div></div>'+
+main.innerHTML='<div class="quiz-head"><div><div class="kicker">影像判讀 / 第 '+(q.number<=24?"一":"二")+'組</div><h1>第 '+String(q.number).padStart(2,"0")+' 題 <span style="color:var(--muted);font-size:.6em;font-weight:500">/ '+limit+'</span></h1></div><div class="stage-badges"><span class="pill">'+q.color+'影像</span><span class="pill dark">'+(first?"階段 1｜獨立作答":"階段 2｜最後確認")+'</span></div></div>'+
+'<div class="progress-bg" role="progressbar" aria-valuenow="'+(q.number-1)+'" aria-valuemin="0" aria-valuemax="'+limit+'" aria-label="完成題數"><div class="progress-fill" style="width:'+((q.number-1)/limit*100)+'%"></div></div>'+
 '<div class="workspace"><section class="card photo-card"><div class="photo-top"><strong>觀察影像</strong><span>來源：Panly23 · '+esc(q.id)+'</span></div><div id="photoframe" class="photo-frame '+(q.color==="灰階"?"mono":"")+'"><img id="photo" class="loading" alt="工地安全影像 '+esc(q.id)+'" src="'+RAW+encodeURIComponent(q.image)+'"><button class="zoom-photo" type="button" id="zoomPhoto" aria-label="放大查看照片">放大照片</button><dialog id="imageDialog" class="image-dialog" aria-label="放大查看原始照片"><div class="dialog-top"><strong>照片 '+esc(q.id)+'</strong><button type="button" id="closeZoom">關閉 ×</button></div><img id="zoomImage" alt="放大的工地安全影像 '+esc(q.id)+'"></dialog><div id="photoError" class="img-fail" hidden><strong>照片暫時無法載入</strong><span>請確認網路連線，再重新載入本題照片。</span><button class="btn secondary" id="retry">重新載入圖片</button></div></div><div class="photo-caption"><span>保留原圖比例；灰階題僅改變色彩呈現。</span><span><a href="'+SOURCE+'/blob/main/dataset/train/images/'+encodeURIComponent(q.image)+'" target="_blank" rel="noopener noreferrer">查看原始檔案</a></span></div></section>'+
-'<section class="card question-card"><div class="stage-label">'+(first?"步驟 02 / 獨立判斷":"步驟 03–04 / 閱讀建議後再次回答")+'</div><h2 class="question-title">'+esc(q.wording)+'</h2>'+
+'<section class="card question-card"><div class="stage-label">'+(first?"本題第 1 步 / 獨立判斷":"本題第 2 步 / 閱讀 AI 建議後再作答")+'</div><h2 class="question-title">'+esc(q.wording)+'</h2>'+
 (first?'<p class="note">請只依照照片自行判斷；提交後才會出現 AI 建議。</p>':'<div class="hint">你第一次的答案：<strong>'+esc(r.initial)+'</strong>。可以維持原判斷，或選擇修改。</div><div class="ai-panel"><div class="eyebrow">AI 辨識建議 · 模擬輸出</div><div class="suggest">建議回答「'+suggestion+'」</div><p>這是模擬的輔助建議，請仍依照你對圖片的觀察決定最後答案。</p></div>')+
-'<div class="answer-group" role="group" aria-label="選擇答案"><button class="answer" data-answer="是">是 <small>符合題目敘述</small></button><button class="answer" data-answer="否">否 <small>不符合題目敘述</small></button></div><button id="commit" class="btn primary" style="width:100%" disabled>'+(first?"提交第一次回答":"確認最後答案，前往下一題")+'</button><div class="question-foot"><span>題目 '+q.number+'／48</span><span>每個階段各記錄一次作答時間</span></div></section></div>';
+'<div class="answer-group" role="group" aria-label="選擇答案"><button class="answer" data-answer="是">是 <small>符合題目敘述</small></button><button class="answer" data-answer="否">否 <small>不符合題目敘述</small></button></div><button id="commit" class="btn primary" style="width:100%" disabled>'+(first?"提交第一次回答":"確認最後答案，前往下一題")+'</button><div class="question-foot"><span>題目 '+q.number+'／'+limit+'</span><span>每個階段各記錄一次作答時間</span></div></section></div>';
 const img=document.querySelector("#photo"),err=document.querySelector("#photoError");let imageReady=false;
 function imgSuccess(){imageReady=true;err.hidden=true;img.classList.remove("loading");document.querySelector("#zoomPhoto").hidden=false;}
 function imgFail(){imageReady=false;err.hidden=false;img.classList.add("loading");document.querySelector("#zoomPhoto").hidden=true;document.querySelector("#commit").disabled=true;}
@@ -299,7 +304,7 @@ document.querySelector("#closeZoom").onclick=()=>document.querySelector("#imageD
 document.querySelector("#imageDialog").onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close();};
 document.querySelector("#retry").onclick=()=>{err.hidden=true;img.src=RAW+encodeURIComponent(q.image)+(img.src.includes("?")?"&":"?")+"reload="+Date.now();};
 document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{selected=b.dataset.answer;document.querySelectorAll(".answer").forEach(x=>x.classList.toggle("selected",x===b));document.querySelector("#commit").disabled=!imageReady;});
-document.querySelector("#commit").onclick=()=>{if(!selected||!imageReady)return;const elapsed=Date.now()-questionStart;if(first){state.records[state.position]={imageId:q.id,imageFile:q.image,source:q.source,originalImageId:q.sourceOriginal,question:q.wording,category:q.category,color:q.color,aiCondition:q.aiCorrect?"correct":"incorrect",conditionId:q.condition+1,standardAnswer:q.correct,aiAdvice:suggestion,initial:selected,initialMs:elapsed,final:null,finalMs:null};state.phase="second";save();quiz();}else{const out=state.records[state.position];out.final=selected;out.finalMs=elapsed;out.initialCorrect=out.initial===q.correct;out.finalCorrect=out.final===q.correct;out.changed=out.initial!==out.final;state.position++;state.phase="first";state.screen=state.position===24?"pause":state.position===48?"survey":"quiz";save();render();}};
+document.querySelector("#commit").onclick=()=>{if(!selected||!imageReady)return;const elapsed=Date.now()-questionStart;if(first){state.records[state.position]={imageId:q.id,imageFile:q.image,source:q.source,originalImageId:q.sourceOriginal,question:q.wording,category:q.category,color:q.color,aiCondition:q.aiCorrect?"correct":"incorrect",conditionId:q.condition+1,standardAnswer:q.correct,aiAdvice:suggestion,initial:selected,initialMs:elapsed,final:null,finalMs:null};state.phase="second";save();render();}else{const out=state.records[state.position];out.final=selected;out.finalMs=elapsed;out.initialCorrect=out.initial===q.correct;out.finalCorrect=out.final===q.correct;out.changed=out.initial!==out.final;state.position++;state.phase="first";state.screen=!isDemo()&&state.position===24?"pause":state.position===total()?"survey":"quiz";save();render();}};
 }
 function pause(){main.innerHTML='<section class="card pause-card"><div class="kicker">組間休息</div><h1>第一組 24 題完成</h1><p>你已完成前半段影像判讀。接下來還有 24 題，操作方式完全相同。需要的話可以先離開螢幕休息。</p><div class="progress-bg"><div class="progress-fill" style="width:50%"></div></div><p class="note">暫存紀錄保留在目前瀏覽器，不會自動上傳伺服器。</p><button class="btn primary" id="resume">開始第二組 24 題</button></section>';document.querySelector("#resume").onclick=()=>{state.screen="quiz";save();render();};}
 function survey(){
