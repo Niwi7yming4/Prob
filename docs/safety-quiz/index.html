@@ -238,4 +238,4 @@ document.querySelector("#prev").onclick=()=>{previewPage--;review();scrollTo(0,0
 }
 const footer=document.createElement("footer");footer.className="footer-note shell";footer.innerHTML='<strong>資料來源與限制</strong><br>影像與 YOLO 類別：<a href="'+SOURCE+'" target="_blank" rel="noopener noreferrer">Panly23 / Labeling-data-for-safety-helmets-and-work-uniforms</a>（示範使用；該倉庫未明示獨立 LICENSE，公開再利用前須確認授權）。研究條件、Jian 量表中文版文字依使用者提供的研究文件整理。問卷翻譯與實驗操作流程皆為課程研究原型；本頁無資料上傳功能，資料僅保留在瀏覽器 localStorage。';document.body.append(footer);
 if(new URLSearchParams(location.search).has("review")){state.screen="review";}render();
-</script></body></html>
+</script><script src="./flow-addon.js"></script></body></html>
