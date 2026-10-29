@@ -66,9 +66,10 @@ function tutorial(){
  '<h1 class="practice-question">'+esc(q.prompt)+'</h1>'+
  (reveal?'<section class="practice-ai"><div class="practice-ai-title">AI 辨識建議 <small>模擬</small></div><div class="practice-ai-answer">建議回答 <strong>'+esc(q.aiAdvice)+'</strong></div><p>'+esc(summaryEvidence(q))+'</p></section>':'')+
  '<section class="practice-photo"><img id="practiceImg" alt="教學題 '+(i+1)+' 影像" src="'+imgUrl(q.image)+'"><div id="practiceEvidence" class="evidence-layer" hidden></div></section>'+
- (finished?'<div class="practice-explain"><strong>參考答案：'+esc(q.correct)+'　/　AI 建議'+(correct?"正確":"錯誤")+'</strong><p>'+esc(q.explanation)+'</p></div>':
- '<div class="practice-options" role="group" aria-label="教學題回答"><button type="button" data-practice-answer="是">是</button><button type="button" data-practice-answer="否">否</button></div>')+
- '<div class="practice-foot"><button class="btn primary" id="practiceNext" '+(!finished?'disabled':'')+'>'+(finished?(i===1?"開始正式作答":"下一題教學"):(reveal?"確認答案":"查看 AI 建議"))+'</button></div>'+
+ (finished?'<div class="practice-explain"><strong>參考答案：'+esc(q.correct)+'　/　AI 建議'+(correct?"正確":"錯誤")+'</strong><p>'+esc(q.explanation)+'</p></div>':'')+
+ '<div class="practice-dock" role="group" aria-label="教學作答與操作">'+
+ (finished?'':'<div class="practice-options" role="group" aria-label="教學題回答"><button type="button" data-practice-answer="是">是</button><button type="button" data-practice-answer="否">否</button></div>')+
+ '<div class="practice-foot"><button class="btn primary" id="practiceNext" '+(!finished?'disabled':'')+'>'+(finished?(i===1?"開始正式作答":"下一題教學"):(reveal?"確認答案":"查看 AI 建議"))+'</button></div></div>'+
  '<p class="practice-caption">教學題不計分。框選位置依公開資料集標註示意，AI 回覆為預設模擬。</p></section>';
  const img=document.querySelector("#practiceImg");
  img.onload=()=>{if(reveal)renderEvidence(q,img,document.querySelector("#practiceEvidence"));};
