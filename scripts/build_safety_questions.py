@@ -211,6 +211,46 @@ def assign_all_questions(items,rng):
   groups[gi].append((category,code,label,prompt,assigned[i],present))
  return groups
 
+def build_tutorials(items,used,zips):
+ """Two extra annotated teaching images, excluded from the 48 scored questions."""
+ specs=[
+  ("ultralytics",1,{0,1,6},"示範 1：畫面中是否同時出現安全帽與防護手套？","是","是","同時辨認安全帽與手套；AI 這次建議正確。"),
+  ("roboflow",8,{5,8},"示範 2：畫面中是否同時出現施工機具和作業人員？","是","否","可看到人員與機具；AI 這次建議錯誤，應自行核對。")
+ ]
+ result=[]
+ for index,(code,label,needed,prompt,answer,advice,explanation) in enumerate(specs,1):
+  candidates=[]
+  for a in items[code]:
+   if not is_work_scene(a,code) or (code,a["original"]) in used:continue
+   classes={v[0] for v in a["boxes"]}
+   if not needed.issubset(classes):continue
+   target=[v[3]*v[4] for v in a["boxes"] if v[0]==label]
+   if not target:continue
+   score=max(target)+(0.04 if "/test/" in a["file"] else 0)
+   candidates.append((score,a))
+  if not candidates:raise RuntimeError("No separate teaching image found for "+code)
+  candidates.sort(key=lambda z:z[0],reverse=True)
+  a=candidates[0][1]
+  used.add((code,a["original"]))
+  filename=f"tutorial-{index:02d}.jpg"
+  with Image.open(io.BytesIO(zips[code].read(a["file"]))) as src:
+   image=ImageOps.exif_transpose(src).convert("RGB")
+   image.thumbnail((1200,900),Image.Resampling.LANCZOS)
+   image.save(IMAGE_DIR/filename,quality=88,optimize=True,subsampling=0)
+  info=SOURCE_INFO[code]
+  result.append({
+   "id":f"T{index:02d}","image":"./images/"+filename,"prompt":prompt,"correct":answer,
+   "aiAdvice":advice,"explanation":explanation,"source":info["name"],"sourceOriginal":a["original"],
+   "boxes":[{"label":info["classNames"].get(c,str(c)),"classId":c,
+             "x":round(x,5),"y":round(y,5),"w":round(w,5),"h":round(h,5)}
+             for c,x,y,w,h in sorted(a["boxes"],key=lambda b:b[3]*b[4],reverse=True)[:12]],
+   "targetIds":list(sorted(needed)),"mode":"unscored"
+  })
+ with (OUT/"tutorial.json").open("w",encoding="utf-8") as f:
+  json.dump(result,f,ensure_ascii=False,indent=2)
+ print("TUTORIAL BUILT: two independent annotated practice images",flush=True)
+
+
 def main():
  OUT.mkdir(parents=True,exist_ok=True);IMAGE_DIR.mkdir(parents=True,exist_ok=True)
  rng=random.Random(20261029)
@@ -282,6 +322,7 @@ def main():
   print("BUILD COMPLETE:",len(results),"questions /",Counter(q["category"] for q in results),
     "yes/no",Counter(q["correct"] for q in results),flush=True)
   print("COPYRIGHT: Images remain attributed to upstream sources; confirm per-file license before formal use.",flush=True)
+  build_tutorials(items,set((q["source"].startswith("Ultralytics") and "ultralytics" or "roboflow",q["sourceOriginal"]) for q in results),zips)
   for z in zips.values():z.close()
 
 if __name__=="__main__":main()
