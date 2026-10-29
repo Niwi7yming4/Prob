@@ -15,6 +15,40 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.53758,
+        "y": 0.50207,
+        "w": 0.92484,
+        "h": 0.88477
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.59735,
+        "y": 0.71981,
+        "w": 0.8053,
+        "h": 0.55195
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.35725,
+        "y": 0.5671,
+        "w": 0.41991,
+        "h": 0.35952
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.66559,
+        "y": 0.22078,
+        "w": 0.52577,
+        "h": 0.25088
+      }
+    ],
     "imageBytes": 70804
   },
   {
@@ -33,6 +67,88 @@
     "classId": 6,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.43438,
+        "y": 0.5625,
+        "w": 0.28984,
+        "h": 0.3125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.75781,
+        "y": 0.50859,
+        "w": 0.22187,
+        "h": 0.30547
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.67578,
+        "y": 0.38047,
+        "w": 0.19375,
+        "h": 0.275
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.7875,
+        "y": 0.71875,
+        "w": 0.19844,
+        "h": 0.25234
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.26094,
+        "y": 0.50547,
+        "w": 0.20781,
+        "h": 0.23594
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.34844,
+        "y": 0.73203,
+        "w": 0.27969,
+        "h": 0.16953
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.35156,
+        "y": 0.92422,
+        "w": 0.27187,
+        "h": 0.15156
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.91172,
+        "y": 0.44609,
+        "w": 0.17656,
+        "h": 0.23281
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.83672,
+        "y": 0.32109,
+        "w": 0.16719,
+        "h": 0.23594
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.52578,
+        "y": 0.26953,
+        "w": 0.20234,
+        "h": 0.18828
+      }
+    ],
     "imageBytes": 93009
   },
   {
@@ -51,6 +167,40 @@
     "classId": 8,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.52344,
+        "y": 0.49844,
+        "w": 0.8125,
+        "h": 0.87422
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.44375,
+        "y": 0.45703,
+        "w": 0.06484,
+        "h": 0.24063
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.46016,
+        "y": 0.41797,
+        "w": 0.02656,
+        "h": 0.06094
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.46484,
+        "y": 0.35703,
+        "w": 0.01719,
+        "h": 0.03281
+      }
+    ],
     "imageBytes": 87525
   },
   {
@@ -69,6 +219,88 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.71869,
+        "y": 0.49281,
+        "w": 0.56263,
+        "h": 0.98562
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.59018,
+        "y": 0.54616,
+        "w": 0.57839,
+        "h": 0.90642
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.37689,
+        "y": 0.61468,
+        "w": 0.56622,
+        "h": 0.77064
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.24453,
+        "y": 0.62417,
+        "w": 0.48906,
+        "h": 0.75166
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.81109,
+        "y": 0.46164,
+        "w": 0.34656,
+        "h": 0.54203
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.53594,
+        "y": 0.53414,
+        "w": 0.24594,
+        "h": 0.39703
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.42984,
+        "y": 0.19245,
+        "w": 0.175,
+        "h": 0.16916
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.53118,
+        "y": 0.0977,
+        "w": 0.15705,
+        "h": 0.18586
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.18226,
+        "y": 0.31774,
+        "w": 0.15705,
+        "h": 0.13436
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.07852,
+        "y": 0.33454,
+        "w": 0.15705,
+        "h": 0.13436
+      }
+    ],
     "imageBytes": 73326
   },
   {
@@ -87,6 +319,56 @@
     "classId": 9,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.68359,
+        "y": 0.60859,
+        "w": 0.63281,
+        "h": 0.78281
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.21797,
+        "y": 0.55625,
+        "w": 0.30625,
+        "h": 0.88672
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.19141,
+        "y": 0.57578,
+        "w": 0.24063,
+        "h": 0.50078
+      },
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.07891,
+        "y": 0.48516,
+        "w": 0.15781,
+        "h": 0.36016
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.20469,
+        "y": 0.16797,
+        "w": 0.11563,
+        "h": 0.10938
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.21953,
+        "y": 0.30703,
+        "w": 0.05859,
+        "h": 0.0625
+      }
+    ],
     "imageBytes": 68578
   },
   {
@@ -105,6 +387,88 @@
     "classId": 6,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.84375,
+        "y": 0.55781,
+        "w": 0.08672,
+        "h": 0.43438
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.78672,
+        "y": 0.51953,
+        "w": 0.07891,
+        "h": 0.41563
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.46328,
+        "y": 0.53281,
+        "w": 0.0875,
+        "h": 0.36016
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.37969,
+        "y": 0.52344,
+        "w": 0.08672,
+        "h": 0.35469
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.75938,
+        "y": 0.55937,
+        "w": 0.07969,
+        "h": 0.38438
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.14766,
+        "y": 0.55937,
+        "w": 0.07578,
+        "h": 0.39375
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.70469,
+        "y": 0.52812,
+        "w": 0.075,
+        "h": 0.39062
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.54609,
+        "y": 0.5375,
+        "w": 0.08047,
+        "h": 0.35859
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.16875,
+        "y": 0.50703,
+        "w": 0.07266,
+        "h": 0.36797
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.28281,
+        "y": 0.53359,
+        "w": 0.07422,
+        "h": 0.35313
+      }
+    ],
     "imageBytes": 110685
   },
   {
@@ -123,6 +487,40 @@
     "classId": 0,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.65859,
+        "y": 0.54609,
+        "w": 0.60469,
+        "h": 0.90781
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.66641,
+        "y": 0.34375,
+        "w": 0.33203,
+        "h": 0.50156
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.49062,
+        "y": 0.88203,
+        "w": 0.26406,
+        "h": 0.23594
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.69063,
+        "y": 0.75313,
+        "w": 0.13125,
+        "h": 0.17656
+      }
+    ],
     "imageBytes": 77199
   },
   {
@@ -141,6 +539,88 @@
     "classId": 3,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.17128,
+        "y": 0.47474,
+        "w": 0.2,
+        "h": 0.92098
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.854,
+        "y": 0.58709,
+        "w": 0.17284,
+        "h": 0.67655
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.69598,
+        "y": 0.49079,
+        "w": 0.12839,
+        "h": 0.71605
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.32437,
+        "y": 0.48091,
+        "w": 0.12098,
+        "h": 0.71605
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.55523,
+        "y": 0.5118,
+        "w": 0.14328,
+        "h": 0.58516
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.43424,
+        "y": 0.48584,
+        "w": 0.11852,
+        "h": 0.59753
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.17797,
+        "y": 0.36933,
+        "w": 0.14816,
+        "h": 0.36009
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.86213,
+        "y": 0.54628,
+        "w": 0.14609,
+        "h": 0.30247
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.70369,
+        "y": 0.40225,
+        "w": 0.11728,
+        "h": 0.27778
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.31481,
+        "y": 0.39093,
+        "w": 0.11317,
+        "h": 0.28395
+      }
+    ],
     "imageBytes": 94532
   },
   {
@@ -159,6 +639,48 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.50084,
+        "y": 0.55043,
+        "w": 0.99423,
+        "h": 0.73905
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.5,
+        "y": 0.50519,
+        "w": 1.0,
+        "h": 0.6518
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.24248,
+        "y": 0.36989,
+        "w": 0.48497,
+        "h": 0.35556
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.17264,
+        "y": 0.75719,
+        "w": 0.34528,
+        "h": 0.24127
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.36751,
+        "y": 0.47783,
+        "w": 0.20636,
+        "h": 0.13969
+      }
+    ],
     "imageBytes": 46727
   },
   {
@@ -177,6 +699,88 @@
     "classId": 9,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.71797,
+        "y": 0.78047,
+        "w": 0.13437,
+        "h": 0.43125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.27344,
+        "y": 0.81797,
+        "w": 0.15,
+        "h": 0.36406
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.55625,
+        "y": 0.80469,
+        "w": 0.13437,
+        "h": 0.39062
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.20391,
+        "y": 0.78516,
+        "w": 0.10469,
+        "h": 0.42109
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.38438,
+        "y": 0.78906,
+        "w": 0.09531,
+        "h": 0.42109
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.56172,
+        "y": 0.85859,
+        "w": 0.11719,
+        "h": 0.28281
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.72109,
+        "y": 0.79688,
+        "w": 0.12344,
+        "h": 0.2625
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.4875,
+        "y": 0.81016,
+        "w": 0.08516,
+        "h": 0.37891
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.26562,
+        "y": 0.86641,
+        "w": 0.13359,
+        "h": 0.22266
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.48594,
+        "y": 0.81719,
+        "w": 0.06953,
+        "h": 0.21641
+      }
+    ],
     "imageBytes": 107251
   },
   {
@@ -195,6 +799,32 @@
     "classId": 7,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.45859,
+        "y": 0.5,
+        "w": 0.40703,
+        "h": 1.0
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.46563,
+        "y": 0.56563,
+        "w": 0.41641,
+        "h": 0.86797
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.56094,
+        "y": 0.03203,
+        "w": 0.20625,
+        "h": 0.06406
+      }
+    ],
     "imageBytes": 50420
   },
   {
@@ -213,6 +843,88 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.88947,
+        "y": 0.50116,
+        "w": 0.22106,
+        "h": 0.87406
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.30486,
+        "y": 0.55671,
+        "w": 0.19259,
+        "h": 0.67902
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.08453,
+        "y": 0.54313,
+        "w": 0.16906,
+        "h": 0.75555
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.91235,
+        "y": 0.51409,
+        "w": 0.17317,
+        "h": 0.69048
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.69992,
+        "y": 0.55301,
+        "w": 0.16297,
+        "h": 0.71111
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.5073,
+        "y": 0.55671,
+        "w": 0.16303,
+        "h": 0.67408
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.71647,
+        "y": 0.56712,
+        "w": 0.18831,
+        "h": 0.51083
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.5195,
+        "y": 0.5617,
+        "w": 0.19697,
+        "h": 0.46969
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.08227,
+        "y": 0.56712,
+        "w": 0.16234,
+        "h": 0.52814
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.32036,
+        "y": 0.54763,
+        "w": 0.171,
+        "h": 0.49352
+      }
+    ],
     "imageBytes": 94124
   },
   {
@@ -231,6 +943,16 @@
     "classId": 8,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.54297,
+        "y": 0.48281,
+        "w": 0.82891,
+        "h": 0.92656
+      }
+    ],
     "imageBytes": 74038
   },
   {
@@ -249,6 +971,88 @@
     "classId": 18,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.53828,
+        "y": 0.50625,
+        "w": 0.63828,
+        "h": 0.77187
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.51875,
+        "y": 0.52422,
+        "w": 0.15937,
+        "h": 0.27891
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.68437,
+        "y": 0.64531,
+        "w": 0.05312,
+        "h": 0.08594
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.04844,
+        "y": 0.49453,
+        "w": 0.03359,
+        "h": 0.11406
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.65234,
+        "y": 0.41094,
+        "w": 0.01641,
+        "h": 0.07578
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.05234,
+        "y": 0.48203,
+        "w": 0.02187,
+        "h": 0.05156
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.20469,
+        "y": 0.21172,
+        "w": 0.02031,
+        "h": 0.03047
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.70156,
+        "y": 0.64844,
+        "w": 0.01484,
+        "h": 0.03516
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.65,
+        "y": 0.39766,
+        "w": 0.01094,
+        "h": 0.03281
+      },
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.27656,
+        "y": 0.225,
+        "w": 0.0125,
+        "h": 0.01875
+      }
+    ],
     "imageBytes": 129994
   },
   {
@@ -267,6 +1071,72 @@
     "classId": 3,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.54517,
+        "y": 0.50035,
+        "w": 0.61006,
+        "h": 0.9993
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.59125,
+        "y": 0.43569,
+        "w": 0.49366,
+        "h": 0.44286
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.52141,
+        "y": 0.88015,
+        "w": 0.33492,
+        "h": 0.2397
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.61664,
+        "y": 0.07531,
+        "w": 0.35397,
+        "h": 0.14125
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.42538,
+        "y": 0.82934,
+        "w": 0.18731,
+        "h": 0.20794
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.38411,
+        "y": 0.51188,
+        "w": 0.13334,
+        "h": 0.1508
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.55395,
+        "y": 0.12458,
+        "w": 0.29523,
+        "h": 0.06191
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.55553,
+        "y": 0.66108,
+        "w": 0.12381,
+        "h": 0.14441
+      }
+    ],
     "imageBytes": 128442
   },
   {
@@ -285,6 +1155,88 @@
     "classId": 7,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.36094,
+        "y": 0.47344,
+        "w": 0.72188,
+        "h": 0.49922
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.36172,
+        "y": 0.11016,
+        "w": 0.72188,
+        "h": 0.21953
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.26094,
+        "y": 0.53594,
+        "w": 0.40781,
+        "h": 0.36641
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.24844,
+        "y": 0.89531,
+        "w": 0.49688,
+        "h": 0.20938
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.26172,
+        "y": 0.10078,
+        "w": 0.38828,
+        "h": 0.20078
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.29609,
+        "y": 0.92891,
+        "w": 0.37031,
+        "h": 0.14219
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.62109,
+        "y": 0.3875,
+        "w": 0.19141,
+        "h": 0.26484
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.62266,
+        "y": 0.08906,
+        "w": 0.1875,
+        "h": 0.17813
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.52891,
+        "y": 0.44297,
+        "w": 0.09844,
+        "h": 0.14531
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.54922,
+        "y": 0.03516,
+        "w": 0.11797,
+        "h": 0.06953
+      }
+    ],
     "imageBytes": 87400
   },
   {
@@ -303,6 +1255,32 @@
     "classId": 8,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.51953,
+        "y": 0.47891,
+        "w": 0.77812,
+        "h": 0.925
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.42422,
+        "y": 0.43672,
+        "w": 0.04063,
+        "h": 0.15937
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.43359,
+        "y": 0.41563,
+        "w": 0.02031,
+        "h": 0.05312
+      }
+    ],
     "imageBytes": 89800
   },
   {
@@ -321,6 +1299,80 @@
     "classId": 0,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.63516,
+        "y": 0.61406,
+        "w": 0.44219,
+        "h": 0.77187
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.17031,
+        "y": 0.51016,
+        "w": 0.33437,
+        "h": 0.97891
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.52812,
+        "y": 0.72969,
+        "w": 0.24375,
+        "h": 0.54063
+      },
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.39141,
+        "y": 0.56563,
+        "w": 0.29063,
+        "h": 0.27344
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.16328,
+        "y": 0.47734,
+        "w": 0.14688,
+        "h": 0.37031
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.63359,
+        "y": 0.325,
+        "w": 0.16641,
+        "h": 0.18984
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.21641,
+        "y": 0.19375,
+        "w": 0.08594,
+        "h": 0.10156
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.64375,
+        "y": 0.49453,
+        "w": 0.07187,
+        "h": 0.07578
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.19531,
+        "y": 0.24375,
+        "w": 0.04844,
+        "h": 0.05469
+      }
+    ],
     "imageBytes": 82830
   },
   {
@@ -339,6 +1391,48 @@
     "classId": 9,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.5,
+        "y": 0.57266,
+        "w": 1.0,
+        "h": 0.85391
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.63047,
+        "y": 0.5,
+        "w": 0.40078,
+        "h": 1.0
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.65469,
+        "y": 0.64375,
+        "w": 0.35313,
+        "h": 0.7125
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.60234,
+        "y": 0.1,
+        "w": 0.18906,
+        "h": 0.2
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.60234,
+        "y": 0.31719,
+        "w": 0.07109,
+        "h": 0.18203
+      }
+    ],
     "imageBytes": 87456
   },
   {
@@ -357,6 +1451,88 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.37056,
+        "y": 0.51887,
+        "w": 0.44202,
+        "h": 0.96173
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.74177,
+        "y": 0.56476,
+        "w": 0.48,
+        "h": 0.87048
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.20889,
+        "y": 0.5047,
+        "w": 0.41778,
+        "h": 0.98942
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.22637,
+        "y": 0.46621,
+        "w": 0.44719,
+        "h": 0.92202
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.58206,
+        "y": 0.56734,
+        "w": 0.45409,
+        "h": 0.86531
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.35641,
+        "y": 0.51797,
+        "w": 0.33939,
+        "h": 0.94375
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.75722,
+        "y": 0.57931,
+        "w": 0.35628,
+        "h": 0.81128
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.66333,
+        "y": 0.55284,
+        "w": 0.27444,
+        "h": 0.82089
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.70875,
+        "y": 0.70242,
+        "w": 0.35875,
+        "h": 0.58891
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.37781,
+        "y": 0.54445,
+        "w": 0.3,
+        "h": 0.51109
+      }
+    ],
     "imageBytes": 190604
   },
   {
@@ -375,6 +1551,16 @@
     "classId": 8,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.49531,
+        "y": 0.50313,
+        "w": 0.93359,
+        "h": 0.94688
+      }
+    ],
     "imageBytes": 82284
   },
   {
@@ -393,6 +1579,88 @@
     "classId": 18,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.71094,
+        "y": 0.36094,
+        "w": 0.55625,
+        "h": 0.45156
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.46875,
+        "y": 0.62031,
+        "w": 0.35234,
+        "h": 0.24766
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.30781,
+        "y": 0.31953,
+        "w": 0.28984,
+        "h": 0.27656
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.14062,
+        "y": 0.4875,
+        "w": 0.21875,
+        "h": 0.13906
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.53203,
+        "y": 0.33437,
+        "w": 0.13672,
+        "h": 0.11016
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.96719,
+        "y": 0.3125,
+        "w": 0.06563,
+        "h": 0.175
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.81094,
+        "y": 0.4,
+        "w": 0.03203,
+        "h": 0.08594
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.01094,
+        "y": 0.32578,
+        "w": 0.02187,
+        "h": 0.08047
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.34453,
+        "y": 0.36484,
+        "w": 0.02031,
+        "h": 0.04844
+      },
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.98281,
+        "y": 0.18984,
+        "w": 0.03359,
+        "h": 0.02422
+      }
+    ],
     "imageBytes": 111563
   },
   {
@@ -411,6 +1679,64 @@
     "classId": 6,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.60391,
+        "y": 0.60938,
+        "w": 0.38828,
+        "h": 0.43594
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.20703,
+        "y": 0.36016,
+        "w": 0.06328,
+        "h": 0.12109
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.2625,
+        "y": 0.34844,
+        "w": 0.05234,
+        "h": 0.09922
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.26719,
+        "y": 0.33984,
+        "w": 0.03984,
+        "h": 0.04766
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.21094,
+        "y": 0.34531,
+        "w": 0.04766,
+        "h": 0.03672
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.20312,
+        "y": 0.30859,
+        "w": 0.02422,
+        "h": 0.01484
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.26094,
+        "y": 0.30312,
+        "w": 0.02031,
+        "h": 0.0125
+      }
+    ],
     "imageBytes": 74884
   },
   {
@@ -429,6 +1755,88 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.73194,
+        "y": 0.48784,
+        "w": 0.50314,
+        "h": 0.93645
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.4298,
+        "y": 0.49469,
+        "w": 0.46331,
+        "h": 0.98938
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.73843,
+        "y": 0.41671,
+        "w": 0.51367,
+        "h": 0.82302
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.38649,
+        "y": 0.49266,
+        "w": 0.36111,
+        "h": 0.97016
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.18723,
+        "y": 0.51434,
+        "w": 0.37445,
+        "h": 0.84494
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.18519,
+        "y": 0.50591,
+        "w": 0.35683,
+        "h": 0.84892
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.3937,
+        "y": 0.62623,
+        "w": 0.3635,
+        "h": 0.73175
+      },
+      {
+        "label": "none",
+        "classId": 5,
+        "x": 0.75361,
+        "y": 0.542,
+        "w": 0.47425,
+        "h": 0.5585
+      },
+      {
+        "label": "none",
+        "classId": 5,
+        "x": 0.18668,
+        "y": 0.64792,
+        "w": 0.25998,
+        "h": 0.47184
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.64052,
+        "y": 0.11113,
+        "w": 0.25714,
+        "h": 0.22227
+      }
+    ],
     "imageBytes": 121060
   },
   {
@@ -447,6 +1855,40 @@
     "classId": 0,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.66406,
+        "y": 0.45703,
+        "w": 0.67109,
+        "h": 0.79141
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.82109,
+        "y": 0.59922,
+        "w": 0.35781,
+        "h": 0.51484
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.45703,
+        "y": 0.39453,
+        "w": 0.26562,
+        "h": 0.67578
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.63672,
+        "y": 0.58125,
+        "w": 0.12109,
+        "h": 0.27891
+      }
+    ],
     "imageBytes": 73005
   },
   {
@@ -465,6 +1907,88 @@
     "classId": 7,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.67188,
+        "y": 0.70078,
+        "w": 0.14688,
+        "h": 0.59844
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.06563,
+        "y": 0.70937,
+        "w": 0.13125,
+        "h": 0.58125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.14297,
+        "y": 0.6875,
+        "w": 0.13437,
+        "h": 0.51562
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.48438,
+        "y": 0.68125,
+        "w": 0.10156,
+        "h": 0.53906
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.06797,
+        "y": 0.7,
+        "w": 0.13594,
+        "h": 0.325
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.67422,
+        "y": 0.60703,
+        "w": 0.10938,
+        "h": 0.20781
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.48984,
+        "y": 0.58984,
+        "w": 0.08906,
+        "h": 0.18672
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.11563,
+        "y": 0.60625,
+        "w": 0.06797,
+        "h": 0.15313
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.04453,
+        "y": 0.46172,
+        "w": 0.0875,
+        "h": 0.08516
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.10938,
+        "y": 0.46172,
+        "w": 0.06484,
+        "h": 0.05312
+      }
+    ],
     "imageBytes": 76331
   },
   {
@@ -483,6 +2007,64 @@
     "classId": 6,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.72969,
+        "y": 0.72656,
+        "w": 0.28828,
+        "h": 0.42344
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.4125,
+        "y": 0.44609,
+        "w": 0.21484,
+        "h": 0.41875
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.18516,
+        "y": 0.59062,
+        "w": 0.14766,
+        "h": 0.24141
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.07891,
+        "y": 0.53125,
+        "w": 0.13672,
+        "h": 0.16719
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.45,
+        "y": 0.36719,
+        "w": 0.12812,
+        "h": 0.14141
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.01953,
+        "y": 0.49609,
+        "w": 0.0375,
+        "h": 0.10078
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.46094,
+        "y": 0.25547,
+        "w": 0.07422,
+        "h": 0.03047
+      }
+    ],
     "imageBytes": 68769
   },
   {
@@ -501,6 +2083,88 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.76731,
+        "y": 0.53502,
+        "w": 0.25681,
+        "h": 0.92995
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.55989,
+        "y": 0.53916,
+        "w": 0.22228,
+        "h": 0.91355
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.2303,
+        "y": 0.53379,
+        "w": 0.21481,
+        "h": 0.93242
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.35992,
+        "y": 0.55646,
+        "w": 0.15309,
+        "h": 0.87408
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.21091,
+        "y": 0.61216,
+        "w": 0.19342,
+        "h": 0.61934
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.77059,
+        "y": 0.55968,
+        "w": 0.22633,
+        "h": 0.4897
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.57512,
+        "y": 0.56171,
+        "w": 0.20164,
+        "h": 0.46908
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.3282,
+        "y": 0.56277,
+        "w": 0.13991,
+        "h": 0.5
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.26441,
+        "y": 0.15948,
+        "w": 0.15227,
+        "h": 0.17902
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.73459,
+        "y": 0.13684,
+        "w": 0.1502,
+        "h": 0.16256
+      }
+    ],
     "imageBytes": 111782
   },
   {
@@ -519,6 +2183,64 @@
     "classId": 18,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.42266,
+        "y": 0.55312,
+        "w": 0.82812,
+        "h": 0.72109
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.62813,
+        "y": 0.51328,
+        "w": 0.26172,
+        "h": 0.28437
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.02813,
+        "y": 0.57734,
+        "w": 0.05547,
+        "h": 0.25156
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.40625,
+        "y": 0.43672,
+        "w": 0.03594,
+        "h": 0.07969
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.39609,
+        "y": 0.43984,
+        "w": 0.01484,
+        "h": 0.0375
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.39844,
+        "y": 0.40391,
+        "w": 0.00937,
+        "h": 0.0125
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.40234,
+        "y": 0.41875,
+        "w": 0.00781,
+        "h": 0.01016
+      }
+    ],
     "imageBytes": 95484
   },
   {
@@ -537,6 +2259,88 @@
     "classId": 0,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.19453,
+        "y": 0.54375,
+        "w": 0.38594,
+        "h": 0.9125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.66797,
+        "y": 0.56328,
+        "w": 0.33906,
+        "h": 0.87266
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.40078,
+        "y": 0.60156,
+        "w": 0.21406,
+        "h": 0.79688
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.19766,
+        "y": 0.81484,
+        "w": 0.39219,
+        "h": 0.37031
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.66016,
+        "y": 0.69922,
+        "w": 0.24453,
+        "h": 0.53828
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.21406,
+        "y": 0.25312,
+        "w": 0.27578,
+        "h": 0.31641
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.38516,
+        "y": 0.77969,
+        "w": 0.17422,
+        "h": 0.44062
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.61641,
+        "y": 0.21172,
+        "w": 0.15625,
+        "h": 0.17656
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.37031,
+        "y": 0.29297,
+        "w": 0.14531,
+        "h": 0.17188
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.62813,
+        "y": 0.38828,
+        "w": 0.08828,
+        "h": 0.1375
+      }
+    ],
     "imageBytes": 87207
   },
   {
@@ -555,6 +2359,40 @@
     "classId": 7,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.50078,
+        "y": 0.55469,
+        "w": 0.99531,
+        "h": 0.89062
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.69766,
+        "y": 0.66875,
+        "w": 0.60469,
+        "h": 0.625
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.60469,
+        "y": 0.19297,
+        "w": 0.34219,
+        "h": 0.16484
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.59766,
+        "y": 0.33437,
+        "w": 0.13828,
+        "h": 0.05703
+      }
+    ],
     "imageBytes": 70503
   },
   {
@@ -573,6 +2411,88 @@
     "classId": 3,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.33627,
+        "y": 0.51743,
+        "w": 0.35683,
+        "h": 0.94964
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.59743,
+        "y": 0.59225,
+        "w": 0.27195,
+        "h": 0.8
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.15427,
+        "y": 0.62391,
+        "w": 0.30072,
+        "h": 0.67337
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.2772,
+        "y": 0.52361,
+        "w": 0.21955,
+        "h": 0.85797
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.58198,
+        "y": 0.55974,
+        "w": 0.2398,
+        "h": 0.73958
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.14287,
+        "y": 0.60594,
+        "w": 0.25133,
+        "h": 0.6702
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.78592,
+        "y": 0.5498,
+        "w": 0.17122,
+        "h": 0.71223
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.78273,
+        "y": 0.56549,
+        "w": 0.13866,
+        "h": 0.72798
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.10957,
+        "y": 0.52545,
+        "w": 0.21111,
+        "h": 0.35239
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.30247,
+        "y": 0.45321,
+        "w": 0.15881,
+        "h": 0.44923
+      }
+    ],
     "imageBytes": 116250
   },
   {
@@ -591,6 +2511,56 @@
     "classId": 9,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.67734,
+        "y": 0.61094,
+        "w": 0.64531,
+        "h": 0.77812
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.40313,
+        "y": 0.57812,
+        "w": 0.35469,
+        "h": 0.84297
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.35938,
+        "y": 0.50234,
+        "w": 0.22969,
+        "h": 0.33828
+      },
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.09688,
+        "y": 0.49766,
+        "w": 0.19375,
+        "h": 0.36562
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.37422,
+        "y": 0.21797,
+        "w": 0.11797,
+        "h": 0.11797
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.39453,
+        "y": 0.32656,
+        "w": 0.05,
+        "h": 0.06641
+      }
+    ],
     "imageBytes": 69673
   },
   {
@@ -609,6 +2579,88 @@
     "classId": 6,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.14219,
+        "y": 0.67734,
+        "w": 0.14609,
+        "h": 0.64453
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.38281,
+        "y": 0.68437,
+        "w": 0.125,
+        "h": 0.63125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.83125,
+        "y": 0.70312,
+        "w": 0.13281,
+        "h": 0.58984
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.47266,
+        "y": 0.68437,
+        "w": 0.11406,
+        "h": 0.59141
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.60703,
+        "y": 0.69219,
+        "w": 0.10391,
+        "h": 0.57031
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.24609,
+        "y": 0.65625,
+        "w": 0.11406,
+        "h": 0.48906
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.70078,
+        "y": 0.67266,
+        "w": 0.09375,
+        "h": 0.48984
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.78203,
+        "y": 0.65938,
+        "w": 0.08906,
+        "h": 0.44141
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.14922,
+        "y": 0.64453,
+        "w": 0.12266,
+        "h": 0.29922
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.37109,
+        "y": 0.61016,
+        "w": 0.09688,
+        "h": 0.24219
+      }
+    ],
     "imageBytes": 125277
   },
   {
@@ -627,6 +2679,88 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.66771,
+        "y": 0.47841,
+        "w": 0.57202,
+        "h": 0.93209
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.66883,
+        "y": 0.58334,
+        "w": 0.49806,
+        "h": 0.66905
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.17336,
+        "y": 0.74075,
+        "w": 0.34672,
+        "h": 0.41975
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.69697,
+        "y": 0.77306,
+        "w": 0.30281,
+        "h": 0.26623
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.17089,
+        "y": 0.83777,
+        "w": 0.23809,
+        "h": 0.30736
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.18931,
+        "y": 0.38993,
+        "w": 0.21606,
+        "h": 0.3107
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.57359,
+        "y": 0.77413,
+        "w": 0.22922,
+        "h": 0.28139
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.64405,
+        "y": 0.07154,
+        "w": 0.24459,
+        "h": 0.14286
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.17857,
+        "y": 0.42652,
+        "w": 0.1712,
+        "h": 0.20347
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.15043,
+        "y": 0.90401,
+        "w": 0.15823,
+        "h": 0.10389
+      }
+    ],
     "imageBytes": 79186
   },
   {
@@ -645,6 +2779,88 @@
     "classId": 8,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.64766,
+        "y": 0.59062,
+        "w": 0.23906,
+        "h": 0.81875
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.19844,
+        "y": 0.65781,
+        "w": 0.26328,
+        "h": 0.68437
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.39844,
+        "y": 0.58672,
+        "w": 0.20469,
+        "h": 0.82656
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.19687,
+        "y": 0.80391,
+        "w": 0.25547,
+        "h": 0.39141
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.63672,
+        "y": 0.59062,
+        "w": 0.15234,
+        "h": 0.47422
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.40547,
+        "y": 0.60234,
+        "w": 0.14375,
+        "h": 0.41953
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.22031,
+        "y": 0.4,
+        "w": 0.13984,
+        "h": 0.16719
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.41406,
+        "y": 0.24766,
+        "w": 0.10938,
+        "h": 0.14609
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.64766,
+        "y": 0.25312,
+        "w": 0.09062,
+        "h": 0.13906
+      },
+      {
+        "label": "NO-Mask",
+        "classId": 3,
+        "x": 0.26875,
+        "y": 0.55781,
+        "w": 0.05156,
+        "h": 0.13516
+      }
+    ],
     "imageBytes": 64216
   },
   {
@@ -663,6 +2879,64 @@
     "classId": 18,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.58203,
+        "y": 0.6875,
+        "w": 0.40859,
+        "h": 0.35313
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.25,
+        "y": 0.43125,
+        "w": 0.25156,
+        "h": 0.26562
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.81094,
+        "y": 0.54297,
+        "w": 0.04531,
+        "h": 0.08359
+      },
+      {
+        "label": "machinery",
+        "classId": 8,
+        "x": 0.425,
+        "y": 0.50625,
+        "w": 0.05547,
+        "h": 0.02734
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.69844,
+        "y": 0.56406,
+        "w": 0.0125,
+        "h": 0.03984
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.74766,
+        "y": 0.53047,
+        "w": 0.00469,
+        "h": 0.02031
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.74766,
+        "y": 0.52812,
+        "w": 0.00313,
+        "h": 0.01016
+      }
+    ],
     "imageBytes": 75916
   },
   {
@@ -681,6 +2955,88 @@
     "classId": 9,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.26797,
+        "y": 0.60938,
+        "w": 0.18828,
+        "h": 0.78125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.42969,
+        "y": 0.62109,
+        "w": 0.16562,
+        "h": 0.75781
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.26562,
+        "y": 0.4875,
+        "w": 0.18906,
+        "h": 0.3125
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.43125,
+        "y": 0.53438,
+        "w": 0.16719,
+        "h": 0.3375
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.95859,
+        "y": 0.51328,
+        "w": 0.08281,
+        "h": 0.41953
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.18359,
+        "y": 0.54375,
+        "w": 0.075,
+        "h": 0.45391
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.48281,
+        "y": 0.50313,
+        "w": 0.07656,
+        "h": 0.32656
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.13125,
+        "y": 0.50469,
+        "w": 0.06953,
+        "h": 0.34063
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.52422,
+        "y": 0.49922,
+        "w": 0.05469,
+        "h": 0.31562
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.69922,
+        "y": 0.48984,
+        "w": 0.05625,
+        "h": 0.26406
+      }
+    ],
     "imageBytes": 102171
   },
   {
@@ -699,6 +3055,72 @@
     "classId": 3,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.47545,
+        "y": 0.45039,
+        "w": 0.53817,
+        "h": 0.90078
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.45789,
+        "y": 0.29766,
+        "w": 0.34766,
+        "h": 0.33813
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.43652,
+        "y": 0.76348,
+        "w": 0.2793,
+        "h": 0.23492
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.2968,
+        "y": 0.65316,
+        "w": 0.20317,
+        "h": 0.18253
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.60791,
+        "y": 0.05316,
+        "w": 0.33333,
+        "h": 0.09366
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.40633,
+        "y": 0.48969,
+        "w": 0.12078,
+        "h": 0.11594
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.53725,
+        "y": 0.48966,
+        "w": 0.09675,
+        "h": 0.11588
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.60397,
+        "y": 0.11978,
+        "w": 0.19531,
+        "h": 0.03656
+      }
+    ],
     "imageBytes": 92460
   },
   {
@@ -717,6 +3139,88 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": true,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.23646,
+        "y": 0.51079,
+        "w": 0.32592,
+        "h": 0.95555
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.48093,
+        "y": 0.64737,
+        "w": 0.17783,
+        "h": 0.70527
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.61671,
+        "y": 0.67128,
+        "w": 0.15802,
+        "h": 0.53087
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.92811,
+        "y": 0.77128,
+        "w": 0.14378,
+        "h": 0.44444
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.84017,
+        "y": 0.83054,
+        "w": 0.17531,
+        "h": 0.3358
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.25307,
+        "y": 0.35287,
+        "w": 0.15433,
+        "h": 0.35186
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.46294,
+        "y": 0.49998,
+        "w": 0.10083,
+        "h": 0.20575
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.85287,
+        "y": 0.85081,
+        "w": 0.11523,
+        "h": 0.17078
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.30143,
+        "y": 0.85698,
+        "w": 0.09877,
+        "h": 0.19547
+      },
+      {
+        "label": "boots",
+        "classId": 3,
+        "x": 0.21398,
+        "y": 0.86624,
+        "w": 0.08436,
+        "h": 0.22633
+      }
+    ],
     "imageBytes": 103996
   },
   {
@@ -735,6 +3239,40 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.48171,
+        "y": 0.49351,
+        "w": 0.90692,
+        "h": 0.97814
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.54919,
+        "y": 0.65236,
+        "w": 0.6,
+        "h": 0.69206
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.61823,
+        "y": 0.09284,
+        "w": 0.35716,
+        "h": 0.1762
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.57141,
+        "y": 0.40394,
+        "w": 0.30159,
+        "h": 0.18255
+      }
+    ],
     "imageBytes": 97733
   },
   {
@@ -753,6 +3291,88 @@
     "classId": 9,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.16016,
+        "y": 0.54922,
+        "w": 0.32031,
+        "h": 0.72656
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.45312,
+        "y": 0.57188,
+        "w": 0.26328,
+        "h": 0.61016
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.82422,
+        "y": 0.54609,
+        "w": 0.18359,
+        "h": 0.72422
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.13203,
+        "y": 0.54766,
+        "w": 0.19687,
+        "h": 0.41719
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.48281,
+        "y": 0.55391,
+        "w": 0.18516,
+        "h": 0.28437
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.95312,
+        "y": 0.45859,
+        "w": 0.09375,
+        "h": 0.44219
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.83437,
+        "y": 0.42734,
+        "w": 0.15703,
+        "h": 0.22187
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.19062,
+        "y": 0.23906,
+        "w": 0.15469,
+        "h": 0.08828
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.17656,
+        "y": 0.04531,
+        "w": 0.13516,
+        "h": 0.08125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.82891,
+        "y": 0.04375,
+        "w": 0.125,
+        "h": 0.08672
+      }
+    ],
     "imageBytes": 79596
   },
   {
@@ -771,6 +3391,56 @@
     "classId": 6,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.24844,
+        "y": 0.62891,
+        "w": 0.20938,
+        "h": 0.44531
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.51484,
+        "y": 0.45859,
+        "w": 0.12969,
+        "h": 0.28047
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.63516,
+        "y": 0.38672,
+        "w": 0.07734,
+        "h": 0.225
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.72031,
+        "y": 0.32891,
+        "w": 0.07109,
+        "h": 0.18438
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.80156,
+        "y": 0.28437,
+        "w": 0.05781,
+        "h": 0.14609
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.83984,
+        "y": 0.25,
+        "w": 0.04609,
+        "h": 0.12734
+      }
+    ],
     "imageBytes": 55329
   },
   {
@@ -789,6 +3459,88 @@
     "classId": 8,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.19375,
+        "y": 0.68281,
+        "w": 0.21719,
+        "h": 0.63438
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.25547,
+        "y": 0.23438,
+        "w": 0.21719,
+        "h": 0.46875
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.73672,
+        "y": 0.45,
+        "w": 0.10391,
+        "h": 0.63672
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.17031,
+        "y": 0.75156,
+        "w": 0.15234,
+        "h": 0.42578
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.21094,
+        "y": 0.19219,
+        "w": 0.07969,
+        "h": 0.27109
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.91719,
+        "y": 0.36719,
+        "w": 0.05234,
+        "h": 0.34375
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.74844,
+        "y": 0.36484,
+        "w": 0.06875,
+        "h": 0.24375
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.95781,
+        "y": 0.20156,
+        "w": 0.05078,
+        "h": 0.28984
+      },
+      {
+        "label": "NO-Hardhat",
+        "classId": 2,
+        "x": 0.17813,
+        "y": 0.42188,
+        "w": 0.10469,
+        "h": 0.12187
+      },
+      {
+        "label": "Hardhat",
+        "classId": 0,
+        "x": 0.27187,
+        "y": 0.04297,
+        "w": 0.06953,
+        "h": 0.08594
+      }
+    ],
     "imageBytes": 66842
   },
   {
@@ -807,6 +3559,56 @@
     "classId": 1,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.54416,
+        "y": 0.48655,
+        "w": 0.75514,
+        "h": 0.94856
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.58643,
+        "y": 0.68067,
+        "w": 0.44239,
+        "h": 0.59466
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.46711,
+        "y": 0.77533,
+        "w": 0.41766,
+        "h": 0.27778
+      },
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.45984,
+        "y": 0.64395,
+        "w": 0.91967,
+        "h": 0.11934
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.51853,
+        "y": 0.13026,
+        "w": 0.35597,
+        "h": 0.25927
+      },
+      {
+        "label": "gloves",
+        "classId": 1,
+        "x": 0.38788,
+        "y": 0.64672,
+        "w": 0.25925,
+        "h": 0.13581
+      }
+    ],
     "imageBytes": 78450
   },
   {
@@ -825,6 +3627,88 @@
     "classId": 8,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "vehicle",
+        "classId": 9,
+        "x": 0.52187,
+        "y": 0.73047,
+        "w": 0.78984,
+        "h": 0.34922
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.38516,
+        "y": 0.5375,
+        "w": 0.02344,
+        "h": 0.04297
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.39141,
+        "y": 0.43359,
+        "w": 0.0125,
+        "h": 0.06172
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.63516,
+        "y": 0.50859,
+        "w": 0.01797,
+        "h": 0.03281
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.35391,
+        "y": 0.44141,
+        "w": 0.01641,
+        "h": 0.03047
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.32578,
+        "y": 0.44219,
+        "w": 0.01328,
+        "h": 0.03594
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.43984,
+        "y": 0.48984,
+        "w": 0.01172,
+        "h": 0.02266
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.58906,
+        "y": 0.48281,
+        "w": 0.01016,
+        "h": 0.02109
+      },
+      {
+        "label": "Safety Cone",
+        "classId": 6,
+        "x": 0.57188,
+        "y": 0.47266,
+        "w": 0.00859,
+        "h": 0.01719
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.36406,
+        "y": 0.44141,
+        "w": 0.00859,
+        "h": 0.01641
+      }
+    ],
     "imageBytes": 56171
   },
   {
@@ -843,6 +3727,40 @@
     "classId": 4,
     "hasTargetAnnotation": true,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 6,
+        "x": 0.55145,
+        "y": 0.47635,
+        "w": 0.84978,
+        "h": 0.94033
+      },
+      {
+        "label": "vest",
+        "classId": 2,
+        "x": 0.52825,
+        "y": 0.65584,
+        "w": 0.77056,
+        "h": 0.61925
+      },
+      {
+        "label": "helmet",
+        "classId": 0,
+        "x": 0.52478,
+        "y": 0.11699,
+        "w": 0.36581,
+        "h": 0.17748
+      },
+      {
+        "label": "goggles",
+        "classId": 4,
+        "x": 0.54005,
+        "y": 0.42966,
+        "w": 0.30541,
+        "h": 0.14481
+      }
+    ],
     "imageBytes": 82038
   },
   {
@@ -861,6 +3779,88 @@
     "classId": 8,
     "hasTargetAnnotation": false,
     "negativeWording": false,
+    "boxes": [
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.57266,
+        "y": 0.64297,
+        "w": 0.15625,
+        "h": 0.71406
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.86875,
+        "y": 0.64531,
+        "w": 0.15,
+        "h": 0.70937
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.1875,
+        "y": 0.69688,
+        "w": 0.16797,
+        "h": 0.60625
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.73828,
+        "y": 0.63438,
+        "w": 0.13281,
+        "h": 0.73125
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.30781,
+        "y": 0.67344,
+        "w": 0.14844,
+        "h": 0.65312
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.41094,
+        "y": 0.65859,
+        "w": 0.14141,
+        "h": 0.68281
+      },
+      {
+        "label": "Person",
+        "classId": 5,
+        "x": 0.50625,
+        "y": 0.73594,
+        "w": 0.14766,
+        "h": 0.52812
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.87031,
+        "y": 0.62813,
+        "w": 0.12422,
+        "h": 0.33516
+      },
+      {
+        "label": "Safety Vest",
+        "classId": 7,
+        "x": 0.55859,
+        "y": 0.59453,
+        "w": 0.11797,
+        "h": 0.31875
+      },
+      {
+        "label": "NO-Safety Vest",
+        "classId": 4,
+        "x": 0.50859,
+        "y": 0.76172,
+        "w": 0.11406,
+        "h": 0.31953
+      }
+    ],
     "imageBytes": 80442
   }
 ]
