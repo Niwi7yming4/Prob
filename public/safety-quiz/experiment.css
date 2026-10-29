@@ -67,6 +67,22 @@
  .evidence-label{top:-20px;font-size:11px;padding:2px 4px}
 }
 
+/* Desktop training controls stay stable too when AI evidence appears. */
+@media screen and (min-width:721px){
+ .practice-wrap{padding-bottom:145px}
+ .practice-dock{
+  position:fixed;z-index:25;left:50%;bottom:16px;
+  transform:translateX(-50%);width:min(970px,calc(100vw - 38px));
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.44fr);
+  align-items:center;gap:14px;
+  background:rgba(255,255,255,.985);border:1px solid #d5e1ea;
+  border-radius:13px;padding:13px 16px;box-sizing:border-box;
+  box-shadow:0 8px 34px rgba(26,50,75,.19);
+ }
+ .practice-dock .practice-foot{margin:0}
+ .practice-dock .practice-foot .btn{width:100%;min-height:65px}
+}
+
 /* Phone training: keep the two answers and the main action visible even
    when the AI evidence panel expands above the photograph. */
 @media screen and (max-width:720px){
