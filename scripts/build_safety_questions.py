@@ -102,10 +102,22 @@ def find_entries(z):
  if len(out)<50:raise RuntimeError("Not enough labeled images in archive; check dataset structure")
  return out
 
+def is_work_scene(a,source):
+ # Reject Roboflow's four-panel mosaic training images and unrelated racing videos.
+ # Ultralytics' generic images contain gyms, children, musicians and labs; use PPE/site context.
+ name=a["file"].lower()
+ classes={x[0] for x in a["boxes"]}
+ if source=="roboflow":
+  if "/train/" in name or "autox" in name or "race" in name: return False
+  return bool(classes.intersection({0,5,6,7,8,9}))
+ return 6 in classes and (0 in classes or 2 in classes)
+
 def choose(target,zitems,chosen,amount,threshold,rng,source):
- # Prefer large enough visible marked objects. Source's annotations are not an independent audit.
+ # Only consider photos with a concrete worksite/PPE context, not generic people photos.
+ zitems=[a for a in zitems if is_work_scene(a,source)]
  yes=[a for a in zitems if any(c==target and w*h>=threshold for c,x,y,w,h in a["boxes"])]
  no=[a for a in zitems if not any(c==target for c,x,y,w,h in a["boxes"]) and len(a["boxes"])>=1]
+ print("Candidate pool",source,target,"yes",len(yes),"no",len(no),flush=True)
  def rank(a,positive):
   target_areas=[w*h for c,x,y,w,h in a["boxes"] if c==target]
   return (max(target_areas,default=0) if positive else .03)+rng.random()*.04
@@ -143,12 +155,29 @@ def main():
    for source_item,present in selections:
     group.append((category,code,label,prompt,source_item,present))
    groups.append(group)
-  # Interleave 9 categories so adjacent tasks do not look like 8 pages of same helmet checks.
+  # Allocate 48 photos across 4 experimental cells with 6 YES and 6 NO per cell.
+  # Four preview questions deliberately cover 4 separate topics, including machinery and cones.
+  remaining=[record for group in groups for record in group]
   ordered=[]
-  while any(groups):
-   for g in groups:
-    if g:ordered.append(g.pop(0))
+  cellCount=Counter()
+  firstCategories=["防護手套","警示錐","施工機具","護目鏡"]
+  for pos in range(48):
+   cell=((pos//4)+(pos%4))%4
+   occurrence=cellCount[cell]
+   shouldBePresent=occurrence%2==cell%2
+   cellCount[cell]+=1
+   possibilities=[a for a in remaining if a[5]==shouldBePresent]
+   if pos<4:
+    possibilities=[a for a in possibilities if a[0]==firstCategories[pos]]
+   usedRecent={a[0] for a in ordered[-3:]}
+   cellUsage=Counter(a[0] for j,a in enumerate(ordered) if ((j//4)+(j%4))%4==cell)
+   possibilities.sort(key=lambda a:(a[0] in usedRecent,cellUsage[a[0]],rng.random()))
+   if not possibilities: raise RuntimeError("Unable to balance visual condition and category at item "+str(pos))
+   chosenItem=possibilities[0]
+   ordered.append(chosenItem)
+   remaining.remove(chosenItem)
   assert len(ordered)==48
+  assert Counter(( ((i//4)+(i%4))%4, x[5]) for i,x in enumerate(ordered))==Counter({(cell,flag):6 for cell in range(4) for flag in [True,False]})
   results=[]
   for i,(category,code,label,prompt,item,present) in enumerate(ordered):
    file=f"q{i+1:02d}.jpg"
